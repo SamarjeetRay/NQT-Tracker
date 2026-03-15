@@ -534,10 +534,9 @@ function renderBody(lec){
   const metaHtml=META.map(m=>{
     const k=mk(lec.id,m.key);
     const checked=!!state[k];
-    return `<label class="check-pill${checked?' checked':''}" onclick="toggleM('${lec.id}','${m.key}',this)">
-      <input type="checkbox" ${checked?'checked':''} style="display:none">
+    return `<div class="check-pill${checked?' checked':''}" onclick="toggleM('${lec.id}','${m.key}')">
       <span class="check-icon"></span>${m.label}
-    </label>`;
+    </div>`;
   }).join('');
   return `<div class="lec-body">
     <div class="body-cols">
@@ -550,11 +549,11 @@ function renderBody(lec){
 
 function toggleCard(id){openCards[id]=!openCards[id];renderAll();}
 function toggleT(lid,t){const k=tk(lid,t);state[k]=!state[k];scheduleSave();renderAll();}
-function toggleM(lid,mk2,el){
+function toggleM(lid,mk2){
   const k=mk(lid,mk2);
   state[k]=!state[k];
-  el.classList.toggle('checked',!!state[k]);
-  scheduleSave();updateStats();
+  scheduleSave();
+  renderAll();
 }
 
 function updateStats(){

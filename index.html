@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>TCS NQT 2026 — Full Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0d0d0f;
+  --bg2:#141416;
+  --bg3:#1a1a1e;
+  --bg4:#212127;
+  --surface:#252530;
+  --line:#ffffff12;
+  --line2:#ffffff20;
+  --text:#f0efe8;
+  --text2:#9d9ba8;
+  --text3:#5a5868;
+  --accent:#c8f135;
+  --accent2:#a8d420;
+  --accent-dim:#c8f13520;
+  --blue:#60a5fa;
+  --blue-dim:#60a5fa18;
+  --purple:#a78bfa;
+  --purple-dim:#a78bfa18;
+  --orange:#fb923c;
+  --orange-dim:#fb923c18;
+  --teal:#2dd4bf;
+  --teal-dim:#2dd4bf18;
+  --red:#f87171;
+  --green:#4ade80;
+  --green-dim:#4ade8018;
+  --radius:10px;
+  --radius-lg:16px;
+  --radius-xl:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ── GRID BG ── */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:40px 40px;
+  pointer-events:none;
+  z-index:0;
+}
+
+.wrap{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:2rem 1.25rem 4rem;}
+
+/* ── HERO ── */
+.hero{
+  padding:3rem 0 2rem;
+  border-bottom:1px solid var(--line2);
+  margin-bottom:2rem;
+}
+.hero-eyebrow{
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  letter-spacing:0.15em;
+  color:var(--accent);
+  text-transform:uppercase;
+  margin-bottom:0.75rem;
+  display:flex;align-items:center;gap:8px;
+}
+.hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--accent);}
+.hero-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(28px,5vw,48px);
+  font-weight:800;
+  line-height:1.05;
+  letter-spacing:-0.02em;
+  color:var(--text);
+  margin-bottom:0.5rem;
+}
+.hero-title span{color:var(--accent);}
+.hero-sub{font-size:14px;color:var(--text2);font-weight:300;}
+
+/* ── USER LOGIN ── */
+.login-card{
+  background:var(--bg3);
+  border:1px solid var(--line2);
+  border-radius:var(--radius-xl);
+  padding:1.5rem;
+  margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.login-card p{font-size:13px;color:var(--text2);flex:1;min-width:180px;}
+.login-inputs{display:flex;gap:8px;flex-wrap:wrap;}
+.login-inputs input{
+  font-family:'DM Mono',monospace;
+  font-size:13px;
+  padding:9px 14px;
+  background:var(--bg4);
+  border:1px solid var(--line2);
+  border-radius:var(--radius);
+  color:var(--text);
+  outline:none;
+  width:200px;
+  transition:border-color 0.2s;
+}
+.login-inputs input:focus{border-color:var(--accent);}
+.btn{
+  font-family:'DM Sans',sans-serif;
+  font-size:13px;font-weight:500;
+  padding:9px 18px;
+  border-radius:var(--radius);
+  border:none;cursor:pointer;
+  transition:all 0.15s;
+}
+.btn-accent{background:var(--accent);color:#0d0d0f;}
+.btn-accent:hover{background:var(--accent2);}
+.btn-ghost{background:var(--bg4);border:1px solid var(--line2);color:var(--text2);}
+.btn-ghost:hover{border-color:var(--line2);color:var(--text);background:var(--surface);}
+
+.user-active{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--bg3);border:1px solid var(--line2);
+  border-radius:var(--radius-xl);padding:1rem 1.5rem;
+  margin-bottom:1.5rem;flex-wrap:wrap;gap:10px;
+}
+.user-pill{
+  display:flex;align-items:center;gap:10px;
+  font-size:13px;color:var(--text2);
+}
+.user-avatar{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--accent-dim);border:1px solid var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'DM Mono',monospace;font-size:12px;font-weight:500;color:var(--accent);
+}
+.sync-pill{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text3);}
+.sync-dot{width:7px;height:7px;border-radius:50%;background:var(--green);}
+.sync-dot.saving{background:var(--orange);}
+.sync-dot.error{background:var(--red);}
+
+/* ── STATS ── */
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;margin-bottom:1.5rem;
+}
+.stat{
+  background:var(--bg3);border:1px solid var(--line2);
+  border-radius:var(--radius-lg);padding:1rem 1.1rem;
+  position:relative;overflow:hidden;
+}
+.stat::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--accent);opacity:0;transition:opacity 0.3s;
+}
+.stat.has-val::after{opacity:1;}
+.stat-label{font-size:11px;color:var(--text3);margin-bottom:6px;font-family:'DM Mono',monospace;letter-spacing:0.05em;}
+.stat-val{font-size:22px;font-weight:700;font-family:'Syne',sans-serif;color:var(--text);}
+.stat-val span{font-size:13px;font-weight:400;color:var(--text3);font-family:'DM Sans',sans-serif;}
+
+/* ── PROGRESS ── */
+.prog-wrap{
+  background:var(--bg3);border-radius:4px;height:4px;
+  margin-bottom:2rem;overflow:hidden;
+}
+.prog-bar{height:4px;border-radius:4px;background:var(--accent);transition:width 0.5s cubic-bezier(.4,0,.2,1);}
+
+/* ── SECTION HEADER ── */
+.section-header{
+  display:flex;align-items:center;gap:12px;
+  margin:2rem 0 0.75rem;
+}
+.section-tag{
+  font-family:'DM Mono',monospace;font-size:11px;font-weight:500;
+  letter-spacing:0.1em;padding:4px 12px;border-radius:20px;
+}
+.tag-array{background:var(--blue-dim);color:var(--blue);border:1px solid #60a5fa30;}
+.tag-string{background:var(--purple-dim);color:var(--purple);border:1px solid #a78bfa30;}
+.tag-numtheory{background:var(--teal-dim);color:var(--teal);border:1px solid #2dd4bf30;}
+.tag-pyq{background:var(--orange-dim);color:var(--orange);border:1px solid #fb923c30;}
+.section-line{flex:1;height:1px;background:var(--line2);}
+
+/* ── LECTURE CARD ── */
+.lec-card{
+  background:var(--bg3);
+  border:1px solid var(--line2);
+  border-radius:var(--radius-lg);
+  margin-bottom:10px;
+  overflow:hidden;
+  transition:border-color 0.2s;
+}
+.lec-card:hover{border-color:var(--line2);} 
+.lec-card.done-card{border-color:#4ade8030;}
+
+.lec-head{
+  display:grid;
+  grid-template-columns:auto 1fr auto auto auto;
+  align-items:center;gap:12px;
+  padding:1rem 1.25rem;cursor:pointer;user-select:none;
+}
+.lec-head:hover{background:var(--bg4);}
+
+.lec-num{
+  font-family:'DM Mono',monospace;font-size:11px;
+  color:var(--text3);width:20px;text-align:right;
+}
+.lec-name-wrap{display:flex;flex-direction:column;gap:2px;}
+.lec-name{font-size:14px;font-weight:500;color:var(--text);}
+.lec-dur{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;}
+.lec-topic-count{
+  font-size:11px;color:var(--text3);
+  font-family:'DM Mono',monospace;white-space:nowrap;
+}
+.lec-pct{
+  font-family:'DM Mono',monospace;font-size:11px;
+  padding:3px 8px;border-radius:20px;white-space:nowrap;
+  background:var(--bg4);color:var(--text3);
+  min-width:44px;text-align:center;
+}
+.lec-pct.complete{background:var(--green-dim);color:var(--green);}
+.chev{font-size:10px;color:var(--text3);transition:transform 0.2s;margin-left:4px;}
+.chev.open{transform:rotate(180deg);}
+
+/* ── BODY ── */
+.lec-body{
+  padding:0 1.25rem 1.25rem;
+  border-top:1px solid var(--line);
+  animation:slideDown 0.18s ease;
+}
+@keyframes slideDown{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
+
+.body-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 1.5rem;}
+.body-sec-title{
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;
+  color:var(--text3);margin:1rem 0 0.5rem;text-transform:uppercase;
+  grid-column:1/-1;
+}
+.t-row{display:flex;align-items:flex-start;gap:8px;padding:4px 0;}
+.t-row.full{grid-column:1/-1;}
+.t-row input[type=checkbox]{
+  margin-top:3px;flex-shrink:0;
+  accent-color:var(--accent);cursor:pointer;
+}
+.t-row label{font-size:13px;color:var(--text2);line-height:1.4;cursor:pointer;transition:color 0.15s;}
+.t-row label:hover{color:var(--text);}
+.t-row label.done{color:var(--text3);text-decoration:line-through;}
+
+.checklist-row{
+  display:flex;flex-wrap:wrap;gap:8px;
+  margin-top:1rem;padding-top:1rem;
+  border-top:1px solid var(--line);
+  grid-column:1/-1;
+}
+.check-pill{
+  display:flex;align-items:center;gap:6px;
+  font-size:12px;color:var(--text3);
+  background:var(--bg4);border:1px solid var(--line2);
+  border-radius:20px;padding:5px 12px;cursor:pointer;
+  transition:all 0.15s;
+}
+.check-pill:hover{border-color:var(--line2);color:var(--text2);}
+.check-pill.checked{
+  background:var(--accent-dim);border-color:var(--accent);color:var(--accent);
+}
+.check-pill input{display:none;}
+.check-icon{width:12px;height:12px;border-radius:50%;border:1px solid currentColor;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.check-pill.checked .check-icon::after{content:'✓';font-size:8px;}
+
+/* ── SCHEDULE ── */
+.sched-toggle{
+  display:flex;align-items:center;gap:8px;
+  font-size:13px;color:var(--text2);
+  margin-top:2rem;cursor:pointer;
+  background:none;border:1px solid var(--line2);
+  border-radius:var(--radius);padding:10px 16px;
+  width:100%;transition:all 0.15s;
+}
+.sched-toggle:hover{border-color:var(--accent);color:var(--accent);}
+.sched-box{
+  margin-top:1rem;
+  background:var(--bg3);border:1px solid var(--line2);
+  border-radius:var(--radius-xl);padding:1.5rem;
+}
+.sched-box h3{
+  font-family:'Syne',sans-serif;font-size:16px;font-weight:700;
+  margin-bottom:1rem;color:var(--text);
+}
+.sched-table{width:100%;border-collapse:collapse;font-size:13px;}
+.sched-table th{
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;
+  color:var(--text3);text-align:left;
+  padding:0 12px 10px 0;border-bottom:1px solid var(--line2);
+}
+.sched-table td{
+  padding:10px 12px 10px 0;vertical-align:top;
+  border-bottom:1px solid var(--line);color:var(--text2);
+}
+.sched-table td:first-child{color:var(--text3);font-family:'DM Mono',monospace;font-size:12px;white-space:nowrap;}
+.sched-table td:nth-child(2){font-weight:500;color:var(--text);}
+.sched-note{font-size:12px;color:var(--text3);margin-top:1rem;font-style:italic;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:560px){
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+  .body-cols{grid-template-columns:1fr;}
+  .body-cols .body-sec-title{grid-column:auto;}
+  .t-row.full{grid-column:auto;}
+  .lec-head{grid-template-columns:auto 1fr auto auto;}
+  .lec-topic-count{display:none;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">GeeksforGeeks · 2026</div>
+    <div class="hero-title">TCS NQT <span>Prep</span><br>Progress Tracker</div>
+    <div class="hero-sub">Full playlist · Arrays, Strings, Number Theory, PYQ Practice</div>
+  </div>
+
+  <!-- LOGIN -->
+  <div id="login-section" class="login-card">
+    <p>Enter a username to sync your progress across devices. Use the same name anywhere to continue where you left off.</p>
+    <div class="login-inputs">
+      <input id="uid-input" type="text" placeholder="your_username" onkeydown="if(event.key==='Enter')setUser()"/>
+      <button class="btn btn-accent" onclick="setUser()">Start →</button>
+    </div>
+  </div>
+
+  <div id="user-bar" style="display:none" class="user-active">
+    <div class="user-pill">
+      <div class="user-avatar" id="user-avatar"></div>
+      <div>
+        <div style="font-size:13px;font-weight:500;color:var(--text)" id="user-label-name"></div>
+        <div style="font-size:11px;color:var(--text3)">personal tracker</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div class="sync-pill"><div class="sync-dot" id="sync-dot"></div><span id="sync-label">synced</span></div>
+      <button class="btn btn-ghost" style="font-size:12px;padding:6px 12px;" onclick="changeUser()">Switch user</button>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div id="main-content" style="display:none">
+    <div class="stats-grid">
+      <div class="stat" id="s1"><div class="stat-label">LECTURES</div><div class="stat-val" id="st-lec">0<span>/13</span></div></div>
+      <div class="stat" id="s2"><div class="stat-label">TOPICS</div><div class="stat-val" id="st-topics">0<span> done</span></div></div>
+      <div class="stat" id="s3"><div class="stat-label">NOTES</div><div class="stat-val" id="st-notes">0<span>/13</span></div></div>
+      <div class="stat" id="s4"><div class="stat-label">HRS STUDIED</div><div class="stat-val" id="st-hrs">0<span>h</span></div></div>
+    </div>
+    <div class="prog-wrap"><div class="prog-bar" id="prog-bar" style="width:0%"></div></div>
+
+    <div id="lec-list"></div>
+
+    <button class="sched-toggle" onclick="toggleSched()">
+      <span>&#9632;</span> View suggested schedule (13 sessions)
+    </button>
+    <div class="sched-box" id="sched-box" style="display:none">
+      <h3>Suggested study schedule</h3>
+      <table class="sched-table">
+        <thead><tr><th>Day</th><th>Lecture</th><th>Key focus</th></tr></thead>
+        <tbody id="sched-tbody"></tbody>
+      </table>
+      <p class="sched-note">Each session ~2–2.5h: watch + notes. Attempt practice Qs the same day, homework next morning.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const SECTIONS=[
+  {
+    id:'array',label:'Arrays',tag:'tag-array',
+    lectures:[
+      {id:'arr1',num:'01',name:'Array 01',dur:'2:06:56',topics:['Sum of Array','Largest in Array','Mean of an Array','Reverse an Array','Second Largest','Remove Duplicates Sorted Array','Check if array is sorted','Max Consecutive Bit','First and Second Smallest','Vector in C++ STL']},
+      {id:'arr2',num:'02',name:'Array 02',dur:'2:05:01',topics:['Array Subset','Rotate Array','Equal Sum','Stock Buy & Sell – Max one Transaction','Addition of two square matrices','Union of 2 Sorted Arrays','Median of an Array','Count Sorted Rows','Row with max 1s','Prefix Sum Array','Stock Buy & Sell','Rotate an Array']},
+      {id:'arr3',num:'03',name:'Array 03',dur:'2:00:38',topics:['Frequencies in a Limited Array','Non-Repeating Element','Remove Duplicates from unsorted array','Replace elements by its rank','Kadane\'s Algorithm','Sort according to an Array','Maximum Product Subarray','Map in C++ STL']},
+      {id:'arr4',num:'04',name:'Array 04',dur:'1:51:08',topics:['Max Sum Subarray of size K','Count distinct elements in every window','First negative in every window of size K','Trapping Rain Water','Maximum average subarray','Container With Most Water','Sliding Window Technique']},
+    ]
+  },
+  {
+    id:'string',label:'Strings',tag:'tag-string',
+    lectures:[
+      {id:'str1',num:'05',name:'String 01',dur:'1:40:15',topics:['Palindrome String','Anagram','Remove vowels from string','Remove character','Remove all characters other than alphabets','Encrypt the string - 1','Smallest and Largest word','Count Alphabets','Non Repeating Character','Sort a String','Toggle Case']},
+      {id:'str2',num:'06',name:'String 02',dur:'1:44:56',topics:['Isomorphic Strings','String Duplicates Removal','Most Frequent Character','Roman to Integer','Convert to Roman No','Common Subsequence','Check if a String is Subsequence of Other','First Occurrence','Implement Atoi','Encrypt the string - 2']},
+      {id:'str3',num:'07',name:'String 03',dur:'1:06:48',topics:['Number of factors','Prime Number','Factorial of a Number','Binomial Coefficient','Sum of elements of an AP','Find all factors of a Positive Number','Check for Prime Number']},
+      {id:'str4',num:'08',name:'String 04',dur:'1:31:30',topics:['Program to print all palindromes in a given range','Find Prime numbers in a range','Replace all 0 with 5 in an input Integer','Program to check Strong Number']},
+    ]
+  },
+  {
+    id:'numtheory',label:'Number Theory',tag:'tag-numtheory',
+    lectures:[
+      {id:'nt1',num:'09',name:'Number Theory 01',dur:'1:22:56',topics:['LCM of two numbers','GCD of two numbers','Largest prime factor','Sum of AP series','Factorial']},
+      {id:'nt2',num:'10',name:'Number Theory 02',dur:'1:17:21',topics:['Number Theory concepts 02']},
+      {id:'nt3',num:'11',name:'Number Theory 03',dur:'1:57:46',topics:['Number Theory concepts 03']},
+      {id:'nt4',num:'12',name:'Number Theory 04',dur:'1:45:51',topics:['Number Theory concepts 04']},
+      {id:'nt5',num:'13',name:'Number Theory 05',dur:'2:01:32',topics:['Number Theory concepts 05']},
+    ]
+  },
+  {
+    id:'pyq',label:'PYQ Practice',tag:'tag-pyq',
+    lectures:[
+      {id:'pyq1',num:'PYQ1',name:'Practice PYQ — Set 1',dur:'~2 hrs',topics:['CSES - Weird Algorithm','CSES - Missing Number','CSES - Repetitions','CSES - Permutations','CSES - Two Sets','Number of occurrence','Check if array is sorted','Find triplets with zero sum']},
+      {id:'pyq2',num:'PYQ2',name:'Practice PYQ — Set 2',dur:'~2 hrs',topics:['First n Fibonacci','First and Second Smallests','Missing And Repeating','Greatest of three numbers','Most Frequent Character','Sum of numbers in string','Perfect Numbers','Toggle Case','Sort according to an Array','Non Repeating Character']},
+      {id:'pyq3',num:'PYQ3',name:'Practice PYQ — Set 3',dur:'~2 hrs',topics:["Kadane's Algorithm","Max Circular Subarray Sum","Maximum difference of zeros and ones in binary string","Maximum Product Subarray"]},
+    ]
+  }
+];
+
+const META=[
+  {key:'watched',label:'Watched'},
+  {key:'pdf',label:'PDF'},
+  {key:'notes',label:'Notes'},
+  {key:'practice',label:'Practice Qs'},
+  {key:'homework',label:'Homework'},
+  {key:'articles',label:'Articles'},
+];
+
+const SCHEDULE=[
+  {day:'Day 1',lec:'Array 01',focus:'Basic array ops, STL vectors'},
+  {day:'Day 2',lec:'Array 02',focus:'Rotation, prefix sum, stock problems'},
+  {day:'Day 3',lec:'Array 03',focus:"Hashing, Kadane's, STL maps"},
+  {day:'Day 4',lec:'Array 04',focus:'Sliding window, Trapping Rain Water'},
+  {day:'Day 5',lec:'String 01',focus:'Palindrome, anagram, core string ops'},
+  {day:'Day 6',lec:'String 02',focus:'Isomorphic, Roman numerals, Atoi'},
+  {day:'Day 7',lec:'String 03',focus:'Primes, factorial, binomial coefficient'},
+  {day:'Day 8',lec:'String 04',focus:'Range palindromes, strong number'},
+  {day:'Day 9',lec:'Number Theory 01',focus:'LCM, GCD, AP series, factorial'},
+  {day:'Day 10',lec:'Number Theory 02–03',focus:'Extended number theory'},
+  {day:'Day 11',lec:'Number Theory 04–05',focus:'Advanced number theory'},
+  {day:'Day 12',lec:'PYQ Sets 1 & 2',focus:'CSES problems, past TCS questions'},
+  {day:'Day 13',lec:'PYQ Set 3 + Revision',focus:'Subarray problems, full revision'},
+];
+
+let state={}, currentUser=null, openCards={}, saveTimer=null;
+const PFX='tcs26_';
+
+function ss(k,v){try{localStorage.setItem(PFX+k,JSON.stringify(v));return true;}catch{return false;}}
+function sg(k){try{const v=localStorage.getItem(PFX+k);return v?JSON.parse(v):null;}catch{return null;}}
+
+function setSS(status,msg){
+  const d=document.getElementById('sync-dot'),l=document.getElementById('sync-label');
+  d.className='sync-dot'+(status==='saving'?' saving':status==='error'?' error':'');
+  l.textContent=msg;
+}
+
+function setUser(){
+  const v=document.getElementById('uid-input').value.trim().replace(/\s+/g,'_').toLowerCase();
+  if(!v)return;
+  currentUser=v;
+  const saved=sg('u::'+v);
+  state=saved||{};
+  document.getElementById('login-section').style.display='none';
+  document.getElementById('user-bar').style.display='flex';
+  document.getElementById('user-label-name').textContent=v;
+  document.getElementById('user-avatar').textContent=v[0].toUpperCase();
+  document.getElementById('main-content').style.display='block';
+  setSS('synced','synced');
+  renderAll();
+}
+function changeUser(){
+  currentUser=null;state={};openCards={};
+  document.getElementById('login-section').style.display='flex';
+  document.getElementById('user-bar').style.display='none';
+  document.getElementById('main-content').style.display='none';
+  document.getElementById('uid-input').value='';
+}
+function scheduleSave(){
+  setSS('saving','saving…');
+  if(saveTimer)clearTimeout(saveTimer);
+  saveTimer=setTimeout(()=>{
+    if(!currentUser)return;
+    const ok=ss('u::'+currentUser,state);
+    setSS(ok?'synced':'error',ok?'synced':'error');
+  },700);
+}
+
+function tk(lid,t){return lid+'|'+t;}
+function mk(lid,k){return lid+'|m|'+k;}
+
+function renderAll(){
+  const list=document.getElementById('lec-list');
+  list.innerHTML='';
+  SECTIONS.forEach(sec=>{
+    const sh=document.createElement('div');
+    sh.className='section-header';
+    sh.innerHTML=`<span class="section-tag ${sec.tag}">${sec.label}</span><div class="section-line"></div>`;
+    list.appendChild(sh);
+    sec.lectures.forEach(lec=>{
+      const dt=lec.topics.filter(t=>state[tk(lec.id,t)]).length;
+      const pct=Math.round((dt/lec.topics.length)*100);
+      const isOpen=!!openCards[lec.id];
+      const card=document.createElement('div');
+      card.className='lec-card'+(pct===100?' done-card':'');
+      card.innerHTML=`
+        <div class="lec-head" onclick="toggleCard('${lec.id}')">
+          <span class="lec-num">${lec.num}</span>
+          <div class="lec-name-wrap">
+            <span class="lec-name">${lec.name}</span>
+            <span class="lec-dur">${lec.dur}</span>
+          </div>
+          <span class="lec-topic-count">${dt}/${lec.topics.length} topics</span>
+          <span class="lec-pct${pct===100?' complete':''}">${pct}%</span>
+          <span class="chev ${isOpen?'open':''}">▼</span>
+        </div>
+        ${isOpen?renderBody(lec):''}
+      `;
+      list.appendChild(card);
+    });
+  });
+  updateStats();
+}
+
+function renderBody(lec){
+  const topicsHtml=lec.topics.map((t,i)=>{
+    const key=tk(lec.id,t);
+    const checked=!!state[key];
+    const safe=t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/'/g,'&#39;');
+    const safeJs=t.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+    const full=(lec.topics.length%2!==0&&i===lec.topics.length-1)?' full':'';
+    return `<div class="t-row${full}">
+      <input type="checkbox" id="${key}" ${checked?'checked':''} onchange="toggleT('${lec.id}','${safeJs}')">
+      <label for="${key}" class="${checked?'done':''}">${safe}</label>
+    </div>`;
+  }).join('');
+  const metaHtml=META.map(m=>{
+    const k=mk(lec.id,m.key);
+    const checked=!!state[k];
+    return `<label class="check-pill${checked?' checked':''}" onclick="toggleM('${lec.id}','${m.key}',this)">
+      <input type="checkbox" ${checked?'checked':''} style="display:none">
+      <span class="check-icon"></span>${m.label}
+    </label>`;
+  }).join('');
+  return `<div class="lec-body">
+    <div class="body-cols">
+      <div class="body-sec-title">Topics covered</div>
+      ${topicsHtml}
+      <div class="checklist-row">${metaHtml}</div>
+    </div>
+  </div>`;
+}
+
+function toggleCard(id){openCards[id]=!openCards[id];renderAll();}
+function toggleT(lid,t){const k=tk(lid,t);state[k]=!state[k];scheduleSave();renderAll();}
+function toggleM(lid,mk2,el){
+  const k=mk(lid,mk2);
+  state[k]=!state[k];
+  el.classList.toggle('checked',!!state[k]);
+  scheduleSave();updateStats();
+}
+
+function updateStats(){
+  let allTopics=0,doneTopics=0,doneLec=0,doneNotes=0,totalLec=0;
+  SECTIONS.forEach(sec=>sec.lectures.forEach(lec=>{
+    totalLec++;
+    allTopics+=lec.topics.length;
+    const dt=lec.topics.filter(t=>state[tk(lec.id,t)]).length;
+    doneTopics+=dt;
+    if(dt===lec.topics.length)doneLec++;
+    if(state[mk(lec.id,'notes')])doneNotes++;
+  }));
+  const hrs=SECTIONS.reduce((a,s)=>a+s.lectures.reduce((b,l)=>b+(state[mk(l.id,'watched')]?2:0),0),0);
+  document.getElementById('st-lec').innerHTML=doneLec+'<span>/'+totalLec+'</span>';
+  document.getElementById('st-topics').innerHTML=doneTopics+'<span> done</span>';
+  document.getElementById('st-notes').innerHTML=doneNotes+'<span>/'+totalLec+'</span>';
+  document.getElementById('st-hrs').innerHTML=hrs+'<span>h</span>';
+  document.getElementById('prog-bar').style.width=Math.round((doneTopics/allTopics)*100)+'%';
+  ['s1','s2','s3','s4'].forEach((id,i)=>{
+    const v=[doneLec,doneTopics,doneNotes,hrs][i];
+    document.getElementById(id).classList.toggle('has-val',v>0);
+  });
+}
+
+function toggleSched(){
+  const b=document.getElementById('sched-box');
+  const vis=b.style.display!=='none';
+  b.style.display=vis?'none':'block';
+  if(!vis){
+    document.getElementById('sched-tbody').innerHTML=SCHEDULE.map(r=>`<tr>
+      <td>${r.day}</td>
+      <td>${r.lec}</td>
+      <td>${r.focus}</td>
+    </tr>`).join('');
+  }
+}
+</script>
+</body>
+</html>

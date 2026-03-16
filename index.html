@@ -13,14 +13,12 @@
   --line:#ffffff12;--line2:#ffffff20;--line3:#ffffff35;
   --text:#f0efe8;--text2:#9d9ba8;--text3:#5a5868;
 
-  /* neon verbal = cyan */
+  /* single neon = cyan */
   --neon-v:#00f5ff;--neon-v-dim:#00f5ff18;--neon-v-glow:0 0 12px #00f5ff60,0 0 28px #00f5ff30;
-  /* neon numerical = magenta */
-  --neon-n:#ff2d78;--neon-n-dim:#ff2d7818;--neon-n-glow:0 0 12px #ff2d7860,0 0 28px #ff2d7830;
-  /* neon coding = lime */
-  --neon-c:#c8f135;--neon-c-dim:#c8f13520;--neon-c-glow:0 0 12px #c8f13560,0 0 28px #c8f13530;
+  --neon-n:#00f5ff;--neon-n-dim:#00f5ff18;--neon-n-glow:0 0 12px #00f5ff60,0 0 28px #00f5ff30;
+  --neon-c:#00f5ff;--neon-c-dim:#00f5ff18;--neon-c-glow:0 0 12px #00f5ff60,0 0 28px #00f5ff30;
 
-  --accent:var(--neon-c);--accent2:#a8d420;--accent-dim:var(--neon-c-dim);
+  --accent:#00f5ff;--accent2:#00d4dd;--accent-dim:#00f5ff18;
   --blue:#60a5fa;--blue-dim:#60a5fa18;
   --purple:#a78bfa;--purple-dim:#a78bfa18;
   --orange:#fb923c;--orange-dim:#fb923c18;
@@ -36,9 +34,9 @@
   --text:#1c1a14;--text2:#5c5540;--text3:#a09878;
 
   --neon-v:#0088aa;--neon-v-dim:#0088aa12;--neon-v-glow:0 0 8px #0088aa35;
-  --neon-n:#cc1155;--neon-n-dim:#cc115512;--neon-n-glow:0 0 8px #cc115535;
-  --neon-c:#5a9e00;--neon-c-dim:#5a9e0012;--neon-c-glow:0 0 8px #5a9e0035;
-  --accent:var(--neon-c);--accent2:#4a8800;--accent-dim:var(--neon-c-dim);
+  --neon-n:#0088aa;--neon-n-dim:#0088aa12;--neon-n-glow:0 0 8px #0088aa35;
+  --neon-c:#0088aa;--neon-c-dim:#0088aa12;--neon-c-glow:0 0 8px #0088aa35;
+  --accent:#0088aa;--accent2:#006f8a;--accent-dim:#0088aa12;
   --green-dim:#4ade8015;
   color-scheme:light;
 }
@@ -71,7 +69,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .login-inputs input{font-family:'DM Mono',monospace;font-size:13px;padding:9px 14px;background:var(--bg4);border:1px solid var(--line2);border-radius:var(--radius);color:var(--text);outline:none;width:200px;transition:border-color 0.2s;}
 .login-inputs input:focus{border-color:var(--neon-c);}
 .btn{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:9px 18px;border-radius:var(--radius);border:none;cursor:pointer;transition:all 0.15s;}
-.btn-accent{background:var(--neon-c);color:#0d0d0f;}
+.btn-accent{background:var(--neon-c);color:#0d0d0f;}[data-theme="light"] .btn-accent{color:#fff;}
 .btn-accent:hover{opacity:0.88;}
 .btn-ghost{background:var(--bg4);border:1px solid var(--line2);color:var(--text2);}
 .btn-ghost:hover{color:var(--text);background:var(--surface);}
@@ -186,6 +184,36 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 /* FOOTER */
 footer{position:relative;z-index:1;text-align:center;padding:2rem 1.25rem 1.5rem;border-top:1px solid var(--line2);margin-top:2rem;}
 
+
+/* COUNTDOWN */
+.cd-box{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:54px;background:var(--bg4);border:1px solid var(--line2);border-radius:var(--radius);padding:10px 14px;}
+.cd-num{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--text);line-height:1;letter-spacing:-0.02em;}
+.cd-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);}
+.cd-sep{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--text3);align-self:center;padding-bottom:14px;}
+#cd-d .cd-num{color:var(--neon-v);text-shadow:var(--neon-v-glow);}
+#cd-h .cd-num{color:var(--neon-n);text-shadow:var(--neon-n-glow);}
+#cd-m .cd-num{color:var(--neon-c);text-shadow:var(--neon-c-glow);}
+#cd-s .cd-num{color:var(--text2);}
+
+/* TARGET DATE */
+.target-row{display:flex;align-items:center;gap:10px;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid var(--line);grid-column:1/-1;flex-wrap:wrap;}
+.target-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);white-space:nowrap;}
+.target-input{font-family:'DM Mono',monospace;font-size:12px;padding:5px 10px;background:var(--bg4);border:1px solid var(--line2);border-radius:var(--radius);color:var(--text);outline:none;cursor:pointer;transition:border-color 0.2s;}
+.target-input:focus{border-color:var(--neon-c);}
+.target-badge{font-family:'DM Mono',monospace;font-size:11px;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+.target-badge.ok{background:var(--neon-c-dim);color:var(--neon-c);border:1px solid var(--neon-c);}
+.target-badge.warn{background:#fb923c18;color:#fb923c;border:1px solid #fb923c40;}
+.target-badge.over{background:#f8717118;color:#f87171;border:1px solid #f8717140;animation:pulse-red 1.5s ease-in-out infinite;}
+@keyframes pulse-red{0%,100%{box-shadow:0 0 0 0 #f8717130;}50%{box-shadow:0 0 0 4px #f8717108;}}
+.lec-card.overdue{border-color:#f8717140;}
+.lec-card.overdue .lec-name{color:#f87171;}
+
+/* LAST STUDIED */
+.last-studied{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:0.04em;margin-left:auto;}
+.last-studied.recent{color:var(--neon-c);}
+
+/* CONFETTI CANVAS */
+#confetti-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;}
 @media(max-width:560px){
   .overall-stats,.sec-stats{grid-template-columns:repeat(2,1fr);}
   .body-cols{grid-template-columns:1fr;}
@@ -209,6 +237,24 @@ footer{position:relative;z-index:1;text-align:center;padding:2rem 1.25rem 1.5rem
       <div class="toggle-track"><div class="toggle-thumb"></div></div>
       <span id="theme-label">Light mode</span>
     </button>
+  </div>
+</div>
+
+<div id="countdown-bar" style="margin-bottom:1.5rem;">
+  <div style="background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius-xl);padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+    <div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text3);margin-bottom:6px;">TCS NQT exam countdown</div>
+      <div style="font-size:12px;color:var(--text2);">26 March 2026 · 7:00 AM</div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;" id="cd-boxes">
+      <div class="cd-box" id="cd-d"><div class="cd-num" id="cd-days">--</div><div class="cd-label">days</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-box" id="cd-h"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">hours</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-box" id="cd-m"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">mins</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-box" id="cd-s"><div class="cd-num" id="cd-secs">--</div><div class="cd-label">secs</div></div>
+    </div>
   </div>
 </div>
 
@@ -416,7 +462,9 @@ function renderTab(cid,secs){
       const pct=Math.round((dt/lec.topics.length)*100);
       const isOpen=!!openCards[lec.id];
       const card=document.createElement('div');
-      card.className='lec-card'+(pct===100?' done-card':'');
+      const tgt=state['target::'+lec.id];
+      const isOver=tgt&&new Date(tgt)<new Date()&&pct<100;
+      card.className='lec-card'+(pct===100?' done-card':isOver?' overdue':'');
       card.innerHTML=`<div class="lec-head" onclick="toggleCard('${lec.id}')">
         <span class="lec-num">${lec.num}</span>
         <div class="lec-name-wrap"><span class="lec-name">${lec.name}</span>${lec.dur?`<span class="lec-dur">${lec.dur}</span>`:''}</div>
@@ -452,14 +500,92 @@ function renderBody(lec){
   if(lec.homework&&lec.homework.length)lhtml+=`<div class="res-dd"><button class="res-btn btn-hw" onclick="toggleDrop(event,'dh-${lec.id}')"><svg width="13" height="13" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#BA7517"/><path d="M7 8h10M7 12h10M7 16h6" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/></svg>Homework ▾</button><div class="drop-menu" id="dh-${lec.id}">${lec.homework.map(h=>`<a href="${h.url}" target="_blank">${h.name}</a>`).join('')}</div></div>`;
   if(lec.articles&&lec.articles.length)lhtml+=`<div class="res-dd"><button class="res-btn btn-art" onclick="toggleDrop(event,'da-${lec.id}')"><svg width="13" height="13" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#534AB7"/><path d="M7 8h10M7 12h10M7 16h6" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/></svg>Articles ▾</button><div class="drop-menu" id="da-${lec.id}">${lec.articles.map(a=>`<a href="${a.url}" target="_blank">${a.name}</a>`).join('')}</div></div>`;
   lhtml+='</div>';
-  return `<div class="lec-body"><div class="body-cols"><div class="bst">Topics covered</div>${thtml}${lhtml}<div class="checklist-row">${mhtml}</div></div></div>`;
+  const targetKey='target::'+lec.id;
+  const lastKey='last::'+lec.id;
+  const targetVal=state[targetKey]||'';
+  const lastVal=state[lastKey]||'';
+  let targetBadge='';
+  if(targetVal){
+    const tDate=new Date(targetVal);
+    const now=new Date();
+    const diff=Math.ceil((tDate-now)/(1000*60*60*24));
+    if(diff<0) targetBadge=`<span class="target-badge over">Overdue by ${Math.abs(diff)}d</span>`;
+    else if(diff<=3) targetBadge=`<span class="target-badge warn">${diff}d left</span>`;
+    else targetBadge=`<span class="target-badge ok">${diff}d left</span>`;
+  }
+  let lastHtml='';
+  if(lastVal){
+    const ago=timeAgo(lastVal);
+    const recent=(Date.now()-new Date(lastVal).getTime())<86400000*2;
+    lastHtml=`<span class="last-studied${recent?' recent':''}">studied ${ago}</span>`;
+  }
+  const targetRow=`<div class="target-row">
+    <span class="target-label">Target date</span>
+    <input class="target-input" type="date" value="${targetVal}" onchange="setTarget('${lec.id}',this.value)" />
+    ${targetBadge}
+    ${lastHtml}
+  </div>`;
+  return `<div class="lec-body"><div class="body-cols"><div class="bst">Topics covered</div>${thtml}${lhtml}<div class="checklist-row">${mhtml}</div>${targetRow}</div></div>`;
 }
 
 function toggleCard(id){openCards[id]=!openCards[id];renderAll();}
-function toggleT(lid,t){const k=tk(lid,t);state[k]=!state[k];scheduleSave();renderAll();}
-function toggleM(lid,mk2){const k=mk(lid,mk2);state[k]=!state[k];scheduleSave();renderAll();}
+function stampLast(lid){state['last::'+lid]=new Date().toISOString();scheduleSave();}
+function checkConfetti(lid){
+  const lec=allLecs().find(l=>l.id===lid);
+  if(!lec)return;
+  const allTopicsDone=lec.topics.every(t=>state[tk(lid,t)]);
+  const allMetaDone=META.every(m=>state[mk(lid,m.key)]);
+  if(allTopicsDone&&allMetaDone)launchConfetti();
+}
+function toggleT(lid,t){const k=tk(lid,t);state[k]=!state[k];stampLast(lid);scheduleSave();renderAll();checkConfetti(lid);}
+function toggleM(lid,mk2){const k=mk(lid,mk2);state[k]=!state[k];stampLast(lid);scheduleSave();renderAll();checkConfetti(lid);}
+function setTarget(lid,val){state['target::'+lid]=val;scheduleSave();renderAll();}
 function toggleDrop(e,id){e.stopPropagation();document.querySelectorAll('.drop-menu.open').forEach(m=>{if(m.id!==id)m.classList.remove('open');});document.getElementById(id).classList.toggle('open');}
 document.addEventListener('click',()=>document.querySelectorAll('.drop-menu.open').forEach(m=>m.classList.remove('open')));
+
+function allLecs(){const a=[];[...V,...N,...C].forEach(s=>s.lectures.forEach(l=>a.push(l)));return a;}
+
+function timeAgo(isoStr){
+  const diff=Date.now()-new Date(isoStr).getTime();
+  const m=Math.floor(diff/60000),h=Math.floor(diff/3600000),d=Math.floor(diff/86400000);
+  if(d>0)return d===1?'yesterday':d+'d ago';
+  if(h>0)return h+'h ago';
+  if(m>0)return m+'m ago';
+  return 'just now';
+}
+
+function launchConfetti(){
+  const canvas=document.getElementById('confetti-canvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+  const pieces=[];
+  const colors=['#00f5ff','#ffffff','#c8f135','#a78bfa','#f472b6','#fb923c'];
+  for(let i=0;i<160;i++){
+    pieces.push({
+      x:Math.random()*canvas.width,y:-10-Math.random()*200,
+      w:6+Math.random()*8,h:3+Math.random()*5,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      rot:Math.random()*360,rotV:(Math.random()-0.5)*8,
+      vx:(Math.random()-0.5)*4,vy:2+Math.random()*4,alpha:1
+    });
+  }
+  let frame=0;
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p=>{
+      ctx.save();ctx.globalAlpha=p.alpha;ctx.translate(p.x,p.y);
+      ctx.rotate(p.rot*Math.PI/180);ctx.fillStyle=p.color;
+      ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();
+      p.x+=p.vx;p.y+=p.vy;p.rot+=p.rotV;p.vy+=0.05;
+      if(frame>60)p.alpha-=0.012;
+    });
+    frame++;
+    if(frame<160)requestAnimationFrame(draw);
+    else ctx.clearRect(0,0,canvas.width,canvas.height);
+  }
+  draw();
+}
 
 function calc(secs){
   let tot=0,done=0,lec=0,tlec=0,notes=0,hrs=0;
@@ -487,7 +613,35 @@ function updateStats(){
   set('ost-pct',opct,'%');set('ost-topics',allDone,' done');set('ost-lec',allLec,' done');
   ['os1','os2','os3'].forEach((id,i)=>{document.getElementById(id).classList.toggle('hv',[opct,allDone,allLec][i]>0);});
 }
+
+/* COUNTDOWN */
+(function(){
+  const target=new Date('2026-03-26T07:00:00+05:30').getTime();
+  function pad(n){return String(n).padStart(2,'0');}
+  function tick(){
+    const now=Date.now();
+    const diff=target-now;
+    if(diff<=0){
+      document.getElementById('cd-days').textContent='00';
+      document.getElementById('cd-hours').textContent='00';
+      document.getElementById('cd-mins').textContent='00';
+      document.getElementById('cd-secs').textContent='00';
+      return;
+    }
+    const d=Math.floor(diff/86400000);
+    const h=Math.floor((diff%86400000)/3600000);
+    const m=Math.floor((diff%3600000)/60000);
+    const s=Math.floor((diff%60000)/1000);
+    document.getElementById('cd-days').textContent=pad(d);
+    document.getElementById('cd-hours').textContent=pad(h);
+    document.getElementById('cd-mins').textContent=pad(m);
+    document.getElementById('cd-secs').textContent=pad(s);
+  }
+  tick();
+  setInterval(tick,1000);
+})();
 </script>
+<canvas id="confetti-canvas"></canvas>
 <footer style="position:relative;z-index:1;text-align:center;padding:2rem 1.25rem 1.5rem;border-top:1px solid var(--line2);margin-top:2rem;">
   <p style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text3);letter-spacing:0.05em;">made with <span style="color:#f87171;font-size:14px;">&#9829;</span> by <span style="color:var(--accent);font-weight:500;">samar</span></p>
 </footer>

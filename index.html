@@ -6,465 +6,362 @@
 <title>TCS NQT 2026 — Full Tracker</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
+/* ── THEME VARS ── */
 :root{
-  --bg:#0d0d0f;
-  --bg2:#141416;
-  --bg3:#1a1a1e;
-  --bg4:#212127;
-  --surface:#252530;
-  --line:#ffffff12;
-  --line2:#ffffff20;
-  --text:#f0efe8;
-  --text2:#9d9ba8;
-  --text3:#5a5868;
-  --accent:#c8f135;
-  --accent2:#a8d420;
-  --accent-dim:#c8f13520;
-  --blue:#60a5fa;
-  --blue-dim:#60a5fa18;
-  --purple:#a78bfa;
-  --purple-dim:#a78bfa18;
-  --orange:#fb923c;
-  --orange-dim:#fb923c18;
-  --teal:#2dd4bf;
-  --teal-dim:#2dd4bf18;
-  --red:#f87171;
-  --green:#4ade80;
-  --green-dim:#4ade8018;
-  --radius:10px;
-  --radius-lg:16px;
-  --radius-xl:22px;
+  /* DARK (default) */
+  --bg:#0d0d0f;--bg2:#141416;--bg3:#1a1a1e;--bg4:#212127;--surface:#252530;
+  --line:#ffffff12;--line2:#ffffff20;--line3:#ffffff35;
+  --text:#f0efe8;--text2:#9d9ba8;--text3:#5a5868;
+
+  /* neon verbal = cyan */
+  --neon-v:#00f5ff;--neon-v-dim:#00f5ff18;--neon-v-glow:0 0 12px #00f5ff60,0 0 28px #00f5ff30;
+  /* neon numerical = magenta */
+  --neon-n:#ff2d78;--neon-n-dim:#ff2d7818;--neon-n-glow:0 0 12px #ff2d7860,0 0 28px #ff2d7830;
+  /* neon coding = lime */
+  --neon-c:#c8f135;--neon-c-dim:#c8f13520;--neon-c-glow:0 0 12px #c8f13560,0 0 28px #c8f13530;
+
+  --accent:var(--neon-c);--accent2:#a8d420;--accent-dim:var(--neon-c-dim);
+  --blue:#60a5fa;--blue-dim:#60a5fa18;
+  --purple:#a78bfa;--purple-dim:#a78bfa18;
+  --orange:#fb923c;--orange-dim:#fb923c18;
+  --teal:#2dd4bf;--teal-dim:#2dd4bf18;
+  --pink:#f472b6;--pink-dim:#f472b618;
+  --red:#f87171;--green:#4ade80;--green-dim:#4ade8018;
+  --radius:10px;--radius-lg:16px;--radius-xl:22px;
+  color-scheme:dark;
+}
+[data-theme="light"]{
+  --bg:#fdf6e3;--bg2:#f7edd0;--bg3:#fffdf5;--bg4:#f7edd0;--surface:#f0e4bc;
+  --line:#00000007;--line2:#00000012;--line3:#0000001e;
+  --text:#1c1a14;--text2:#5c5540;--text3:#a09878;
+
+  --neon-v:#0088aa;--neon-v-dim:#0088aa12;--neon-v-glow:0 0 8px #0088aa35;
+  --neon-n:#cc1155;--neon-n-dim:#cc115512;--neon-n-glow:0 0 8px #cc115535;
+  --neon-c:#5a9e00;--neon-c-dim:#5a9e0012;--neon-c-glow:0 0 8px #5a9e0035;
+  --accent:var(--neon-c);--accent2:#4a8800;--accent-dim:var(--neon-c-dim);
+  --green-dim:#4ade8015;
+  color-scheme:light;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-body{
-  font-family:'DM Sans',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  overflow-x:hidden;
-}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background 0.3s,color 0.3s;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.wrap{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:2rem 1.25rem 4rem;}
 
-/* ── GRID BG ── */
-body::before{
-  content:'';
-  position:fixed;
-  inset:0;
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size:40px 40px;
-  pointer-events:none;
-  z-index:0;
-}
-
-.wrap{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:2rem 1.25rem 4rem;}
-
-/* ── HERO ── */
-.hero{
-  padding:3rem 0 2rem;
-  border-bottom:1px solid var(--line2);
-  margin-bottom:2rem;
-}
-.hero-eyebrow{
-  font-family:'DM Mono',monospace;
-  font-size:11px;
-  letter-spacing:0.15em;
-  color:var(--accent);
-  text-transform:uppercase;
-  margin-bottom:0.75rem;
-  display:flex;align-items:center;gap:8px;
-}
-.hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--accent);}
-.hero-title{
-  font-family:'Syne',sans-serif;
-  font-size:clamp(28px,5vw,48px);
-  font-weight:800;
-  line-height:1.05;
-  letter-spacing:-0.02em;
-  color:var(--text);
-  margin-bottom:0.5rem;
-}
-.hero-title span{color:var(--accent);}
+/* HERO */
+.hero{padding:3rem 0 2rem;border-bottom:1px solid var(--line2);margin-bottom:2rem;}
+.hero-top{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.15em;color:var(--neon-c);text-transform:uppercase;margin-bottom:0.75rem;display:flex;align-items:center;gap:8px;}
+.hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--neon-c);}
+.hero-title{font-family:'Syne',sans-serif;font-size:clamp(28px,5vw,48px);font-weight:800;line-height:1.05;letter-spacing:-0.02em;margin-bottom:0.5rem;}
+.hero-title span{color:var(--neon-c);}
 .hero-sub{font-size:14px;color:var(--text2);font-weight:300;}
 
-/* ── USER LOGIN ── */
-.login-card{
-  background:var(--bg3);
-  border:1px solid var(--line2);
-  border-radius:var(--radius-xl);
-  padding:1.5rem;
-  margin-bottom:1.5rem;
-  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
-}
+/* THEME TOGGLE */
+.theme-toggle{display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--line2);border-radius:30px;padding:6px 14px;cursor:pointer;font-size:12px;color:var(--text2);transition:all 0.2s;white-space:nowrap;flex-shrink:0;margin-top:0.5rem;}
+.theme-toggle:hover{border-color:var(--line3);color:var(--text);}
+.toggle-track{width:32px;height:18px;border-radius:9px;background:var(--bg4);border:1px solid var(--line2);position:relative;transition:background 0.2s;}
+.toggle-thumb{width:12px;height:12px;border-radius:50%;background:var(--text3);position:absolute;top:2px;left:2px;transition:all 0.2s;}
+[data-theme="light"] .toggle-track{background:var(--neon-c-dim);border-color:var(--neon-c);}
+[data-theme="light"] .toggle-thumb{background:var(--neon-c);left:16px;}
+
+/* LOGIN */
+.login-card{background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius-xl);padding:1.5rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
 .login-card p{font-size:13px;color:var(--text2);flex:1;min-width:180px;}
 .login-inputs{display:flex;gap:8px;flex-wrap:wrap;}
-.login-inputs input{
-  font-family:'DM Mono',monospace;
-  font-size:13px;
-  padding:9px 14px;
-  background:var(--bg4);
-  border:1px solid var(--line2);
-  border-radius:var(--radius);
-  color:var(--text);
-  outline:none;
-  width:200px;
-  transition:border-color 0.2s;
-}
-.login-inputs input:focus{border-color:var(--accent);}
-.btn{
-  font-family:'DM Sans',sans-serif;
-  font-size:13px;font-weight:500;
-  padding:9px 18px;
-  border-radius:var(--radius);
-  border:none;cursor:pointer;
-  transition:all 0.15s;
-}
-.btn-accent{background:var(--accent);color:#0d0d0f;}
-.btn-accent:hover{background:var(--accent2);}
+.login-inputs input{font-family:'DM Mono',monospace;font-size:13px;padding:9px 14px;background:var(--bg4);border:1px solid var(--line2);border-radius:var(--radius);color:var(--text);outline:none;width:200px;transition:border-color 0.2s;}
+.login-inputs input:focus{border-color:var(--neon-c);}
+.btn{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:9px 18px;border-radius:var(--radius);border:none;cursor:pointer;transition:all 0.15s;}
+.btn-accent{background:var(--neon-c);color:#0d0d0f;}
+.btn-accent:hover{opacity:0.88;}
 .btn-ghost{background:var(--bg4);border:1px solid var(--line2);color:var(--text2);}
-.btn-ghost:hover{border-color:var(--line2);color:var(--text);background:var(--surface);}
-
-.user-active{
-  display:flex;align-items:center;justify-content:space-between;
-  background:var(--bg3);border:1px solid var(--line2);
-  border-radius:var(--radius-xl);padding:1rem 1.5rem;
-  margin-bottom:1.5rem;flex-wrap:wrap;gap:10px;
-}
-.user-pill{
-  display:flex;align-items:center;gap:10px;
-  font-size:13px;color:var(--text2);
-}
-.user-avatar{
-  width:32px;height:32px;border-radius:50%;
-  background:var(--accent-dim);border:1px solid var(--accent);
-  display:flex;align-items:center;justify-content:center;
-  font-family:'DM Mono',monospace;font-size:12px;font-weight:500;color:var(--accent);
-}
+.btn-ghost:hover{color:var(--text);background:var(--surface);}
+.user-active{display:flex;align-items:center;justify-content:space-between;background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius-xl);padding:1rem 1.5rem;margin-bottom:1.5rem;flex-wrap:wrap;gap:10px;}
+.user-pill{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text2);}
+.user-avatar{width:32px;height:32px;border-radius:50%;background:var(--neon-c-dim);border:1px solid var(--neon-c);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:12px;font-weight:500;color:var(--neon-c);}
 .sync-pill{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text3);}
 .sync-dot{width:7px;height:7px;border-radius:50%;background:var(--green);}
 .sync-dot.saving{background:var(--orange);}
 .sync-dot.error{background:var(--red);}
 
-/* ── STATS ── */
-.stats-grid{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:10px;margin-bottom:1.5rem;
-}
-.stat{
-  background:var(--bg3);border:1px solid var(--line2);
-  border-radius:var(--radius-lg);padding:1rem 1.1rem;
-  position:relative;overflow:hidden;
-}
-.stat::after{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
-  background:var(--accent);opacity:0;transition:opacity 0.3s;
-}
-.stat.has-val::after{opacity:1;}
-.stat-label{font-size:11px;color:var(--text3);margin-bottom:6px;font-family:'DM Mono',monospace;letter-spacing:0.05em;}
-.stat-val{font-size:22px;font-weight:700;font-family:'Syne',sans-serif;color:var(--text);}
-.stat-val span{font-size:13px;font-weight:400;color:var(--text3);font-family:'DM Sans',sans-serif;}
+/* OVERALL STATS */
+.overall-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:1.5rem;}
+.os{background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius-lg);padding:1rem 1.1rem;position:relative;overflow:hidden;}
+.os::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--neon-c);opacity:0;transition:opacity 0.3s;}
+.os.hv::after{opacity:1;}
+.os-label{font-size:11px;color:var(--text3);margin-bottom:6px;font-family:'DM Mono',monospace;letter-spacing:0.05em;}
+.os-val{font-size:22px;font-weight:700;font-family:'Syne',sans-serif;color:var(--text);}
+.os-val span{font-size:12px;font-weight:400;color:var(--text3);font-family:'DM Sans',sans-serif;}
 
-/* ── PROGRESS ── */
-.prog-wrap{
-  background:var(--bg3);border-radius:4px;height:4px;
-  margin-bottom:2rem;overflow:hidden;
-}
-.prog-bar{height:4px;border-radius:4px;background:var(--accent);transition:width 0.5s cubic-bezier(.4,0,.2,1);}
+/* TABS */
+.tabs{display:flex;gap:4px;background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius-lg);padding:5px;margin-bottom:1.5rem;}
+.tab-btn{flex:1;font-size:13px;font-weight:500;padding:9px 12px;border-radius:10px;border:1px solid transparent;background:transparent;color:var(--text3);cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;align-items:center;gap:3px;font-family:'DM Sans',sans-serif;}
+.tab-btn:hover{color:var(--text2);background:var(--bg4);}
+.tab-btn.active-v{background:var(--neon-v-dim);border-color:var(--neon-v);color:var(--neon-v);box-shadow:var(--neon-v-glow);}
+.tab-btn.active-n{background:var(--neon-n-dim);border-color:var(--neon-n);color:var(--neon-n);box-shadow:var(--neon-n-glow);}
+.tab-btn.active-c{background:var(--neon-c-dim);border-color:var(--neon-c);color:var(--neon-c);box-shadow:var(--neon-c-glow);}
+.tab-sub{font-size:10px;font-family:'DM Mono',monospace;letter-spacing:0.05em;color:var(--text3);}
+.tab-btn.active-v .tab-sub{color:var(--neon-v);}
+.tab-btn.active-n .tab-sub{color:var(--neon-n);}
+.tab-btn.active-c .tab-sub{color:var(--neon-c);}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
 
-/* ── SECTION HEADER ── */
-.section-header{
-  display:flex;align-items:center;gap:12px;
-  margin:2rem 0 0.75rem;
-}
-.section-tag{
-  font-family:'DM Mono',monospace;font-size:11px;font-weight:500;
-  letter-spacing:0.1em;padding:4px 12px;border-radius:20px;
-}
-.tag-array{background:var(--blue-dim);color:var(--blue);border:1px solid #60a5fa30;}
-.tag-string{background:var(--purple-dim);color:var(--purple);border:1px solid #a78bfa30;}
-.tag-numtheory{background:var(--teal-dim);color:var(--teal);border:1px solid #2dd4bf30;}
-.tag-pyq{background:var(--orange-dim);color:var(--orange);border:1px solid #fb923c30;}
+/* SECTION STATS */
+.sec-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:1.25rem;}
+.ss{background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius);padding:0.75rem 1rem;}
+.ss-label{font-size:10px;color:var(--text3);margin-bottom:4px;font-family:'DM Mono',monospace;letter-spacing:0.05em;}
+.ss-val{font-size:18px;font-weight:700;font-family:'Syne',sans-serif;color:var(--text);}
+.ss-val span{font-size:11px;font-weight:400;color:var(--text3);}
+
+/* NEON PROGRESS BARS */
+.prog-wrap{background:var(--bg3);border-radius:4px;height:4px;margin-bottom:1.5rem;overflow:hidden;}
+.prog-bar{height:4px;border-radius:4px;transition:width 0.5s cubic-bezier(.4,0,.2,1);}
+.pb-v{background:var(--neon-v);box-shadow:0 0 8px var(--neon-v);}
+.pb-n{background:var(--neon-n);box-shadow:0 0 8px var(--neon-n);}
+.pb-c{background:var(--neon-c);box-shadow:0 0 8px var(--neon-c);}
+
+/* SECTION HEADER */
+.section-header{display:flex;align-items:center;gap:12px;margin:1.75rem 0 0.75rem;}
+.section-tag{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.1em;padding:4px 12px;border-radius:20px;}
+.tag-verbal{background:var(--neon-v-dim);color:var(--neon-v);border:1px solid var(--neon-v);}
+.tag-numerical{background:var(--neon-n-dim);color:var(--neon-n);border:1px solid var(--neon-n);}
+.tag-array{background:var(--neon-c-dim);color:var(--neon-c);border:1px solid var(--neon-c);}
+.tag-string{background:var(--purple-dim);color:var(--purple);border:1px solid #a78bfa40;}
+.tag-numtheory{background:var(--teal-dim);color:var(--teal);border:1px solid #2dd4bf40;}
+.tag-pyq{background:var(--orange-dim);color:var(--orange);border:1px solid #fb923c40;}
 .section-line{flex:1;height:1px;background:var(--line2);}
 
-/* ── LECTURE CARD ── */
-.lec-card{
-  background:var(--bg3);
-  border:1px solid var(--line2);
-  border-radius:var(--radius-lg);
-  margin-bottom:10px;
-  overflow:hidden;
-  transition:border-color 0.2s;
-}
-.lec-card:hover{border-color:var(--line2);} 
-.lec-card.done-card{border-color:#4ade8030;}
-
-.lec-head{
-  display:grid;
-  grid-template-columns:auto 1fr auto auto auto;
-  align-items:center;gap:12px;
-  padding:1rem 1.25rem;cursor:pointer;user-select:none;
-}
+/* LECTURE CARD */
+.lec-card{background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius-lg);margin-bottom:10px;overflow:hidden;transition:border-color 0.2s,box-shadow 0.2s;}
+.lec-card.done-card{border-color:#4ade8040;box-shadow:0 0 0 1px #4ade8020;}
+.lec-head{display:grid;grid-template-columns:auto 1fr auto auto auto;align-items:center;gap:12px;padding:1rem 1.25rem;cursor:pointer;user-select:none;}
 .lec-head:hover{background:var(--bg4);}
-
-.lec-num{
-  font-family:'DM Mono',monospace;font-size:11px;
-  color:var(--text3);width:20px;text-align:right;
-}
+.lec-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);width:20px;text-align:right;}
 .lec-name-wrap{display:flex;flex-direction:column;gap:2px;}
 .lec-name{font-size:14px;font-weight:500;color:var(--text);}
 .lec-dur{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;}
-.lec-topic-count{
-  font-size:11px;color:var(--text3);
-  font-family:'DM Mono',monospace;white-space:nowrap;
-}
-.lec-pct{
-  font-family:'DM Mono',monospace;font-size:11px;
-  padding:3px 8px;border-radius:20px;white-space:nowrap;
-  background:var(--bg4);color:var(--text3);
-  min-width:44px;text-align:center;
-}
+.lec-tc{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;white-space:nowrap;}
+.lec-pct{font-family:'DM Mono',monospace;font-size:11px;padding:3px 8px;border-radius:20px;white-space:nowrap;background:var(--bg4);color:var(--text3);min-width:44px;text-align:center;}
 .lec-pct.complete{background:var(--green-dim);color:var(--green);}
 .chev{font-size:10px;color:var(--text3);transition:transform 0.2s;margin-left:4px;}
 .chev.open{transform:rotate(180deg);}
 
-/* ── BODY ── */
-.lec-body{
-  padding:0 1.25rem 1.25rem;
-  border-top:1px solid var(--line);
-  animation:slideDown 0.18s ease;
-}
-@keyframes slideDown{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
-
+/* BODY */
+.lec-body{padding:0 1.25rem 1.25rem;border-top:1px solid var(--line);animation:sd 0.18s ease;}
+@keyframes sd{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
 .body-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 1.5rem;}
-.body-sec-title{
-  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;
-  color:var(--text3);margin:1rem 0 0.5rem;text-transform:uppercase;
-  grid-column:1/-1;
-}
+.bst{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--text3);margin:1rem 0 0.5rem;text-transform:uppercase;grid-column:1/-1;}
 .t-row{display:flex;align-items:flex-start;gap:8px;padding:4px 0;}
 .t-row.full{grid-column:1/-1;}
-.t-row input[type=checkbox]{
-  margin-top:3px;flex-shrink:0;
-  accent-color:var(--accent);cursor:pointer;
-}
+.t-row input[type=checkbox]{margin-top:3px;flex-shrink:0;accent-color:var(--neon-c);cursor:pointer;}
 .t-row label{font-size:13px;color:var(--text2);line-height:1.4;cursor:pointer;transition:color 0.15s;}
 .t-row label:hover{color:var(--text);}
+.topic-link{color:inherit;text-decoration:none;border-bottom:1px dashed var(--text3);transition:color 0.15s,border-color 0.15s;}
+.topic-link:hover{color:var(--neon-c);border-bottom-color:var(--neon-c);}
 .t-row label.done{color:var(--text3);text-decoration:line-through;}
+.t-row label.done .topic-link{color:var(--text3);border-bottom-color:var(--text3);}
 
-.checklist-row{
-  display:flex;flex-wrap:wrap;gap:8px;
-  margin-top:1rem;padding-top:1rem;
-  border-top:1px solid var(--line);
-  grid-column:1/-1;
-}
-.check-pill{
-  display:flex;align-items:center;gap:6px;
-  font-size:12px;color:var(--text3);
-  background:var(--bg4);border:1px solid var(--line2);
-  border-radius:20px;padding:5px 12px;cursor:pointer;
-  transition:all 0.15s;
-}
-.check-pill:hover{border-color:var(--line2);color:var(--text2);}
-.check-pill.checked{
-  background:var(--accent-dim);border-color:var(--accent);color:var(--accent);
-}
-.check-pill input{display:none;}
-.check-icon{width:12px;height:12px;border-radius:50%;border:1px solid currentColor;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.check-pill.checked .check-icon::after{content:'✓';font-size:8px;}
+/* CHECKLIST PILLS */
+.checklist-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line);grid-column:1/-1;}
+.check-pill{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text3);background:var(--bg4);border:1px solid var(--line2);border-radius:20px;padding:5px 12px;cursor:pointer;transition:all 0.15s;}
+.check-pill:hover{color:var(--text2);}
+.check-pill.checked{background:var(--neon-c-dim);border-color:var(--neon-c);color:var(--neon-c);}
+.ci{width:12px;height:12px;border-radius:50%;border:1px solid currentColor;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:8px;}
 
-/* ── SCHEDULE ── */
-.sched-toggle{
-  display:flex;align-items:center;gap:8px;
-  font-size:13px;color:var(--text2);
-  margin-top:2rem;cursor:pointer;
-  background:none;border:1px solid var(--line2);
-  border-radius:var(--radius);padding:10px 16px;
-  width:100%;transition:all 0.15s;
-}
-.sched-toggle:hover{border-color:var(--accent);color:var(--accent);}
-.sched-box{
-  margin-top:1rem;
-  background:var(--bg3);border:1px solid var(--line2);
-  border-radius:var(--radius-xl);padding:1.5rem;
-}
-.sched-box h3{
-  font-family:'Syne',sans-serif;font-size:16px;font-weight:700;
-  margin-bottom:1rem;color:var(--text);
-}
-.sched-table{width:100%;border-collapse:collapse;font-size:13px;}
-.sched-table th{
-  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;
-  color:var(--text3);text-align:left;
-  padding:0 12px 10px 0;border-bottom:1px solid var(--line2);
-}
-.sched-table td{
-  padding:10px 12px 10px 0;vertical-align:top;
-  border-bottom:1px solid var(--line);color:var(--text2);
-}
-.sched-table td:first-child{color:var(--text3);font-family:'DM Mono',monospace;font-size:12px;white-space:nowrap;}
-.sched-table td:nth-child(2){font-weight:500;color:var(--text);}
-.sched-note{font-size:12px;color:var(--text3);margin-top:1rem;font-style:italic;}
+/* LINKS */
+.lec-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line);grid-column:1/-1;}
+.res-btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;padding:6px 12px;border-radius:20px;border:1px solid var(--line2);background:var(--bg4);color:var(--text2);text-decoration:none;cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;white-space:nowrap;}
+.res-btn:hover{color:var(--text);background:var(--surface);}
+.btn-yt:hover{border-color:#ff444440;color:#ff6666;background:#ff000018;}
+.btn-pdf:hover{border-color:#e24b4a40;color:#f87171;background:#e24b4a18;}
+.btn-prac:hover{border-color:#1d9e7540;color:#4ade80;background:#1d9e7518;}
+.btn-hw:hover{border-color:#ba751740;color:#fb923c;background:#ba751718;}
+.btn-art:hover{border-color:#534ab740;color:#a78bfa;background:#534ab718;}
+.res-dd{position:relative;}
+.drop-menu{display:none;position:absolute;top:calc(100% + 6px);left:0;min-width:240px;max-width:320px;background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius);padding:6px;z-index:99;box-shadow:0 8px 32px rgba(0,0,0,0.5);}
+.drop-menu.open{display:block;}
+.drop-menu a{display:block;font-size:12px;color:var(--text2);text-decoration:none;padding:7px 10px;border-radius:6px;transition:all 0.1s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.drop-menu a:hover{background:var(--bg4);color:var(--text);}
 
-/* ── RESPONSIVE ── */
+/* FOOTER */
+footer{position:relative;z-index:1;text-align:center;padding:2rem 1.25rem 1.5rem;border-top:1px solid var(--line2);margin-top:2rem;}
+
 @media(max-width:560px){
-  .stats-grid{grid-template-columns:repeat(2,1fr);}
+  .overall-stats,.sec-stats{grid-template-columns:repeat(2,1fr);}
   .body-cols{grid-template-columns:1fr;}
-  .body-cols .body-sec-title{grid-column:auto;}
-  .t-row.full{grid-column:auto;}
+  .bst,.t-row.full{grid-column:auto;}
   .lec-head{grid-template-columns:auto 1fr auto auto;}
-  .lec-topic-count{display:none;}
+  .lec-tc{display:none;}
+  .tabs{flex-direction:column;}
 }
 </style>
 </head>
 <body>
 <div class="wrap">
-
-  <div class="hero">
-    <div class="hero-eyebrow">GeeksforGeeks · 2026</div>
-    <div class="hero-title">TCS NQT <span>Prep</span><br>Progress Tracker</div>
-    <div class="hero-sub">Full playlist · Arrays, Strings, Number Theory, PYQ Practice</div>
-  </div>
-
-  <!-- LOGIN -->
-  <div id="login-section" class="login-card">
-    <p>Enter a username to sync your progress across devices. Use the same name anywhere to continue where you left off.</p>
-    <div class="login-inputs">
-      <input id="uid-input" type="text" placeholder="your_username" onkeydown="if(event.key==='Enter')setUser()"/>
-      <button class="btn btn-accent" onclick="setUser()">Start →</button>
+<div class="hero">
+  <div class="hero-top">
+    <div>
+      <div class="hero-eyebrow">GeeksforGeeks · 2026</div>
+      <div class="hero-title">TCS NQT <span>Prep</span><br>Progress Tracker</div>
+      <div class="hero-sub">Verbal · Numerical · Coding — complete course tracker</div>
     </div>
-  </div>
-
-  <div id="user-bar" style="display:none" class="user-active">
-    <div class="user-pill">
-      <div class="user-avatar" id="user-avatar"></div>
-      <div>
-        <div style="font-size:13px;font-weight:500;color:var(--text)" id="user-label-name"></div>
-        <div style="font-size:11px;color:var(--text3)">personal tracker</div>
-      </div>
-    </div>
-    <div style="display:flex;align-items:center;gap:12px;">
-      <div class="sync-pill"><div class="sync-dot" id="sync-dot"></div><span id="sync-label">synced</span></div>
-      <button class="btn btn-ghost" style="font-size:12px;padding:6px 12px;" onclick="changeUser()">Switch user</button>
-    </div>
-  </div>
-
-  <!-- STATS -->
-  <div id="main-content" style="display:none">
-    <div class="stats-grid">
-      <div class="stat" id="s1"><div class="stat-label">LECTURES</div><div class="stat-val" id="st-lec">0<span>/13</span></div></div>
-      <div class="stat" id="s2"><div class="stat-label">TOPICS</div><div class="stat-val" id="st-topics">0<span> done</span></div></div>
-      <div class="stat" id="s3"><div class="stat-label">NOTES</div><div class="stat-val" id="st-notes">0<span>/13</span></div></div>
-      <div class="stat" id="s4"><div class="stat-label">HRS STUDIED</div><div class="stat-val" id="st-hrs">0<span>h</span></div></div>
-    </div>
-    <div class="prog-wrap"><div class="prog-bar" id="prog-bar" style="width:0%"></div></div>
-
-    <div id="lec-list"></div>
-
-    <button class="sched-toggle" onclick="toggleSched()">
-      <span>&#9632;</span> View suggested schedule (13 sessions)
+    <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn">
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span id="theme-label">Light mode</span>
     </button>
-    <div class="sched-box" id="sched-box" style="display:none">
-      <h3>Suggested study schedule</h3>
-      <table class="sched-table">
-        <thead><tr><th>Day</th><th>Lecture</th><th>Key focus</th></tr></thead>
-        <tbody id="sched-tbody"></tbody>
-      </table>
-      <p class="sched-note">Each session ~2–2.5h: watch + notes. Attempt practice Qs the same day, homework next morning.</p>
-    </div>
   </div>
 </div>
 
+<div id="login-section" class="login-card">
+  <p>Enter a username to save progress. Use the same name on any device.</p>
+  <div class="login-inputs">
+    <input id="uid-input" type="text" placeholder="your_username" onkeydown="if(event.key==='Enter')setUser()"/>
+    <button class="btn btn-accent" onclick="setUser()">Start →</button>
+  </div>
+</div>
+
+<div id="user-bar" style="display:none" class="user-active">
+  <div class="user-pill">
+    <div class="user-avatar" id="user-avatar"></div>
+    <div>
+      <div style="font-size:13px;font-weight:500;color:var(--text)" id="user-label-name"></div>
+      <div style="font-size:11px;color:var(--text3)">personal tracker</div>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <div class="sync-pill"><div class="sync-dot" id="sync-dot"></div><span id="sync-label">synced</span></div>
+    <button class="btn btn-ghost" style="font-size:12px;padding:6px 12px;" onclick="changeUser()">Switch user</button>
+  </div>
+</div>
+
+<div id="main-content" style="display:none;">
+  <div class="overall-stats">
+    <div class="os" id="os1"><div class="os-label">OVERALL PROGRESS</div><div class="os-val" id="ost-pct">0<span>%</span></div></div>
+    <div class="os" id="os2"><div class="os-label">TOPICS DONE</div><div class="os-val" id="ost-topics">0<span> done</span></div></div>
+    <div class="os" id="os3"><div class="os-label">LECTURES DONE</div><div class="os-val" id="ost-lec">0<span> done</span></div></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active-v" id="tbn-v" onclick="switchTab('v',this)"><span>Verbal</span><span class="tab-sub" id="tsub-v">0%</span></button>
+    <button class="tab-btn" id="tbn-n" onclick="switchTab('n',this)"><span>Numerical</span><span class="tab-sub" id="tsub-n">0%</span></button>
+    <button class="tab-btn" id="tbn-c" onclick="switchTab('c',this)"><span>Coding</span><span class="tab-sub" id="tsub-c">0%</span></button>
+  </div>
+
+  <div class="tab-panel active" id="panel-v">
+    <div class="sec-stats">
+      <div class="ss"><div class="ss-label">LECTURES</div><div class="ss-val" id="v-lec">0<span>/13</span></div></div>
+      <div class="ss"><div class="ss-label">TOPICS</div><div class="ss-val" id="v-top">0<span> done</span></div></div>
+      <div class="ss"><div class="ss-label">NOTES</div><div class="ss-val" id="v-not">0<span>/13</span></div></div>
+      <div class="ss"><div class="ss-label">PROGRESS</div><div class="ss-val" id="v-pct">0<span>%</span></div></div>
+    </div>
+    <div class="prog-wrap"><div class="prog-bar pb-v" id="v-prog" style="width:0%"></div></div>
+    <div id="list-v"></div>
+  </div>
+
+  <div class="tab-panel" id="panel-n">
+    <div class="sec-stats">
+      <div class="ss"><div class="ss-label">LECTURES</div><div class="ss-val" id="n-lec">0<span>/14</span></div></div>
+      <div class="ss"><div class="ss-label">TOPICS</div><div class="ss-val" id="n-top">0<span> done</span></div></div>
+      <div class="ss"><div class="ss-label">NOTES</div><div class="ss-val" id="n-not">0<span>/14</span></div></div>
+      <div class="ss"><div class="ss-label">PROGRESS</div><div class="ss-val" id="n-pct">0<span>%</span></div></div>
+    </div>
+    <div class="prog-wrap"><div class="prog-bar pb-n" id="n-prog" style="width:0%"></div></div>
+    <div id="list-n"></div>
+  </div>
+
+  <div class="tab-panel" id="panel-c">
+    <div class="sec-stats">
+      <div class="ss"><div class="ss-label">LECTURES</div><div class="ss-val" id="c-lec">0<span>/13</span></div></div>
+      <div class="ss"><div class="ss-label">TOPICS</div><div class="ss-val" id="c-top">0<span> done</span></div></div>
+      <div class="ss"><div class="ss-label">NOTES</div><div class="ss-val" id="c-not">0<span>/13</span></div></div>
+      <div class="ss"><div class="ss-label">HRS STUDIED</div><div class="ss-val" id="c-hrs">0<span>h</span></div></div>
+    </div>
+    <div class="prog-wrap"><div class="prog-bar pb-c" id="c-prog" style="width:0%"></div></div>
+    <div id="list-c"></div>
+  </div>
+</div>
+</div>
+
 <script>
-const SECTIONS=[
-  {
-    id:'array',label:'Arrays',tag:'tag-array',
-    lectures:[
-      {id:'arr1',num:'01',name:'Array 01',dur:'2:06:56',topics:['Sum of Array','Largest in Array','Mean of an Array','Reverse an Array','Second Largest','Remove Duplicates Sorted Array','Check if array is sorted','Max Consecutive Bit','First and Second Smallest','Vector in C++ STL']},
-      {id:'arr2',num:'02',name:'Array 02',dur:'2:05:01',topics:['Array Subset','Rotate Array','Equal Sum','Stock Buy & Sell – Max one Transaction','Addition of two square matrices','Union of 2 Sorted Arrays','Median of an Array','Count Sorted Rows','Row with max 1s','Prefix Sum Array','Stock Buy & Sell','Rotate an Array']},
-      {id:'arr3',num:'03',name:'Array 03',dur:'2:00:38',topics:['Frequencies in a Limited Array','Non-Repeating Element','Remove Duplicates from unsorted array','Replace elements by its rank','Kadane\'s Algorithm','Sort according to an Array','Maximum Product Subarray','Map in C++ STL']},
-      {id:'arr4',num:'04',name:'Array 04',dur:'1:51:08',topics:['Max Sum Subarray of size K','Count distinct elements in every window','First negative in every window of size K','Trapping Rain Water','Maximum average subarray','Container With Most Water','Sliding Window Technique']},
-    ]
-  },
-  {
-    id:'string',label:'Strings',tag:'tag-string',
-    lectures:[
-      {id:'str1',num:'05',name:'String 01',dur:'1:40:15',topics:['Palindrome String','Anagram','Remove vowels from string','Remove character','Remove all characters other than alphabets','Encrypt the string - 1','Smallest and Largest word','Count Alphabets','Non Repeating Character','Sort a String','Toggle Case']},
-      {id:'str2',num:'06',name:'String 02',dur:'1:44:56',topics:['Isomorphic Strings','String Duplicates Removal','Most Frequent Character','Roman to Integer','Convert to Roman No','Common Subsequence','Check if a String is Subsequence of Other','First Occurrence','Implement Atoi','Encrypt the string - 2']},
-      {id:'str3',num:'07',name:'String 03',dur:'1:06:48',topics:['Number of factors','Prime Number','Factorial of a Number','Binomial Coefficient','Sum of elements of an AP','Find all factors of a Positive Number','Check for Prime Number']},
-      {id:'str4',num:'08',name:'String 04',dur:'1:31:30',topics:['Program to print all palindromes in a given range','Find Prime numbers in a range','Replace all 0 with 5 in an input Integer','Program to check Strong Number']},
-    ]
-  },
-  {
-    id:'numtheory',label:'Number Theory',tag:'tag-numtheory',
-    lectures:[
-      {id:'nt1',num:'09',name:'Number Theory 01',dur:'1:22:56',topics:['LCM of two numbers','GCD of two numbers','Largest prime factor','Sum of AP series','Factorial']},
-      {id:'nt2',num:'10',name:'Number Theory 02',dur:'1:17:21',topics:['Number Theory concepts 02']},
-      {id:'nt3',num:'11',name:'Number Theory 03',dur:'1:57:46',topics:['Number Theory concepts 03']},
-      {id:'nt4',num:'12',name:'Number Theory 04',dur:'1:45:51',topics:['Number Theory concepts 04']},
-      {id:'nt5',num:'13',name:'Number Theory 05',dur:'2:01:32',topics:['Number Theory concepts 05']},
-    ]
-  },
-  {
-    id:'pyq',label:'PYQ Practice',tag:'tag-pyq',
-    lectures:[
-      {id:'pyq1',num:'PYQ1',name:'Practice PYQ — Set 1',dur:'~2 hrs',topics:['CSES - Weird Algorithm','CSES - Missing Number','CSES - Repetitions','CSES - Permutations','CSES - Two Sets','Number of occurrence','Check if array is sorted','Find triplets with zero sum']},
-      {id:'pyq2',num:'PYQ2',name:'Practice PYQ — Set 2',dur:'~2 hrs',topics:['First n Fibonacci','First and Second Smallests','Missing And Repeating','Greatest of three numbers','Most Frequent Character','Sum of numbers in string','Perfect Numbers','Toggle Case','Sort according to an Array','Non Repeating Character']},
-      {id:'pyq3',num:'PYQ3',name:'Practice PYQ — Set 3',dur:'~2 hrs',topics:["Kadane's Algorithm","Max Circular Subarray Sum","Maximum difference of zeros and ones in binary string","Maximum Product Subarray"]},
-    ]
-  }
+const V=[{id:'verbal',label:'Verbal Ability',tag:'tag-verbal',lectures:[
+  {id:'v01',num:'01',name:'Rules For Usage Of Nouns',dur:'',yt:'https://www.youtube.com/watch?v=SJMNAltbKpM',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260223160837422156/TCS_NQT_2026_LEC_1_NOUNS-.pdf',practice:[{name:'Nouns Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/rules-for-the-usage-of-nouns/'}],homework:[{name:'Nouns MCQs',url:'https://www.geeksforgeeks.org/quizzes/noun-quiz/'}],articles:[{name:'Nouns',url:'https://www.geeksforgeeks.org/english/nouns/'}],topics:['Nouns Practice Questions','Nouns MCQs','Nouns Article']},
+  {id:'v02',num:'02',name:'Rules For Usage Of Pronouns',dur:'',yt:'https://www.youtube.com/watch?v=TVfKqbenTgM',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260224152047271419/TCS_NQT_LEC_2_VERBAL_PRONOUN.pdf',practice:[{name:'Pronouns Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-verbal-ability-rules-for-the-usage-of-pronoun-2/'}],homework:[{name:'Pronouns MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-verbal-ability-rules-for-the-usage-of-pronoun/'}],articles:[{name:'Pronouns',url:'https://www.geeksforgeeks.org/english/what-are-pronouns-meaning-and-examples/'}],topics:['Pronouns Practice Questions','Pronouns MCQs','Pronouns Article']},
+  {id:'v03',num:'03',name:'Rules For Usage Of Verbs',dur:'',yt:'https://www.youtube.com/watch?v=DgHV4dvV_jk',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260225150405111596/TCS_NQT_VERBAL_VERBS_LEC_3_FINAL.pdf',practice:[{name:'Verbs Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-verbs-class/'}],homework:[{name:'Verbs MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-verbs-hw-01/'}],articles:[{name:'Verb',url:'https://www.geeksforgeeks.org/english/verbs/'}],topics:['Verbs Practice Questions','Verbs MCQs','Verb Article']},
+  {id:'v04',num:'04',name:'Rules For Usage Of Adjective',dur:'',yt:'https://www.youtube.com/watch?v=xpp2_oCMa6M',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260226233954940024/TCS_NQT_Adjectives_Lec4_final.pdf',practice:[{name:'Adjective Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-adjectives-class/'}],homework:[{name:'Adjective MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-english-hw/'}],articles:[{name:'Adjective',url:'https://www.geeksforgeeks.org/english/adjectives/'}],topics:['Adjective Practice Questions','Adjective MCQs','Adjective Article']},
+  {id:'v05',num:'05',name:'Rules For Usage Of Adverbs',dur:'',yt:'https://www.youtube.com/watch?v=tegkf8rOuoo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260227164831917838/TCS_NQT_VERBAL_ADVERBS_FINAL.pdf',practice:[{name:'Adverb Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-adverb-class/'}],homework:[{name:'Adverb MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-adverb-hw/'}],articles:[{name:'Adverb',url:'https://www.geeksforgeeks.org/english/adverbs/'}],topics:['Adverb Practice Questions','Adverb MCQs','Adverb Article']},
+  {id:'v06',num:'06',name:'Rules For Usage Of Preposition',dur:'',yt:'https://www.youtube.com/watch?v=xjqeHT0Vvoc',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260228160754584940/TCS_NQT_VERBAL_PREPOSITION_LEC_6_FINAL.pdf',practice:[{name:'Preposition Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-conjunction-class/'}],homework:[{name:'Preposition MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-preposition-hw/'}],articles:[{name:'Preposition',url:'https://www.geeksforgeeks.org/english/preposition/'}],topics:['Preposition Practice Questions','Preposition MCQs','Preposition Article']},
+  {id:'v07',num:'07',name:'Rules For Usage Of Conjunction',dur:'',yt:'https://www.youtube.com/watch?v=Ft36ni8GsMo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260302154822524829/TCS_NQT_VERBAL_CONJUNCTION_LEC_7_FINAL.pdf',practice:[{name:'Conjunction Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-conjunction-class-1/'}],homework:[{name:'Conjunction MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-conjunction-hw/'}],articles:[{name:'Conjunction',url:'https://www.geeksforgeeks.org/english/conjunction/'}],topics:['Conjunction Practice Questions','Conjunction MCQs','Conjunction Article']},
+  {id:'v08',num:'08',name:'Interjection / Determiners',dur:'',yt:'https://www.youtube.com/watch?v=Lmz6Lye-ymI',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260305182946600955/TCS_NQT_VERBAL_INTERJECTION_DETERMINER_LEC_8_FINAL.pdf',practice:[{name:'Interjection Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-interjection-class/'},{name:'Determiners Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-determiners-class/'}],homework:[{name:'Interjection MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-intejection-hw/'}],articles:[{name:'Interjection',url:'https://www.geeksforgeeks.org/english/interjections/'},{name:'Determiners',url:'https://www.geeksforgeeks.org/aptitude/determiners/'}],topics:['Interjection Practice Questions','Determiners Practice Questions','Interjection MCQs','Interjection Article','Determiners Article']},
+  {id:'v09',num:'09',name:'Direct and Indirect Speech',dur:'',yt:'https://www.youtube.com/watch?v=PYU94_uYRFo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260307121339518988/TCS_NQT_VERBAL_LEC_10_FINAL.pdf',practice:[{name:'Direct Indirect Speech Practice',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-direct-and-indirect-speech-class/'}],homework:[{name:'Direct Indirect Speech MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-direct-and-indirect-speech-hw/'}],articles:[{name:'Direct and Indirect Speech',url:'https://www.geeksforgeeks.org/english/direct-indirect-speech-rules/'}],topics:['Direct Indirect Speech Practice','Direct Indirect Speech MCQs','Direct and Indirect Speech Article']},
+  {id:'v10',num:'10',name:'Active Passive Voice',dur:'',yt:'https://www.youtube.com/watch?v=sPFpfiHNGDM',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260307185621179428/TCS_NQT_Verbal_Lec_10_Final.pdf',practice:[{name:'Active Passive Voice Practice',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-active-passive-voice-class/'}],homework:[{name:'Active Passive MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-active-passive-voice-hw/'}],articles:[{name:'Active Passive Voice',url:'https://www.geeksforgeeks.org/english/difference-between-active-and-passive-voice/'}],topics:['Active Passive Voice Practice','Active Passive MCQs','Active Passive Voice Article']},
+  {id:'v11',num:'11',name:'Reading Comprehension',dur:'',yt:'https://www.youtube.com/watch?v=qTGhSAlibxo',pdf:null,practice:[{name:'Reading Comprehension Practice',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-reading-comprehension-class/'}],homework:[{name:'Reading Comprehension MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-reading-comprehension-hw/'}],articles:[{name:'Reading Comprehension',url:'https://www.geeksforgeeks.org/english/reading-comprehension-questions/'}],topics:['Reading Comprehension Practice','Reading Comprehension MCQs','Reading Comprehension Article']},
+  {id:'v12',num:'12',name:'Jumbled and Parajumbled',dur:'',yt:null,pdf:null,practice:[],homework:[],articles:[],topics:['Jumbled sentences','Parajumbled sentences']},
+  {id:'v13',num:'13',name:'Vocabulary',dur:'',yt:'https://www.youtube.com/watch?v=WuUACJ1mM7g',pdf:null,practice:[],homework:[],articles:[],topics:['Vocabulary practice','Vocabulary MCQs']},
+]}];
+
+const N=[{id:'numerical',label:'Numerical Ability & Reasoning',tag:'tag-numerical',lectures:[
+  {id:'n01',num:'01',name:'Time & Work, Pipes & Cisterns, LCM HCF',dur:'',yt:'https://www.youtube.com/watch?v=3EI9YAySwHQ',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260223221726359180/20260223220636087.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcqnqt2026classtimeworkpipecisternlcmhcf/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-time-and-work-hcf-lcm/'}],articles:[{name:'Time and Work',url:'https://www.geeksforgeeks.org/ssc-banking/time-and-work/'},{name:'Pipes and Cistern',url:'https://www.geeksforgeeks.org/maths/pipes-and-cistern/'},{name:'LCM & HCF',url:'https://www.geeksforgeeks.org/maths/hcf-and-lcm/'}],topics:['Time & Work','Pipes & Cisterns','LCM','HCF']},
+  {id:'n02',num:'02',name:'Time Speed & Distance, Boat & Stream',dur:'',yt:'https://www.youtube.com/watch?v=mLHtKPEXss8',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260224222843411873/20260224215948439.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcsnqt2026classtimedistanceboatstream/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-time-and-distance-boat-stream/'}],articles:[{name:'Time Speed Distance',url:'https://www.geeksforgeeks.org/aptitude/speed-time-distance/'},{name:'Boats and Streams',url:'https://www.geeksforgeeks.org/aptitude/boats-and-streams/'}],topics:['Time Speed Distance','Boats and Streams']},
+  {id:'n03',num:'03',name:'Percentage',dur:'',yt:'https://www.youtube.com/watch?v=5ToqG0SJTLo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260225221502182403/20260225215812523.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-aptitude-percentage-class-practice/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-aptitude-percentage/'}],articles:[{name:'Percentage',url:'https://www.geeksforgeeks.org/maths/percentage/'}],topics:['Percentage concepts','Percentage problems']},
+  {id:'n04',num:'04',name:'Ratio & Proportion, Mixture',dur:'',yt:'https://www.youtube.com/watch?v=afawt9_IyEo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260226234526795026/20260226215942629.pdf',practice:[{name:'Ratio & Proportion Practice',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-ratio-proportion-hw/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-ratio-proportion-hw/'}],articles:[{name:'Ratio and Proportion',url:'https://www.geeksforgeeks.org/maths/ratio-and-proportion/'},{name:'Mixture and Alligation',url:'https://www.geeksforgeeks.org/aptitude/mixtures-and-alligation/'}],topics:['Ratio & Proportion','Mixture and Alligation']},
+  {id:'n05',num:'05',name:'Profit, Loss & Discount',dur:'',yt:'https://www.youtube.com/watch?v=YW4qxQWQdR0',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260228100805469311/20260227220230596.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-profit-loss-discount-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-aptitude-profit-loss-discount-hw/'}],articles:[{name:'Profit Loss & Discount',url:'https://www.geeksforgeeks.org/maths/profit-and-loss-formula/'}],topics:['Profit & Loss','Discount']},
+  {id:'n06',num:'06',name:'SI & CI, Average',dur:'',yt:'https://www.youtube.com/watch?v=PmxujfHK48Q',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260302101858222765/20260228215813020.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/cs-nqt-2026-si-ci-average-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-si-ci-average-hw/'}],articles:[{name:'Simple Interest',url:'https://www.geeksforgeeks.org/maths/simple-interest/'},{name:'Compound Interest',url:'https://www.geeksforgeeks.org/maths/compound-interest-formula/'},{name:'Average',url:'https://www.geeksforgeeks.org/aptitude/average/'}],topics:['Simple Interest','Compound Interest','Average']},
+  {id:'n07',num:'07',name:'Number System',dur:'',yt:'https://www.youtube.com/watch?v=8z9bDGyNQEY',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260303112244909806/20260302215459476.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-apitude-number-system/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-number-system-hw/'}],articles:[{name:'Number System',url:'https://www.geeksforgeeks.org/maths/number-system-in-maths/'}],topics:['Number System concepts','Number System problems']},
+  {id:'n08',num:'08',name:'Mensuration 2D & 3D',dur:'',yt:'https://www.youtube.com/watch?v=xX0UmPDUmGM',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260305110657278982/20260303215858653.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-apitude-mensuration-2d-3d-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-aptitude-mensuration-2d-3d-hw/'}],articles:[{name:'Mensuration 2D',url:'https://www.geeksforgeeks.org/aptitude/2d-mensuration/'},{name:'Mensuration 3D',url:'https://www.geeksforgeeks.org/aptitude/3d-mensuration/'}],topics:['Mensuration 2D','Mensuration 3D']},
+  {id:'n09',num:'09',name:'Clock and Calendar',dur:'',yt:'https://www.youtube.com/watch?v=03EEJjfkfhA',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260305111331185898/20260304215152682-.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-apitude-clock-and-calendar-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-apitude-clock-and-calendar-hw/'}],articles:[{name:'Clock',url:'https://www.geeksforgeeks.org/aptitude/clocks-aptitude/'},{name:'Calendar',url:'https://www.geeksforgeeks.org/aptitude/calendars/'}],topics:['Clock problems','Calendar problems']},
+  {id:'n10',num:'10',name:'Series, Coding Decoding & Analogy',dur:'',yt:'https://www.youtube.com/watch?v=3Sligb3z6JA',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260307122439287405/20260305212843372.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-series-coding-decoding-and-analogy-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-series-coding-decoding-and-analogy-hw/'}],articles:[{name:'Series',url:'https://www.geeksforgeeks.org/aptitude/series/'},{name:'Coding-Decoding',url:'https://www.geeksforgeeks.org/aptitude/reasoning-tricks-to-solve-coding-decoding/'},{name:'Analogy',url:'https://www.geeksforgeeks.org/ssc-banking/word-analogy-for-ssc-cgl-exams/'}],topics:['Number Series','Coding Decoding','Analogy']},
+  {id:'n11',num:'11',name:'Blood Relation, Direction & Math Operations',dur:'',yt:'https://www.youtube.com/watch?v=6tjVVMaODZo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260307122150288852/20260306215705320.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-blood-relation-direction-mathematical-operations-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-blood-relation-direction-mathematical-operations-hw/'}],articles:[{name:'Blood Relation',url:'https://www.geeksforgeeks.org/aptitude/blood-relation-reasoning/'},{name:'Direction & Math Operations',url:'https://www.geeksforgeeks.org/aptitude/puzzles-direction/'}],topics:['Blood Relations','Direction problems','Mathematical Operations']},
+  {id:'n12',num:'12',name:'Seating Arrangement and Puzzle Test',dur:'',yt:'https://www.youtube.com/watch?v=T2pCfaadKdw',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260309105011576264/20260307215652125.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-aptitude-seating-arrangement-and-puzzle-test-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-aptitude-seating-arrangement-and-puzzle-test-hw/'}],articles:[{name:'Seating Arrangement',url:'https://www.geeksforgeeks.org/aptitude/seating-arrangement-aptitude/'},{name:'Puzzle Test',url:'https://www.geeksforgeeks.org/aptitude/puzzles/'}],topics:['Seating Arrangement','Puzzle Test']},
+  {id:'n13',num:'13',name:'Non Verbal Reasoning',dur:'',yt:'https://www.youtube.com/watch?v=NTGeq-FT9Uc',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260311110612229469/20260309215707116.pdf',practice:[],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-aptitude-permutation-and-combination-probability-di-hw/'}],articles:[{name:'Non Verbal Reasoning',url:'https://www.geeksforgeeks.org/aptitude/non-verbal-reasoning-questions-and-answers/'}],topics:['Non Verbal Reasoning practice','Non Verbal Reasoning MCQs']},
+  {id:'n14',num:'14',name:'Algebra and Progression',dur:'',yt:'https://www.youtube.com/watch?v=ddOiz_04Ue4',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260311110510000591/20260310215529200.pdf',practice:[],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-algebra-progression-hw/'}],articles:[],topics:['Algebra problems','Progression problems']},
+]}];
+
+const C=[
+  {id:'array',label:'Arrays',tag:'tag-array',lectures:[
+    {id:'arr1',num:'01',name:'Array 01',dur:'2:06:56',yt:'https://www.youtube.com/watch?v=g9W7uh_Jfxs',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260223184228144414/tcs-nqt-2026-programming-1-.pdf',practice:[{name:'Sum of Array',url:'https://www.geeksforgeeks.org/problems/sum-of-array2326/1'},{name:'Largest in Array',url:'https://www.geeksforgeeks.org/problems/largest-element-in-array4009/1'},{name:'Mean of an Array',url:'https://www.geeksforgeeks.org/problems/mean0021/1'},{name:'Reverse an Array',url:'https://www.geeksforgeeks.org/problems/reverse-an-array/1'},{name:'Second Largest',url:'https://www.geeksforgeeks.org/problems/second-largest3735/1'},{name:'Remove Duplicates Sorted Array',url:'https://www.geeksforgeeks.org/problems/remove-duplicate-elements-from-sorted-array/1'},{name:'Check if array is sorted',url:'https://www.geeksforgeeks.org/problems/check-if-an-array-is-sorted0701/1'},{name:'Max Consecutive Bit',url:'https://www.geeksforgeeks.org/problems/max-consecutive-one/1'}],homework:[{name:'First and Second Smallest',url:'https://www.geeksforgeeks.org/problems/find-the-smallest-and-second-smallest-element-in-an-array3226/1'}],articles:[{name:'Vector in C++ STL',url:'https://www.geeksforgeeks.org/cpp/vector-in-cpp-stl/'}],topics:['Sum of Array','Largest in Array','Mean of an Array','Reverse an Array','Second Largest','Remove Duplicates Sorted Array','Check if array is sorted','Max Consecutive Bit','First and Second Smallest','Vector in C++ STL']},
+    {id:'arr2',num:'02',name:'Array 02',dur:'2:05:01',yt:'https://www.youtube.com/watch?v=HayvoShS1LQ',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260224221223518495/tcs-nqt-programming-part-2-.pdf',practice:[{name:'Array Subset',url:'https://www.geeksforgeeks.org/problems/array-subset-of-another-array2317/1'},{name:'Rotate Array',url:'https://www.geeksforgeeks.org/problems/rotate-array-by-n-elements-1587115621/1'},{name:'Equal Sum',url:'https://www.geeksforgeeks.org/problems/equal-sum0810/1'},{name:'Stock Buy & Sell',url:'https://www.geeksforgeeks.org/problems/buy-stock-2/1'},{name:'Addition of two square matrices',url:'https://www.geeksforgeeks.org/problems/addition-of-two-square-matrices4916/1'}],homework:[{name:'Union of 2 Sorted Arrays',url:'https://www.geeksforgeeks.org/problems/union-of-two-sorted-arrays-1587115621/1'},{name:'Median of an Array',url:'https://www.geeksforgeeks.org/problems/find-the-median0527/1'},{name:'Count Sorted Rows',url:'https://www.geeksforgeeks.org/problems/count-sorted-rows2702/1'},{name:'Row with max 1s',url:'https://www.geeksforgeeks.org/problems/row-with-max-1s0023/1'}],articles:[{name:'Prefix Sum Array',url:'https://www.geeksforgeeks.org/dsa/prefix-sum-array-implementation-applications-competitive-programming/'},{name:'Stock Buy and Sell',url:'https://www.geeksforgeeks.org/competitive-programming/all-variations-of-stock-problems/'},{name:'Rotate an Array',url:'https://www.geeksforgeeks.org/dsa/complete-guide-on-array-rotations/'}],topics:['Array Subset','Rotate Array','Equal Sum','Stock Buy & Sell – Max one Transaction','Addition of two square matrices','Union of 2 Sorted Arrays','Median of an Array','Count Sorted Rows','Row with max 1s','Prefix Sum Array','Stock Buy & Sell','Rotate an Array']},
+    {id:'arr3',num:'03',name:'Array 03',dur:'2:00:38',yt:'https://www.youtube.com/watch?v=eLPApI-lxcY',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260225185305222275/tcsnqt-programming-3-export.pdf',practice:[{name:'Frequencies in a Limited Array',url:'https://www.geeksforgeeks.org/problems/frequency-of-array-elements-1587115620/1'},{name:'Non-Repeating Element',url:'https://www.geeksforgeeks.org/problems/non-repeating-element3958/1'},{name:'Remove Duplicates from unsorted array',url:'https://www.geeksforgeeks.org/problems/remove-duplicates-from-unsorted-array4141/1'},{name:'Replace elements by its rank',url:'https://www.geeksforgeeks.org/problems/replace-elements-by-its-rank-in-the-array/1'},{name:"Kadane's Algorithm",url:'https://www.geeksforgeeks.org/problems/kadanes-algorithm-1587115620/1'}],homework:[{name:'Sort according to an Array',url:'https://www.geeksforgeeks.org/problems/relative-sorting4323/1'},{name:'Maximum Product Subarray',url:'https://www.geeksforgeeks.org/problems/maximum-product-subarray3604/1'}],articles:[{name:'Map in C++ STL',url:'https://www.geeksforgeeks.org/cpp/map-associative-containers-the-c-standard-template-library-stl/'}],topics:['Frequencies in a Limited Array','Non-Repeating Element','Remove Duplicates from unsorted array','Replace elements by its rank',"Kadane's Algorithm",'Sort according to an Array','Maximum Product Subarray','Map in C++ STL']},
+    {id:'arr4',num:'04',name:'Array 04',dur:'1:51:08',yt:'https://www.youtube.com/watch?v=NgZa2IHcQS8',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260228102044590456/tcs-nqt-4-export.pdf',practice:[{name:'Max Sum Subarray of size K',url:'https://www.geeksforgeeks.org/problems/max-sum-subarray-of-size-k5313/1'},{name:'Count distinct elements in every window',url:'https://www.geeksforgeeks.org/problems/count-distinct-elements-in-every-window/1'},{name:'First negative in every window of size K',url:'https://www.geeksforgeeks.org/problems/first-negative-integer-in-every-window-of-size-k3345/1'},{name:'Trapping Rain Water',url:'https://www.geeksforgeeks.org/problems/trapping-rain-water-1587115621/1'}],homework:[{name:'Maximum average subarray',url:'https://www.geeksforgeeks.org/problems/maximum-average-subarray5859/1'},{name:'Container With Most Water',url:'https://www.geeksforgeeks.org/problems/container-with-most-water0535/1'}],articles:[{name:'Sliding Window Technique',url:'https://www.geeksforgeeks.org/dsa/window-sliding-technique/'}],topics:['Max Sum Subarray of size K','Count distinct elements in every window','First negative in every window of size K','Trapping Rain Water','Maximum average subarray','Container With Most Water','Sliding Window Technique']},
+  ]},
+  {id:'string',label:'Strings',tag:'tag-string',lectures:[
+    {id:'str1',num:'05',name:'String 01',dur:'1:40:15',yt:'https://www.youtube.com/watch?v=x3_RZbzjvks',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260228102138772430/tcs-nqt-programming-5.pdf',practice:[{name:'Palindrome String',url:'https://www.geeksforgeeks.org/problems/palindrome-string0817/1'},{name:'Anagram',url:'https://www.geeksforgeeks.org/problems/anagram-1587115620/1'},{name:'Remove vowels from string',url:'https://www.geeksforgeeks.org/problems/remove-vowels-from-string1446/1'},{name:'Remove character',url:'https://www.geeksforgeeks.org/problems/remove-character3815/1'},{name:'Remove all characters other than alphabets',url:'https://www.geeksforgeeks.org/problems/remove-all-characters-other-than-alphabets4923/1'},{name:'Encrypt the string - 1',url:'https://www.geeksforgeeks.org/problems/encrypt-the-string-10337/1'},{name:'Smallest and Largest word',url:'https://www.geeksforgeeks.org/problems/smallest-and-largest/1'}],homework:[{name:'Count Alphabets',url:'https://www.geeksforgeeks.org/problems/count-alphabets3649/1'},{name:'Non Repeating Character',url:'https://www.geeksforgeeks.org/problems/non-repeating-character-1587115620/1'},{name:'Sort a String',url:'https://www.geeksforgeeks.org/problems/sort-a-string2943/1'},{name:'Toggle Case',url:'https://www.geeksforgeeks.org/problems/toggle-case/1'}],articles:[{name:'String in Data Structure',url:'https://www.geeksforgeeks.org/dsa/string-data-structure/'}],topics:['Palindrome String','Anagram','Remove vowels from string','Remove character','Remove all characters other than alphabets','Encrypt the string - 1','Smallest and Largest word','Count Alphabets','Non Repeating Character','Sort a String','Toggle Case']},
+    {id:'str2',num:'06',name:'String 02',dur:'1:44:56',yt:'https://www.youtube.com/watch?v=mVzFQaBy6II',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260302103335161323/tcs-nqt-6-export.pdf',practice:[{name:'Isomorphic Strings',url:'https://www.geeksforgeeks.org/problems/isomorphic-strings-1587115620/1'},{name:'String Duplicates Removal',url:'https://www.geeksforgeeks.org/problems/remove-all-duplicates-from-a-given-string4321/1'},{name:'Most Frequent Character',url:'https://www.geeksforgeeks.org/problems/maximum-occuring-character-1587115620/1'},{name:'Roman to Integer',url:'https://www.geeksforgeeks.org/problems/roman-number-to-integer3201/1'},{name:'Convert to Roman No',url:'https://www.geeksforgeeks.org/problems/convert-to-roman-no/1'},{name:'Common Subsequence',url:'https://www.geeksforgeeks.org/problems/common-subsequence4049/1'},{name:'Check if a String is Subsequence of Other',url:'https://www.geeksforgeeks.org/problems/given-two-strings-find-if-first-string-is-a-subsequence-of-second/1'},{name:'First Occurrence',url:'https://www.geeksforgeeks.org/problems/implement-strstr/1'}],homework:[{name:'Implement Atoi',url:'https://www.geeksforgeeks.org/problems/implement-atoi/1'},{name:'Encrypt the string - 2',url:'https://www.geeksforgeeks.org/problems/encrypt-the-string-21117/1'}],articles:[{name:'Converting Decimal to Roman Numerals',url:'https://www.geeksforgeeks.org/dsa/converting-decimal-number-lying-between-1-to-3999-to-roman-numerals/'}],topics:['Isomorphic Strings','String Duplicates Removal','Most Frequent Character','Roman to Integer','Convert to Roman No','Common Subsequence','Check if a String is Subsequence of Other','First Occurrence','Implement Atoi','Encrypt the string - 2']},
+    {id:'str3',num:'07',name:'String 03',dur:'1:06:48',yt:'https://www.youtube.com/watch?v=aJY9Z6cFJNQ',pdf:null,practice:[{name:'Number of factors',url:'https://www.geeksforgeeks.org/problems/number-of-factors1435/1'},{name:'Prime Number',url:'https://www.geeksforgeeks.org/problems/prime-number2314/1'}],homework:[{name:'Factorial of a Number',url:'https://www.geeksforgeeks.org/dsa/program-for-factorial-of-a-number/'},{name:'Binomial Coefficient',url:'https://www.geeksforgeeks.org/dsa/binomial-coefficient-dp-9/'}],articles:[{name:'Sum of elements of an AP',url:'https://www.geeksforgeeks.org/dsa/sum-of-elements-of-an-ap-in-the-given-range/'},{name:'Find all factors of a Positive Number',url:'https://www.geeksforgeeks.org/dsa/find-all-factors-of-a-natural-number/'},{name:'Check for Prime Number',url:'https://www.geeksforgeeks.org/dsa/check-for-prime-number/'}],topics:['Number of factors','Prime Number','Factorial of a Number','Binomial Coefficient','Sum of elements of an AP','Find all factors of a Positive Number','Check for Prime Number']},
+    {id:'str4',num:'08',name:'String 04',dur:'1:31:30',yt:'https://www.youtube.com/watch?v=WP-MR6xUqVM',pdf:null,practice:[{name:'Program to print all palindromes in a given range',url:'https://www.geeksforgeeks.org/dsa/program-print-palindromes-given-range/'},{name:'Find Prime numbers in a range',url:'https://www.geeksforgeeks.org/problems/find-prime-numbers-in-a-range4718/1'}],homework:[{name:"Replace all '0' with '5'",url:'https://www.geeksforgeeks.org/problems/replace-all-0s-with-5/1'},{name:'Program to check Strong Number',url:'https://www.geeksforgeeks.org/problems/strong-numbers3315/1'}],articles:[],topics:['Program to print all palindromes in a given range','Find Prime numbers in a range',"Replace all '0' with '5' in an input Integer",'Program to check Strong Number']},
+  ]},
+  {id:'numtheory',label:'Number Theory',tag:'tag-numtheory',lectures:[
+    {id:'nt1',num:'09',name:'Number Theory 01',dur:'1:22:56',yt:'https://www.youtube.com/watch?v=zhrIXkwn_NA',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260305182542408649/aman05.pdf',practice:[{name:'LCM of two numbers',url:'https://www.geeksforgeeks.org/problems/lcm--151453/1'},{name:'GCD of two numbers',url:'https://www.geeksforgeeks.org/problems/gcd-of-two-numbers3459/1'},{name:'Largest prime factor',url:'https://www.geeksforgeeks.org/problems/largest-prime-factor2601/1'},{name:'Sum of AP series',url:'https://www.geeksforgeeks.org/problems/sum-of-ap-series4512/1'}],homework:[{name:'Factorial',url:'https://www.geeksforgeeks.org/problems/factorial5739/1'}],articles:[],topics:['LCM of two numbers','GCD of two numbers','Largest prime factor','Sum of AP series','Factorial']},
+    {id:'nt2',num:'10',name:'Number Theory 02',dur:'1:17:21',yt:'https://www.youtube.com/watch?v=BtKaHBKMfcc',pdf:null,practice:[],homework:[],articles:[],topics:['Number Theory 02 concepts']},
+    {id:'nt3',num:'11',name:'Number Theory 03',dur:'1:57:46',yt:'https://www.youtube.com/watch?v=KVHnqUsVPSQ',pdf:null,practice:[],homework:[],articles:[],topics:['Number Theory 03 concepts']},
+    {id:'nt4',num:'12',name:'Number Theory 04',dur:'1:45:51',yt:'https://www.youtube.com/watch?v=HVrFGMSMUP8',pdf:null,practice:[],homework:[],articles:[],topics:['Number Theory 04 concepts']},
+    {id:'nt5',num:'13',name:'Number Theory 05',dur:'2:01:32',yt:'https://www.youtube.com/watch?v=T2o_VpIp7rk',pdf:null,practice:[],homework:[],articles:[],topics:['Number Theory 05 concepts']},
+  ]},
+  {id:'pyq',label:'PYQ Practice',tag:'tag-pyq',lectures:[
+    {id:'pyq1',num:'PYQ1',name:'Practice PYQ — Set 1',dur:'~2 hrs',yt:'https://www.youtube.com/watch?v=paG2hNpT1YU',pdf:null,practice:[{name:'CSES - Weird Algorithm',url:'https://www.geeksforgeeks.org/competitive-programming/weird-algorithm/'},{name:'CSES - Missing Number',url:'https://www.geeksforgeeks.org/competitive-programming/missing-number-cses/'},{name:'CSES - Repetitions',url:'https://www.geeksforgeeks.org/competitive-programming/cses-solutions-repetitions/'},{name:'CSES - Permutations',url:'https://www.geeksforgeeks.org/competitive-programming/cses-solutions-permutations/'},{name:'CSES - Two Sets',url:'https://www.geeksforgeeks.org/competitive-programming/cses-solutions-two-sets/'}],homework:[{name:'Number of occurrence',url:'https://www.geeksforgeeks.org/problems/number-of-occurrence2259/1'},{name:'Check if array is sorted',url:'https://www.geeksforgeeks.org/problems/check-if-an-array-is-sorted0701/1'},{name:'Find triplets with zero sum',url:'https://www.geeksforgeeks.org/problems/find-triplets-with-zero-sum/1'}],articles:[],topics:['CSES - Weird Algorithm','CSES - Missing Number','CSES - Repetitions','CSES - Permutations','CSES - Two Sets','Number of occurrence','Check if array is sorted','Find triplets with zero sum']},
+    {id:'pyq2',num:'PYQ2',name:'Practice PYQ — Set 2',dur:'~2 hrs',yt:'https://www.youtube.com/watch?v=xjsnCsNDnfg',pdf:null,practice:[{name:'First n Fibonacci',url:'https://www.geeksforgeeks.org/problems/print-first-n-fibonacci-numbers1002/1'},{name:'First and Second Smallests',url:'https://www.geeksforgeeks.org/problems/find-the-smallest-and-second-smallest-element-in-an-array3226/1'},{name:'Missing And Repeating',url:'https://www.geeksforgeeks.org/problems/find-missing-and-repeating2512/1'},{name:'Greatest of three numbers',url:'https://www.geeksforgeeks.org/problems/greatest-of-three-numbers2520/1'},{name:'Most Frequent Character',url:'https://www.geeksforgeeks.org/problems/maximum-occuring-character-1587115620/1'},{name:'Sum of numbers in string',url:'https://www.geeksforgeeks.org/problems/sum-of-numbers-in-string-1587115621/1'},{name:'Perfect Numbers',url:'https://www.geeksforgeeks.org/problems/perfect-numbers3207/1'},{name:'Toggle Case',url:'https://www.geeksforgeeks.org/problems/toggle-case/1'}],homework:[{name:'Sort according to an Array',url:'https://www.geeksforgeeks.org/problems/relative-sorting4323/1'},{name:'Non Repeating Character',url:'https://www.geeksforgeeks.org/problems/non-repeating-character-1587115620/1'},{name:'Most Frequent Character',url:'https://www.geeksforgeeks.org/problems/maximum-occuring-character-1587115620/1'}],articles:[],topics:['First n Fibonacci','First and Second Smallests','Missing And Repeating','Greatest of three numbers','Most Frequent Character','Sum of numbers in string','Perfect Numbers','Toggle Case','Sort according to an Array','Non Repeating Character']},
+    {id:'pyq3',num:'PYQ3',name:'Practice PYQ — Set 3',dur:'~2 hrs',yt:'https://www.youtube.com/watch?v=KTWKcsfNI_s',pdf:null,practice:[{name:"Kadane's Algorithm",url:'https://www.geeksforgeeks.org/problems/kadanes-algorithm-1587115620/1'},{name:'Max Circular Subarray Sum',url:'https://www.geeksforgeeks.org/problems/max-circular-subarray-sum-1587115620/1'}],homework:[{name:'Max diff of zeros and ones in binary string',url:'https://www.geeksforgeeks.org/problems/maximum-difference-of-zeros-and-ones-in-binary-string4111/1'},{name:'Maximum Product Subarray',url:'https://www.geeksforgeeks.org/problems/max-circular-subarray-sum-1587115620/1'}],articles:[],topics:["Kadane's Algorithm","Max Circular Subarray Sum","Maximum difference of zeros and ones in binary string","Maximum Product Subarray"]},
+  ]},
 ];
 
-const META=[
-  {key:'watched',label:'Watched'},
-  {key:'pdf',label:'PDF'},
-  {key:'notes',label:'Notes'},
-  {key:'practice',label:'Practice Qs'},
-  {key:'homework',label:'Homework'},
-  {key:'articles',label:'Articles'},
-];
+const META=[{key:'watched',label:'Watched'},{key:'pdf',label:'PDF'},{key:'notes',label:'Notes'},{key:'practice',label:'Practice Qs'},{key:'homework',label:'Homework'},{key:'articles',label:'Articles'}];
 
-const SCHEDULE=[
-  {day:'Day 1',lec:'Array 01',focus:'Basic array ops, STL vectors'},
-  {day:'Day 2',lec:'Array 02',focus:'Rotation, prefix sum, stock problems'},
-  {day:'Day 3',lec:'Array 03',focus:"Hashing, Kadane's, STL maps"},
-  {day:'Day 4',lec:'Array 04',focus:'Sliding window, Trapping Rain Water'},
-  {day:'Day 5',lec:'String 01',focus:'Palindrome, anagram, core string ops'},
-  {day:'Day 6',lec:'String 02',focus:'Isomorphic, Roman numerals, Atoi'},
-  {day:'Day 7',lec:'String 03',focus:'Primes, factorial, binomial coefficient'},
-  {day:'Day 8',lec:'String 04',focus:'Range palindromes, strong number'},
-  {day:'Day 9',lec:'Number Theory 01',focus:'LCM, GCD, AP series, factorial'},
-  {day:'Day 10',lec:'Number Theory 02–03',focus:'Extended number theory'},
-  {day:'Day 11',lec:'Number Theory 04–05',focus:'Advanced number theory'},
-  {day:'Day 12',lec:'PYQ Sets 1 & 2',focus:'CSES problems, past TCS questions'},
-  {day:'Day 13',lec:'PYQ Set 3 + Revision',focus:'Subarray problems, full revision'},
-];
-
-let state={}, currentUser=null, openCards={}, saveTimer=null;
+let state={},currentUser=null,openCards={},saveTimer=null;
 const PFX='tcs26_';
-
 function ss(k,v){try{localStorage.setItem(PFX+k,JSON.stringify(v));return true;}catch{return false;}}
 function sg(k){try{const v=localStorage.getItem(PFX+k);return v?JSON.parse(v):null;}catch{return null;}}
-
-function setSS(status,msg){
-  const d=document.getElementById('sync-dot'),l=document.getElementById('sync-label');
-  d.className='sync-dot'+(status==='saving'?' saving':status==='error'?' error':'');
-  l.textContent=msg;
-}
+function setSS(s,m){const d=document.getElementById('sync-dot'),l=document.getElementById('sync-label');d.className='sync-dot'+(s==='saving'?' saving':s==='error'?' error':'');l.textContent=m;}
+function scheduleSave(){setSS('saving','saving…');if(saveTimer)clearTimeout(saveTimer);saveTimer=setTimeout(()=>{if(!currentUser)return;const ok=ss('u::'+currentUser,state);setSS(ok?'synced':'error',ok?'synced':'error');},700);}
 
 function setUser(){
   const v=document.getElementById('uid-input').value.trim().replace(/\s+/g,'_').toLowerCase();
   if(!v)return;
-  currentUser=v;
-  const saved=sg('u::'+v);
-  state=saved||{};
+  currentUser=v;const saved=sg('u::'+v);state=saved||{};
   document.getElementById('login-section').style.display='none';
   document.getElementById('user-bar').style.display='flex';
   document.getElementById('user-label-name').textContent=v;
   document.getElementById('user-avatar').textContent=v[0].toUpperCase();
   document.getElementById('main-content').style.display='block';
-  setSS('synced','synced');
-  renderAll();
+  setSS('synced','synced');renderAll();
 }
 function changeUser(){
   currentUser=null;state={};openCards={};
@@ -473,123 +370,126 @@ function changeUser(){
   document.getElementById('main-content').style.display='none';
   document.getElementById('uid-input').value='';
 }
-function scheduleSave(){
-  setSS('saving','saving…');
-  if(saveTimer)clearTimeout(saveTimer);
-  saveTimer=setTimeout(()=>{
-    if(!currentUser)return;
-    const ok=ss('u::'+currentUser,state);
-    setSS(ok?'synced':'error',ok?'synced':'error');
-  },700);
+const TAB_NEON={v:'active-v',n:'active-n',c:'active-c'};
+function switchTab(t,btn){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active-v','active-n','active-c'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add(TAB_NEON[t]);
+  document.getElementById('panel-'+t).classList.add('active');
 }
+function toggleTheme(){
+  const html=document.documentElement;
+  const isLight=html.getAttribute('data-theme')==='light';
+  html.setAttribute('data-theme',isLight?'dark':'light');
+  document.getElementById('theme-label').textContent=isLight?'Light mode':'Dark mode';
+  localStorage.setItem('tcs26_theme',isLight?'dark':'light');
+}
+(function(){
+  const saved=localStorage.getItem('tcs26_theme');
+  if(saved==='light'){
+    document.documentElement.setAttribute('data-theme','light');
+    document.addEventListener('DOMContentLoaded',()=>{
+      const lbl=document.getElementById('theme-label');
+      if(lbl)lbl.textContent='Dark mode';
+    });
+  }
+})();
 
 function tk(lid,t){return lid+'|'+t;}
 function mk(lid,k){return lid+'|m|'+k;}
 
 function renderAll(){
-  const list=document.getElementById('lec-list');
-  list.innerHTML='';
-  SECTIONS.forEach(sec=>{
-    const sh=document.createElement('div');
-    sh.className='section-header';
+  renderTab('list-v',V);
+  renderTab('list-n',N);
+  renderTab('list-c',C);
+  updateStats();
+}
+
+function renderTab(cid,secs){
+  const el=document.getElementById(cid);el.innerHTML='';
+  secs.forEach(sec=>{
+    const sh=document.createElement('div');sh.className='section-header';
     sh.innerHTML=`<span class="section-tag ${sec.tag}">${sec.label}</span><div class="section-line"></div>`;
-    list.appendChild(sh);
+    el.appendChild(sh);
     sec.lectures.forEach(lec=>{
       const dt=lec.topics.filter(t=>state[tk(lec.id,t)]).length;
       const pct=Math.round((dt/lec.topics.length)*100);
       const isOpen=!!openCards[lec.id];
       const card=document.createElement('div');
       card.className='lec-card'+(pct===100?' done-card':'');
-      card.innerHTML=`
-        <div class="lec-head" onclick="toggleCard('${lec.id}')">
-          <span class="lec-num">${lec.num}</span>
-          <div class="lec-name-wrap">
-            <span class="lec-name">${lec.name}</span>
-            <span class="lec-dur">${lec.dur}</span>
-          </div>
-          <span class="lec-topic-count">${dt}/${lec.topics.length} topics</span>
-          <span class="lec-pct${pct===100?' complete':''}">${pct}%</span>
-          <span class="chev ${isOpen?'open':''}">▼</span>
-        </div>
-        ${isOpen?renderBody(lec):''}
-      `;
-      list.appendChild(card);
+      card.innerHTML=`<div class="lec-head" onclick="toggleCard('${lec.id}')">
+        <span class="lec-num">${lec.num}</span>
+        <div class="lec-name-wrap"><span class="lec-name">${lec.name}</span>${lec.dur?`<span class="lec-dur">${lec.dur}</span>`:''}</div>
+        <span class="lec-tc">${dt}/${lec.topics.length} topics</span>
+        <span class="lec-pct${pct===100?' complete':''}">${pct}%</span>
+        <span class="chev ${isOpen?'open':''}">▼</span>
+      </div>${isOpen?renderBody(lec):''}`;
+      el.appendChild(card);
     });
   });
-  updateStats();
 }
 
 function renderBody(lec){
-  const topicsHtml=lec.topics.map((t,i)=>{
-    const key=tk(lec.id,t);
-    const checked=!!state[key];
+  const umap={};
+  [...(lec.practice||[]),...(lec.homework||[]),...(lec.articles||[])].forEach(x=>{umap[x.name.toLowerCase().trim()]=x.url;});
+  const thtml=lec.topics.map((t,i)=>{
+    const key=tk(lec.id,t),checked=!!state[key];
     const safe=t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/'/g,'&#39;');
-    const safeJs=t.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+    const sjs=t.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
     const full=(lec.topics.length%2!==0&&i===lec.topics.length-1)?' full':'';
-    return `<div class="t-row${full}">
-      <input type="checkbox" id="${key}" ${checked?'checked':''} onchange="toggleT('${lec.id}','${safeJs}')">
-      <label for="${key}" class="${checked?'done':''}">${safe}</label>
-    </div>`;
+    const url=umap[t.toLowerCase().trim()];
+    const inner=url?`<a href="${url}" target="_blank" rel="noopener" class="topic-link" onclick="event.stopPropagation()">${safe}</a>`:safe;
+    return `<div class="t-row${full}"><input type="checkbox" id="${key}" ${checked?'checked':''} onchange="toggleT('${lec.id}','${sjs}')"><label for="${key}" class="${checked?'done':''}">${inner}</label></div>`;
   }).join('');
-  const metaHtml=META.map(m=>{
-    const k=mk(lec.id,m.key);
-    const checked=!!state[k];
-    return `<div class="check-pill${checked?' checked':''}" onclick="toggleM('${lec.id}','${m.key}')">
-      <span class="check-icon"></span>${m.label}
-    </div>`;
+  const mhtml=META.map(m=>{
+    const k=mk(lec.id,m.key),checked=!!state[k];
+    return `<div class="check-pill${checked?' checked':''}" onclick="toggleM('${lec.id}','${m.key}')"><span class="ci">${checked?'✓':''}</span>${m.label}</div>`;
   }).join('');
-  return `<div class="lec-body">
-    <div class="body-cols">
-      <div class="body-sec-title">Topics covered</div>
-      ${topicsHtml}
-      <div class="checklist-row">${metaHtml}</div>
-    </div>
-  </div>`;
+  let lhtml='<div class="lec-links">';
+  if(lec.yt)lhtml+=`<a class="res-btn btn-yt" href="${lec.yt}" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#FF0000"/><path d="M10 8.5L16 12L10 15.5Z" fill="white"/></svg>Watch</a>`;
+  if(lec.pdf)lhtml+=`<a class="res-btn btn-pdf" href="${lec.pdf}" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#E24B4A"/><path d="M8 6h5l3 3v9H8Z" fill="white" opacity=".9"/></svg>PDF</a>`;
+  if(lec.practice&&lec.practice.length)lhtml+=`<div class="res-dd"><button class="res-btn btn-prac" onclick="toggleDrop(event,'dp-${lec.id}')"><svg width="13" height="13" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#1D9E75"/><path d="M7 12l4 4 6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Practice Qs ▾</button><div class="drop-menu" id="dp-${lec.id}">${lec.practice.map(p=>`<a href="${p.url}" target="_blank">${p.name}</a>`).join('')}</div></div>`;
+  if(lec.homework&&lec.homework.length)lhtml+=`<div class="res-dd"><button class="res-btn btn-hw" onclick="toggleDrop(event,'dh-${lec.id}')"><svg width="13" height="13" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#BA7517"/><path d="M7 8h10M7 12h10M7 16h6" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/></svg>Homework ▾</button><div class="drop-menu" id="dh-${lec.id}">${lec.homework.map(h=>`<a href="${h.url}" target="_blank">${h.name}</a>`).join('')}</div></div>`;
+  if(lec.articles&&lec.articles.length)lhtml+=`<div class="res-dd"><button class="res-btn btn-art" onclick="toggleDrop(event,'da-${lec.id}')"><svg width="13" height="13" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#534AB7"/><path d="M7 8h10M7 12h10M7 16h6" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/></svg>Articles ▾</button><div class="drop-menu" id="da-${lec.id}">${lec.articles.map(a=>`<a href="${a.url}" target="_blank">${a.name}</a>`).join('')}</div></div>`;
+  lhtml+='</div>';
+  return `<div class="lec-body"><div class="body-cols"><div class="bst">Topics covered</div>${thtml}${lhtml}<div class="checklist-row">${mhtml}</div></div></div>`;
 }
 
 function toggleCard(id){openCards[id]=!openCards[id];renderAll();}
 function toggleT(lid,t){const k=tk(lid,t);state[k]=!state[k];scheduleSave();renderAll();}
-function toggleM(lid,mk2){
-  const k=mk(lid,mk2);
-  state[k]=!state[k];
-  scheduleSave();
-  renderAll();
+function toggleM(lid,mk2){const k=mk(lid,mk2);state[k]=!state[k];scheduleSave();renderAll();}
+function toggleDrop(e,id){e.stopPropagation();document.querySelectorAll('.drop-menu.open').forEach(m=>{if(m.id!==id)m.classList.remove('open');});document.getElementById(id).classList.toggle('open');}
+document.addEventListener('click',()=>document.querySelectorAll('.drop-menu.open').forEach(m=>m.classList.remove('open')));
+
+function calc(secs){
+  let tot=0,done=0,lec=0,tlec=0,notes=0,hrs=0;
+  secs.forEach(s=>s.lectures.forEach(l=>{
+    tlec++;tot+=l.topics.length;
+    const dt=l.topics.filter(t=>state[tk(l.id,t)]).length;
+    done+=dt;if(dt===l.topics.length)lec++;
+    if(state[mk(l.id,'notes')])notes++;
+    if(state[mk(l.id,'watched')])hrs+=2;
+  }));
+  return{tot,done,lec,tlec,notes,hrs,pct:tot?Math.round((done/tot)*100):0};
 }
 
 function updateStats(){
-  let allTopics=0,doneTopics=0,doneLec=0,doneNotes=0,totalLec=0;
-  SECTIONS.forEach(sec=>sec.lectures.forEach(lec=>{
-    totalLec++;
-    allTopics+=lec.topics.length;
-    const dt=lec.topics.filter(t=>state[tk(lec.id,t)]).length;
-    doneTopics+=dt;
-    if(dt===lec.topics.length)doneLec++;
-    if(state[mk(lec.id,'notes')])doneNotes++;
-  }));
-  const hrs=SECTIONS.reduce((a,s)=>a+s.lectures.reduce((b,l)=>b+(state[mk(l.id,'watched')]?2:0),0),0);
-  document.getElementById('st-lec').innerHTML=doneLec+'<span>/'+totalLec+'</span>';
-  document.getElementById('st-topics').innerHTML=doneTopics+'<span> done</span>';
-  document.getElementById('st-notes').innerHTML=doneNotes+'<span>/'+totalLec+'</span>';
-  document.getElementById('st-hrs').innerHTML=hrs+'<span>h</span>';
-  document.getElementById('prog-bar').style.width=Math.round((doneTopics/allTopics)*100)+'%';
-  ['s1','s2','s3','s4'].forEach((id,i)=>{
-    const v=[doneLec,doneTopics,doneNotes,hrs][i];
-    document.getElementById(id).classList.toggle('has-val',v>0);
-  });
-}
-
-function toggleSched(){
-  const b=document.getElementById('sched-box');
-  const vis=b.style.display!=='none';
-  b.style.display=vis?'none':'block';
-  if(!vis){
-    document.getElementById('sched-tbody').innerHTML=SCHEDULE.map(r=>`<tr>
-      <td>${r.day}</td>
-      <td>${r.lec}</td>
-      <td>${r.focus}</td>
-    </tr>`).join('');
-  }
+  const v=calc(V),n=calc(N),c=calc(C);
+  const set=(id,val,sfx)=>{document.getElementById(id).innerHTML=val+`<span>${sfx}</span>`;};
+  set('v-lec',v.lec,'/'+v.tlec);set('v-top',v.done,' done');set('v-not',v.notes,'/'+v.tlec);set('v-pct',v.pct,'%');
+  document.getElementById('v-prog').style.width=v.pct+'%';document.getElementById('tsub-v').textContent=v.pct+'%';
+  set('n-lec',n.lec,'/'+n.tlec);set('n-top',n.done,' done');set('n-not',n.notes,'/'+n.tlec);set('n-pct',n.pct,'%');
+  document.getElementById('n-prog').style.width=n.pct+'%';document.getElementById('tsub-n').textContent=n.pct+'%';
+  set('c-lec',c.lec,'/'+c.tlec);set('c-top',c.done,' done');set('c-not',c.notes,'/'+c.tlec);set('c-hrs',c.hrs,'h');
+  document.getElementById('c-prog').style.width=c.pct+'%';document.getElementById('tsub-c').textContent=c.pct+'%';
+  const allTot=v.tot+n.tot+c.tot,allDone=v.done+n.done+c.done,allLec=v.lec+n.lec+c.lec;
+  const opct=allTot?Math.round((allDone/allTot)*100):0;
+  set('ost-pct',opct,'%');set('ost-topics',allDone,' done');set('ost-lec',allLec,' done');
+  ['os1','os2','os3'].forEach((id,i)=>{document.getElementById(id).classList.toggle('hv',[opct,allDone,allLec][i]>0);});
 }
 </script>
+<footer style="position:relative;z-index:1;text-align:center;padding:2rem 1.25rem 1.5rem;border-top:1px solid var(--line2);margin-top:2rem;">
+  <p style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text3);letter-spacing:0.05em;">made with <span style="color:#f87171;font-size:14px;">&#9829;</span> by <span style="color:var(--accent);font-weight:500;">samar</span></p>
+</footer>
 </body>
 </html>

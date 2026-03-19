@@ -547,7 +547,7 @@ function checkConfetti(lid){
   const hasItems=(lec.practice||[]).length+(lec.homework||[]).length+(lec.articles||[]).length>0;
   if(hasItems&&allP&&allH&&allA&&allMeta)launchConfetti();
 }
-function toggleT(lid,t){const k=tk(lid,t);state[k]=!state[k];stampLast(lid);scheduleSave();renderAll();checkConfetti(lid);}
+function toggleT(lid,t){state[t]=!state[t];stampLast(lid);scheduleSave();renderAll();checkConfetti(lid);}
 function toggleM(lid,mk2){const k=mk(lid,mk2);state[k]=!state[k];stampLast(lid);scheduleSave();renderAll();checkConfetti(lid);}
 function setTarget(lid,val){state['target::'+lid]=val;scheduleSave();renderAll();}
 function toggleDrop(e,id){e.stopPropagation();document.querySelectorAll('.drop-menu.open').forEach(m=>{if(m.id!==id)m.classList.remove('open');});document.getElementById(id).classList.toggle('open');}

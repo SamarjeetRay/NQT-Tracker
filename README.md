@@ -1,115 +1,44 @@
-# 📊 TCS NQT 2026 — Full Prep Tracker
+# TCS NQT 2026 — Prep Tracker
 
-> A sleek, fully offline-capable progress tracker for the **TCS NQT 2026** course by GeeksforGeeks — covering Verbal Ability, Numerical Reasoning, and Coding.
+A progress tracker for the TCS NQT 2026 course by GeeksforGeeks — Verbal, Numerical & Coding.
 
-🔗 **[Live Demo → samar.github.io/tcs-nqt-tracker](https://samarjeetray.github.io/NQT-Tracker/)**
-
----
-
-## ✨ Features
-
-- **3 Sections covered** — Verbal (13 lectures), Numerical (14 lectures), Coding (13 lectures)
-- **Per-lecture tracking** — mark practice questions, homework, articles, notes, and watch status
-- **Real-time stats** — overall progress %, topics done, lectures completed
-- **Target date system** — set a deadline per lecture, get overdue alerts
-- **GitHub Gist sync** — save progress to a private Gist and access it from any device
-- **Live countdown** — counts down to the TCS NQT exam (26 March 2026, 7:00 AM)
-- **Dark / Light mode** — toggle with persistence via localStorage
-- **Confetti 🎉** — fires when you complete a lecture 100%
-- **No backend required** — pure HTML/CSS/JS, works entirely in the browser
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-NQT%20Tracker-39FF14?style=for-the-badge&logo=githubpages&logoColor=000)](https://samarjeetray.github.io/NQT-Tracker/)
 
 ---
 
-## 🖼️ Preview
+## Preview
 
-| Dark Mode | Light Mode |
-|-----------|------------|
-| ![dark](https://via.placeholder.com/400x220/0d0d0f/00f5ff?text=Dark+Mode) | ![light](https://via.placeholder.com/400x220/fdf6e3/0088aa?text=Light+Mode) |
-
----
-
-## 🚀 Getting Started
-
-### Option 1 — Use the live site
-Just visit the [GitHub Pages link](https://samar.github.io/tcs-nqt-tracker) — no install needed.
-
-### Option 2 — Run locally
-```bash
-git clone https://github.com/samar/tcs-nqt-tracker.git
-cd tcs-nqt-tracker
-# Open index.html in your browser
-open index.html
-```
-
-No build step. No dependencies. Just open the file.
+| Light Mode | Dark Mode |
+|:---:|:---:|
+| ![light](preview-light.png) | ![dark](preview-dark.png) |
 
 ---
 
-## 💾 Saving Progress
+## What it does
 
-Progress is saved in two ways:
+- Track lectures across all 3 sections (40 total)
+- Mark practice questions, homework, notes & watch status per lecture
+- Set target dates per lecture with overdue alerts
+- Sync progress across devices via GitHub Gist
+- Live countdown to exam day · Dark/Light mode · Confetti on 100% 🎉
 
-### Local (default)
-Your progress is automatically saved to `localStorage` under your username. It persists across browser sessions on the same device.
+## Usage
 
-### GitHub Gist Sync (cross-device)
-1. [Create a private GitHub Gist](https://gist.github.com/) with a file named `nqt-progress.json`
-2. [Generate a GitHub Personal Access Token](https://github.com/settings/tokens) with `gist` scope
-3. Click **⚙ Sync** in the tracker, enter your Gist ID and token
-4. Your progress is now synced across all devices
+Open the [live site](https://samarjeetray.github.io/NQT-Tracker/) — no install needed.
 
-> Your token is stored only in your browser's localStorage — never sent anywhere except the GitHub API.
+Or clone and open `index.html` directly in your browser.
 
----
+## Gist Sync
 
-## 📚 Syllabus Covered
+1. Create a private Gist with a file named `nqt-progress.json`
+2. Generate a GitHub token with `gist` scope
+3. Click **⚙ Sync** in the tracker and enter both
 
-### Verbal Ability (13 lectures)
-Nouns · Pronouns · Verbs · Adjectives · Adverbs · Prepositions · Conjunctions · Interjections & Determiners · Direct & Indirect Speech · Active & Passive Voice · Reading Comprehension · Jumbled Sentences · Vocabulary
+Your token stays in your browser only — never leaves except to the GitHub API.
 
-### Numerical Ability & Reasoning (14 lectures)
-Time & Work · Speed & Distance · Percentage · Ratio & Proportion · Profit & Loss · SI & CI · Number System · Mensuration · Clocks & Calendars · Series & Coding · Blood Relations · Seating Arrangement · Non-Verbal Reasoning · Algebra & Progressions
+## Stack
 
-### Coding (13 lectures)
-Arrays I–IV · Strings I–IV · Number Theory I–II · PYQ Practice Sets I–III
-
----
-
-## 🛠️ Tech Stack
-
-| Layer | Tech |
-|-------|------|
-| Markup | HTML5 |
-| Styling | CSS3 (custom properties, grid, animations) |
-| Logic | Vanilla JavaScript (ES6+) |
-| Fonts | DM Mono · Syne · DM Sans (Google Fonts) |
-| Sync | GitHub Gist REST API |
-| Hosting | GitHub Pages |
-
----
-
-## 📁 Project Structure
-
-```
-tcs-nqt-tracker/
-└── index.html      # Everything — markup, styles, and logic in one file
-```
-
----
-
-## 🤝 Contributing
-
-Found a broken link, wrong question, or missing lecture? PRs are welcome!
-
-1. Fork the repo
-2. Make your changes in `index.html`
-3. Open a pull request with a brief description
-
----
-
-## 📄 License
-
-MIT — free to use, modify, and share.
+Pure HTML · CSS · Vanilla JS — no build step, no dependencies.
 
 ---
 

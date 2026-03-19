@@ -10,7 +10,7 @@ A progress tracker for the TCS NQT 2026 course by GeeksforGeeks — Verbal, Nume
 
 | Light Mode | Dark Mode |
 |:---:|:---:|
-| ![light](preview-light.png) | ![dark](preview-dark.png) |
+| <img width="360" src="https://github.com/user-attachments/assets/e13fba62-443f-4b14-896d-7f37b569d9f7" /> | <img width="360" src="https://github.com/user-attachments/assets/82893508-a553-485e-8819-6414c033e366" /> |
 
 ---
 
@@ -39,6 +39,12 @@ Your token stays in your browser only — never leaves except to the GitHub API.
 ## Stack
 
 Pure HTML · CSS · Vanilla JS — no build step, no dependencies.
+
+---
+
+## License
+
+MIT — free to use, modify, and share.
 
 ---
 

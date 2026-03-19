@@ -8,13 +8,17 @@
 <style>
 /* ── THEME VARS ── */
 :root{
+  /* DARK (default) */
   --bg:#0d0d0f;--bg2:#141416;--bg3:#1a1a1e;--bg4:#212127;--surface:#252530;
   --line:#ffffff12;--line2:#ffffff20;--line3:#ffffff35;
   --text:#f0efe8;--text2:#9d9ba8;--text3:#5a5868;
-  --neon-v:#00f5ff;--neon-v-dim:#00f5ff18;--neon-v-glow:0 0 12px #00f5ff60,0 0 28px #00f5ff30;
-  --neon-n:#00f5ff;--neon-n-dim:#00f5ff18;--neon-n-glow:0 0 12px #00f5ff60,0 0 28px #00f5ff30;
-  --neon-c:#00f5ff;--neon-c-dim:#00f5ff18;--neon-c-glow:0 0 12px #00f5ff60,0 0 28px #00f5ff30;
-  --accent:#00f5ff;--accent2:#00d4dd;--accent-dim:#00f5ff18;
+
+  /* single neon = cyan */
+  --neon-v:#ff3030;--neon-v-dim:#ff303018;--neon-v-glow:0 0 12px #ff303060,0 0 28px #ff303030;
+  --neon-n:#ff3030;--neon-n-dim:#ff303018;--neon-n-glow:0 0 12px #ff303060,0 0 28px #ff303030;
+  --neon-c:#ff3030;--neon-c-dim:#ff303018;--neon-c-glow:0 0 12px #ff303060,0 0 28px #ff303030;
+
+  --accent:#ff3030;--accent2:#dd2020;--accent-dim:#ff303018;
   --blue:#60a5fa;--blue-dim:#60a5fa18;
   --purple:#a78bfa;--purple-dim:#a78bfa18;
   --orange:#fb923c;--orange-dim:#fb923c18;
@@ -28,10 +32,11 @@
   --bg:#fdf6e3;--bg2:#f7edd0;--bg3:#fffdf5;--bg4:#f7edd0;--surface:#f0e4bc;
   --line:#00000007;--line2:#00000012;--line3:#0000001e;
   --text:#1c1a14;--text2:#5c5540;--text3:#a09878;
-  --neon-v:#0088aa;--neon-v-dim:#0088aa12;--neon-v-glow:0 0 8px #0088aa35;
-  --neon-n:#0088aa;--neon-n-dim:#0088aa12;--neon-n-glow:0 0 8px #0088aa35;
-  --neon-c:#0088aa;--neon-c-dim:#0088aa12;--neon-c-glow:0 0 8px #0088aa35;
-  --accent:#0088aa;--accent2:#006f8a;--accent-dim:#0088aa12;
+
+  --neon-v:#cc2020;--neon-v-dim:#cc202012;--neon-v-glow:0 0 8px #cc202035;
+  --neon-n:#cc2020;--neon-n-dim:#cc202012;--neon-n-glow:0 0 8px #cc202035;
+  --neon-c:#cc2020;--neon-c-dim:#cc202012;--neon-c-glow:0 0 8px #cc202035;
+  --accent:#cc2020;--accent2:#aa1818;--accent-dim:#cc202012;
   --green-dim:#4ade8015;
   color-scheme:light;
 }
@@ -39,6 +44,8 @@
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background 0.3s,color 0.3s;}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
 .wrap{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:2rem 1.25rem 4rem;}
+
+/* HERO */
 .hero{padding:3rem 0 2rem;border-bottom:1px solid var(--line2);margin-bottom:2rem;}
 .hero-top{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;}
 .hero-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.15em;color:var(--neon-c);text-transform:uppercase;margin-bottom:0.75rem;display:flex;align-items:center;gap:8px;}
@@ -46,12 +53,16 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .hero-title{font-family:'Syne',sans-serif;font-size:clamp(28px,5vw,48px);font-weight:800;line-height:1.05;letter-spacing:-0.02em;margin-bottom:0.5rem;}
 .hero-title span{color:var(--neon-c);}
 .hero-sub{font-size:14px;color:var(--text2);font-weight:300;}
+
+/* THEME TOGGLE */
 .theme-toggle{display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--line2);border-radius:30px;padding:6px 14px;cursor:pointer;font-size:12px;color:var(--text2);transition:all 0.2s;white-space:nowrap;flex-shrink:0;margin-top:0.5rem;}
 .theme-toggle:hover{border-color:var(--line3);color:var(--text);}
 .toggle-track{width:32px;height:18px;border-radius:9px;background:var(--bg4);border:1px solid var(--line2);position:relative;transition:background 0.2s;}
 .toggle-thumb{width:12px;height:12px;border-radius:50%;background:var(--text3);position:absolute;top:2px;left:2px;transition:all 0.2s;}
 [data-theme="light"] .toggle-track{background:var(--neon-c-dim);border-color:var(--neon-c);}
 [data-theme="light"] .toggle-thumb{background:var(--neon-c);left:16px;}
+
+/* LOGIN */
 .login-card{background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius-xl);padding:1.5rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
 .login-card p{font-size:13px;color:var(--text2);flex:1;min-width:180px;}
 .login-inputs{display:flex;gap:8px;flex-wrap:wrap;}
@@ -69,6 +80,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .sync-dot{width:7px;height:7px;border-radius:50%;background:var(--green);}
 .sync-dot.saving{background:var(--orange);}
 .sync-dot.error{background:var(--red);}
+
+/* OVERALL STATS */
 .overall-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:1.5rem;}
 .os{background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius-lg);padding:1rem 1.1rem;position:relative;overflow:hidden;}
 .os::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--neon-c);opacity:0;transition:opacity 0.3s;}
@@ -76,6 +89,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .os-label{font-size:11px;color:var(--text3);margin-bottom:6px;font-family:'DM Mono',monospace;letter-spacing:0.05em;}
 .os-val{font-size:22px;font-weight:700;font-family:'Syne',sans-serif;color:var(--text);}
 .os-val span{font-size:12px;font-weight:400;color:var(--text3);font-family:'DM Sans',sans-serif;}
+
+/* TABS */
 .tabs{display:flex;gap:4px;background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius-lg);padding:5px;margin-bottom:1.5rem;}
 .tab-btn{flex:1;font-size:13px;font-weight:500;padding:9px 12px;border-radius:10px;border:1px solid transparent;background:transparent;color:var(--text3);cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;align-items:center;gap:3px;font-family:'DM Sans',sans-serif;}
 .tab-btn:hover{color:var(--text2);background:var(--bg4);}
@@ -88,16 +103,22 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .tab-btn.active-c .tab-sub{color:var(--neon-c);}
 .tab-panel{display:none;}
 .tab-panel.active{display:block;}
+
+/* SECTION STATS */
 .sec-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:1.25rem;}
 .ss{background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius);padding:0.75rem 1rem;}
 .ss-label{font-size:10px;color:var(--text3);margin-bottom:4px;font-family:'DM Mono',monospace;letter-spacing:0.05em;}
 .ss-val{font-size:18px;font-weight:700;font-family:'Syne',sans-serif;color:var(--text);}
 .ss-val span{font-size:11px;font-weight:400;color:var(--text3);}
+
+/* NEON PROGRESS BARS */
 .prog-wrap{background:var(--bg3);border-radius:4px;height:4px;margin-bottom:1.5rem;overflow:hidden;}
 .prog-bar{height:4px;border-radius:4px;transition:width 0.5s cubic-bezier(.4,0,.2,1);}
 .pb-v{background:var(--neon-v);box-shadow:0 0 8px var(--neon-v);}
 .pb-n{background:var(--neon-n);box-shadow:0 0 8px var(--neon-n);}
 .pb-c{background:var(--neon-c);box-shadow:0 0 8px var(--neon-c);}
+
+/* SECTION HEADER */
 .section-header{display:flex;align-items:center;gap:12px;margin:1.75rem 0 0.75rem;}
 .section-tag{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.1em;padding:4px 12px;border-radius:20px;}
 .tag-verbal{background:var(--neon-v-dim);color:var(--neon-v);border:1px solid var(--neon-v);}
@@ -107,6 +128,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .tag-numtheory{background:var(--teal-dim);color:var(--teal);border:1px solid #2dd4bf40;}
 .tag-pyq{background:var(--orange-dim);color:var(--orange);border:1px solid #fb923c40;}
 .section-line{flex:1;height:1px;background:var(--line2);}
+
+/* LECTURE CARD */
 .lec-card{background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius-lg);margin-bottom:10px;overflow:hidden;transition:border-color 0.2s,box-shadow 0.2s;}
 .lec-card.done-card{border-color:#4ade8040;box-shadow:0 0 0 1px #4ade8020;}
 .lec-head{display:grid;grid-template-columns:auto 1fr auto auto auto;align-items:center;gap:12px;padding:1rem 1.25rem;cursor:pointer;user-select:none;}
@@ -120,11 +143,14 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .lec-pct.complete{background:var(--green-dim);color:var(--green);}
 .chev{font-size:10px;color:var(--text3);transition:transform 0.2s;margin-left:4px;}
 .chev.open{transform:rotate(180deg);}
+
+/* BODY */
 .lec-body{padding:0 1.25rem 1.25rem;border-top:1px solid var(--line);animation:sd 0.18s ease;}
 @keyframes sd{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
 .body-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 1.5rem;}
 .bst{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--text3);margin:1rem 0 0.5rem;text-transform:uppercase;grid-column:1/-1;}
 .prac-title{color:var(--neon-c) !important;}
+.notes-title{color:#38bdf8 !important;}
 .hw-title{color:#fb923c !important;}
 .art-title{color:#a78bfa !important;}
 .t-row{display:flex;align-items:flex-start;gap:8px;padding:4px 0;}
@@ -136,11 +162,15 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .topic-link:hover{color:var(--neon-c);border-bottom-color:var(--neon-c);}
 .t-row label.done{color:var(--text3);text-decoration:line-through;}
 .t-row label.done .topic-link{color:var(--text3);border-bottom-color:var(--text3);}
+
+/* CHECKLIST PILLS */
 .checklist-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line);grid-column:1/-1;}
 .check-pill{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text3);background:var(--bg4);border:1px solid var(--line2);border-radius:20px;padding:5px 12px;cursor:pointer;transition:all 0.15s;}
 .check-pill:hover{color:var(--text2);}
 .check-pill.checked{background:var(--neon-c-dim);border-color:var(--neon-c);color:var(--neon-c);}
 .ci{width:12px;height:12px;border-radius:50%;border:1px solid currentColor;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:8px;}
+
+/* LINKS */
 .lec-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line);grid-column:1/-1;}
 .res-btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;padding:6px 12px;border-radius:20px;border:1px solid var(--line2);background:var(--bg4);color:var(--text2);text-decoration:none;cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;white-space:nowrap;}
 .res-btn:hover{color:var(--text);background:var(--surface);}
@@ -154,7 +184,12 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .drop-menu.open{display:block;}
 .drop-menu a{display:block;font-size:12px;color:var(--text2);text-decoration:none;padding:7px 10px;border-radius:6px;transition:all 0.1s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .drop-menu a:hover{background:var(--bg4);color:var(--text);}
+
+/* FOOTER */
 footer{position:relative;z-index:1;text-align:center;padding:2rem 1.25rem 1.5rem;border-top:1px solid var(--line2);margin-top:2rem;}
+
+
+/* COUNTDOWN */
 .cd-box{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:54px;background:var(--bg4);border:1px solid var(--line2);border-radius:var(--radius);padding:10px 14px;}
 .cd-num{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--text);line-height:1;letter-spacing:-0.02em;}
 .cd-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);}
@@ -163,6 +198,8 @@ footer{position:relative;z-index:1;text-align:center;padding:2rem 1.25rem 1.5rem
 #cd-h .cd-num{color:var(--neon-n);text-shadow:var(--neon-n-glow);}
 #cd-m .cd-num{color:var(--neon-c);text-shadow:var(--neon-c-glow);}
 #cd-s .cd-num{color:var(--text2);}
+
+/* TARGET DATE */
 .target-row{display:flex;align-items:center;gap:10px;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid var(--line);grid-column:1/-1;flex-wrap:wrap;}
 .target-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);white-space:nowrap;}
 .target-input{font-family:'DM Mono',monospace;font-size:12px;padding:5px 10px;background:var(--bg4);border:1px solid var(--line2);border-radius:var(--radius);color:var(--text);outline:none;cursor:pointer;transition:border-color 0.2s;}
@@ -174,9 +211,15 @@ footer{position:relative;z-index:1;text-align:center;padding:2rem 1.25rem 1.5rem
 @keyframes pulse-red{0%,100%{box-shadow:0 0 0 0 #f8717130;}50%{box-shadow:0 0 0 4px #f8717108;}}
 .lec-card.overdue{border-color:#f8717140;}
 .lec-card.overdue .lec-name{color:#f87171;}
+
+/* LAST STUDIED */
 .last-studied{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:0.04em;margin-left:auto;}
 .last-studied.recent{color:var(--neon-c);}
+
+/* CONFETTI CANVAS */
 #confetti-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;}
+
+/* SETTINGS PANEL */
 .settings-panel{background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius-xl);padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:none;}
 .settings-panel.open{display:block;}
 .settings-title{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:1rem;}
@@ -282,11 +325,13 @@ footer{position:relative;z-index:1;text-align:center;padding:2rem 1.25rem 1.5rem
     <div class="os" id="os2"><div class="os-label">TOPICS DONE</div><div class="os-val" id="ost-topics">0<span> done</span></div></div>
     <div class="os" id="os3"><div class="os-label">LECTURES DONE</div><div class="os-val" id="ost-lec">0<span> done</span></div></div>
   </div>
+
   <div class="tabs">
     <button class="tab-btn active-v" id="tbn-v" onclick="switchTab('v',this)"><span>Verbal</span><span class="tab-sub" id="tsub-v">0%</span></button>
     <button class="tab-btn" id="tbn-n" onclick="switchTab('n',this)"><span>Numerical</span><span class="tab-sub" id="tsub-n">0%</span></button>
     <button class="tab-btn" id="tbn-c" onclick="switchTab('c',this)"><span>Coding</span><span class="tab-sub" id="tsub-c">0%</span></button>
   </div>
+
   <div class="tab-panel active" id="panel-v">
     <div class="sec-stats">
       <div class="ss"><div class="ss-label">LECTURES</div><div class="ss-val" id="v-lec">0<span>/13</span></div></div>
@@ -297,6 +342,7 @@ footer{position:relative;z-index:1;text-align:center;padding:2rem 1.25rem 1.5rem
     <div class="prog-wrap"><div class="prog-bar pb-v" id="v-prog" style="width:0%"></div></div>
     <div id="list-v"></div>
   </div>
+
   <div class="tab-panel" id="panel-n">
     <div class="sec-stats">
       <div class="ss"><div class="ss-label">LECTURES</div><div class="ss-val" id="n-lec">0<span>/14</span></div></div>
@@ -307,6 +353,7 @@ footer{position:relative;z-index:1;text-align:center;padding:2rem 1.25rem 1.5rem
     <div class="prog-wrap"><div class="prog-bar pb-n" id="n-prog" style="width:0%"></div></div>
     <div id="list-n"></div>
   </div>
+
   <div class="tab-panel" id="panel-c">
     <div class="sec-stats">
       <div class="ss"><div class="ss-label">LECTURES</div><div class="ss-val" id="c-lec">0<span>/13</span></div></div>
@@ -338,25 +385,25 @@ const V=[{id:'verbal',label:'Verbal Ability',tag:'tag-verbal',lectures:[
 ]}];
 
 const N=[{id:'numerical',label:'Numerical Ability & Reasoning',tag:'tag-numerical',lectures:[
-  {id:'n01',num:'01',name:'Time & Work, Pipes & Cisterns, LCM HCF',dur:'',yt:'https://www.youtube.com/watch?v=3EI9YAySwHQ',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260223221726359180/20260223220636087.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcqnqt2026classtimeworkpipecisternlcmhcf/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-time-and-work-hcf-lcm/'}],articles:[{name:'Time and Work',url:'https://www.geeksforgeeks.org/ssc-banking/time-and-work/'},{name:'Pipes and Cistern',url:'https://www.geeksforgeeks.org/maths/pipes-and-cistern/'},{name:'LCM & HCF',url:'https://www.geeksforgeeks.org/maths/hcf-and-lcm/'}],topics:['Time & Work','Pipes & Cisterns','LCM','HCF']},
-  {id:'n02',num:'02',name:'Time Speed & Distance, Boat & Stream',dur:'',yt:'https://www.youtube.com/watch?v=mLHtKPEXss8',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260224222843411873/20260224215948439.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcsnqt2026classtimedistanceboatstream/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-time-and-distance-boat-stream/'}],articles:[{name:'Time Speed Distance',url:'https://www.geeksforgeeks.org/aptitude/speed-time-distance/'},{name:'Boats and Streams',url:'https://www.geeksforgeeks.org/aptitude/boats-and-streams/'}],topics:['Time Speed Distance','Boats and Streams']},
-  {id:'n03',num:'03',name:'Percentage',dur:'',yt:'https://www.youtube.com/watch?v=5ToqG0SJTLo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260225221502182403/20260225215812523.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-aptitude-percentage-class-practice/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-aptitude-percentage/'}],articles:[{name:'Percentage',url:'https://www.geeksforgeeks.org/maths/percentage/'}],topics:['Percentage concepts','Percentage problems']},
-  {id:'n04',num:'04',name:'Ratio & Proportion, Mixture',dur:'',yt:'https://www.youtube.com/watch?v=afawt9_IyEo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260226234526795026/20260226215942629.pdf',practice:[{name:'Ratio & Proportion Practice',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-ratio-proportion-hw/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-ratio-proportion-hw/'}],articles:[{name:'Ratio and Proportion',url:'https://www.geeksforgeeks.org/maths/ratio-and-proportion/'},{name:'Mixture and Alligation',url:'https://www.geeksforgeeks.org/aptitude/mixtures-and-alligation/'}],topics:['Ratio & Proportion','Mixture and Alligation']},
-  {id:'n05',num:'05',name:'Profit, Loss & Discount',dur:'',yt:'https://www.youtube.com/watch?v=YW4qxQWQdR0',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260228100805469311/20260227220230596.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-profit-loss-discount-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-aptitude-profit-loss-discount-hw/'}],articles:[{name:'Profit Loss & Discount',url:'https://www.geeksforgeeks.org/maths/profit-and-loss-formula/'}],topics:['Profit & Loss','Discount']},
-  {id:'n06',num:'06',name:'SI & CI, Average',dur:'',yt:'https://www.youtube.com/watch?v=PmxujfHK48Q',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260302101858222765/20260228215813020.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/cs-nqt-2026-si-ci-average-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-si-ci-average-hw/'}],articles:[{name:'Simple Interest',url:'https://www.geeksforgeeks.org/maths/simple-interest/'},{name:'Compound Interest',url:'https://www.geeksforgeeks.org/maths/compound-interest-formula/'},{name:'Average',url:'https://www.geeksforgeeks.org/aptitude/average/'}],topics:['Simple Interest','Compound Interest','Average']},
-  {id:'n07',num:'07',name:'Number System',dur:'',yt:'https://www.youtube.com/watch?v=8z9bDGyNQEY',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260303112244909806/20260302215459476.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-apitude-number-system/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-number-system-hw/'}],articles:[{name:'Number System',url:'https://www.geeksforgeeks.org/maths/number-system-in-maths/'}],topics:['Number System concepts','Number System problems']},
-  {id:'n08',num:'08',name:'Mensuration 2D & 3D',dur:'',yt:'https://www.youtube.com/watch?v=xX0UmPDUmGM',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260305110657278982/20260303215858653.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-apitude-mensuration-2d-3d-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-aptitude-mensuration-2d-3d-hw/'}],articles:[{name:'Mensuration 2D',url:'https://www.geeksforgeeks.org/aptitude/2d-mensuration/'},{name:'Mensuration 3D',url:'https://www.geeksforgeeks.org/aptitude/3d-mensuration/'}],topics:['Mensuration 2D','Mensuration 3D']},
-  {id:'n09',num:'09',name:'Clock and Calendar',dur:'',yt:'https://www.youtube.com/watch?v=03EEJjfkfhA',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260305111331185898/20260304215152682-.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-apitude-clock-and-calendar-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-apitude-clock-and-calendar-hw/'}],articles:[{name:'Clock',url:'https://www.geeksforgeeks.org/aptitude/clocks-aptitude/'},{name:'Calendar',url:'https://www.geeksforgeeks.org/aptitude/calendars/'}],topics:['Clock problems','Calendar problems']},
-  {id:'n10',num:'10',name:'Series, Coding Decoding & Analogy',dur:'',yt:'https://www.youtube.com/watch?v=3Sligb3z6JA',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260307122439287405/20260305212843372.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-series-coding-decoding-and-analogy-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-series-coding-decoding-and-analogy-hw/'}],articles:[{name:'Series',url:'https://www.geeksforgeeks.org/aptitude/series/'},{name:'Coding-Decoding',url:'https://www.geeksforgeeks.org/aptitude/reasoning-tricks-to-solve-coding-decoding/'},{name:'Analogy',url:'https://www.geeksforgeeks.org/ssc-banking/word-analogy-for-ssc-cgl-exams/'}],topics:['Number Series','Coding Decoding','Analogy']},
-  {id:'n11',num:'11',name:'Blood Relation, Direction & Math Operations',dur:'',yt:'https://www.youtube.com/watch?v=6tjVVMaODZo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260307122150288852/20260306215705320.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-blood-relation-direction-mathematical-operations-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-blood-relation-direction-mathematical-operations-hw/'}],articles:[{name:'Blood Relation',url:'https://www.geeksforgeeks.org/aptitude/blood-relation-reasoning/'},{name:'Direction & Math Operations',url:'https://www.geeksforgeeks.org/aptitude/puzzles-direction/'}],topics:['Blood Relations','Direction problems','Mathematical Operations']},
-  {id:'n12',num:'12',name:'Seating Arrangement and Puzzle Test',dur:'',yt:'https://www.youtube.com/watch?v=T2pCfaadKdw',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260309105011576264/20260307215652125.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-aptitude-seating-arrangement-and-puzzle-test-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-aptitude-seating-arrangement-and-puzzle-test-hw/'}],articles:[{name:'Seating Arrangement',url:'https://www.geeksforgeeks.org/aptitude/seating-arrangement-aptitude/'},{name:'Puzzle Test',url:'https://www.geeksforgeeks.org/aptitude/puzzles/'}],topics:['Seating Arrangement','Puzzle Test']},
-  {id:'n13',num:'13',name:'Non Verbal Reasoning',dur:'',yt:'https://www.youtube.com/watch?v=NTGeq-FT9Uc',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260311110612229469/20260309215707116.pdf',practice:[],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-aptitude-permutation-and-combination-probability-di-hw/'}],articles:[{name:'Non Verbal Reasoning',url:'https://www.geeksforgeeks.org/aptitude/non-verbal-reasoning-questions-and-answers/'}],topics:['Non Verbal Reasoning practice','Non Verbal Reasoning MCQs']},
-  {id:'n14',num:'14',name:'Algebra and Progression',dur:'',yt:'https://www.youtube.com/watch?v=ddOiz_04Ue4',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260311110510000591/20260310215529200.pdf',practice:[],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-algebra-progression-hw/'}],articles:[],topics:['Algebra problems','Progression problems']},
+  {id:'n01',num:'01',name:'Time & Work, Pipes & Cisterns, LCM HCF',dur:'',yt:'https://www.youtube.com/watch?v=3EI9YAySwHQ',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260223221726359180/20260223220636087.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcqnqt2026classtimeworkpipecisternlcmhcf/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-time-and-work-hcf-lcm/'}],articles:[],notes:[{name:'Time & Work Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/Time_and_Works.pdf'},{name:'Pipes & Cisterns Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Pipes_Cisterns.pdf'},{name:'HCF & LCM Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Number_System_HCF_LCM.pdf'}],topics:['Time & Work','Pipes & Cisterns','LCM','HCF']},
+  {id:'n02',num:'02',name:'Time Speed & Distance, Boat & Stream',dur:'',yt:'https://www.youtube.com/watch?v=mLHtKPEXss8',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260224222843411873/20260224215948439.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcsnqt2026classtimedistanceboatstream/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-time-and-distance-boat-stream/'}],articles:[],notes:[{name:'Time Speed Distance Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Time_Speed_Distance_Boats_Trains.pdf'}],topics:['Time Speed Distance','Boats and Streams']},
+  {id:'n03',num:'03',name:'Percentage',dur:'',yt:'https://www.youtube.com/watch?v=5ToqG0SJTLo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260225221502182403/20260225215812523.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-aptitude-percentage-class-practice/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-aptitude-percentage/'}],articles:[],notes:[{name:'Percentage Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Percentage.pdf'}],topics:['Percentage concepts','Percentage problems']},
+  {id:'n04',num:'04',name:'Ratio & Proportion, Mixture',dur:'',yt:'https://www.youtube.com/watch?v=afawt9_IyEo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260226234526795026/20260226215942629.pdf',practice:[{name:'Ratio & Proportion Practice',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-ratio-proportion-hw/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-ratio-proportion-hw/'}],articles:[],notes:[{name:'Ratio & Proportion Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Ratio_Proportion.pdf'},{name:'Mixtures & Alligation Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Mixtures_Alligation_Notes.pdf'}],topics:['Ratio & Proportion','Mixture and Alligation']},
+  {id:'n05',num:'05',name:'Profit, Loss & Discount',dur:'',yt:'https://www.youtube.com/watch?v=YW4qxQWQdR0',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260228100805469311/20260227220230596.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-profit-loss-discount-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-aptitude-profit-loss-discount-hw/'}],articles:[],notes:[{name:'Profit & Loss Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Profit_Loss.pdf'}],topics:['Profit & Loss','Discount']},
+  {id:'n06',num:'06',name:'SI & CI, Average',dur:'',yt:'https://www.youtube.com/watch?v=PmxujfHK48Q',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260302101858222765/20260228215813020.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/cs-nqt-2026-si-ci-average-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-si-ci-average-hw/'}],articles:[],notes:[{name:'SI & CI Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_2026_SI_CI.pdf'},{name:'Averages Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Averages.pdf'}],topics:['Simple Interest','Compound Interest','Average']},
+  {id:'n07',num:'07',name:'Number System',dur:'',yt:'https://www.youtube.com/watch?v=8z9bDGyNQEY',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260303112244909806/20260302215459476.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-apitude-number-system/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-number-system-hw/'}],articles:[],notes:[{name:'Number System Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Number_System_HCF_LCM.pdf'}],topics:['Number System concepts','Number System problems']},
+  {id:'n08',num:'08',name:'Mensuration 2D & 3D',dur:'',yt:'https://www.youtube.com/watch?v=xX0UmPDUmGM',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260305110657278982/20260303215858653.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-apitude-mensuration-2d-3d-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-aptitude-mensuration-2d-3d-hw/'}],articles:[],notes:[{name:'Mensuration Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Mensuration.pdf'}],topics:['Mensuration 2D','Mensuration 3D']},
+  {id:'n09',num:'09',name:'Clock and Calendar',dur:'',yt:'https://www.youtube.com/watch?v=03EEJjfkfhA',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260305111331185898/20260304215152682-.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-apitude-clock-and-calendar-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-apitude-clock-and-calendar-hw/'}],articles:[],topics:['Clock problems','Calendar problems']},
+  {id:'n10',num:'10',name:'Series, Coding Decoding & Analogy',dur:'',yt:'https://www.youtube.com/watch?v=3Sligb3z6JA',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260307122439287405/20260305212843372.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-series-coding-decoding-and-analogy-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-series-coding-decoding-and-analogy-hw/'}],articles:[],topics:['Number Series','Coding Decoding','Analogy']},
+  {id:'n11',num:'11',name:'Blood Relation, Direction & Math Operations',dur:'',yt:'https://www.youtube.com/watch?v=6tjVVMaODZo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260307122150288852/20260306215705320.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-blood-relation-direction-mathematical-operations-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-blood-relation-direction-mathematical-operations-hw/'}],articles:[],topics:['Blood Relations','Direction problems','Mathematical Operations']},
+  {id:'n12',num:'12',name:'Seating Arrangement and Puzzle Test',dur:'',yt:'https://www.youtube.com/watch?v=T2pCfaadKdw',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260309105011576264/20260307215652125.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-aptitude-seating-arrangement-and-puzzle-test-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-aptitude-seating-arrangement-and-puzzle-test-hw/'}],articles:[],topics:['Seating Arrangement','Puzzle Test']},
+  {id:'n13',num:'13',name:'Non Verbal Reasoning',dur:'',yt:'https://www.youtube.com/watch?v=NTGeq-FT9Uc',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260311110612229469/20260309215707116.pdf',practice:[],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-aptitude-permutation-and-combination-probability-di-hw/'}],articles:[],topics:['Non Verbal Reasoning practice','Non Verbal Reasoning MCQs']},
+  {id:'n14',num:'14',name:'Algebra and Progression',dur:'',yt:'https://www.youtube.com/watch?v=ddOiz_04Ue4',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260311110510000591/20260310215529200.pdf',practice:[],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-algebra-progression-hw/'}],articles:[],notes:[{name:'Permutation & Combination Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/TCS_NQT_Permutation_Combination.pdf'},{name:'Probability Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/TCS_NQT_Probability.pdf'},{name:'Statistics Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/TCS_NQT_Statistics.pdf'},{name:'Data Interpretation Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Data_Interpretation.pdf'}],topics:['Algebra problems','Progression problems']},
 ]}];
 
 const C=[
   {id:'array',label:'Arrays',tag:'tag-array',lectures:[
-    {id:'arr1',num:'01',name:'Array 01',dur:'2:06:56',yt:'https://www.youtube.com/watch?v=g9W7uh_Jfxs',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260223184228144414/tcs-nqt-2026-programming-1-.pdf',practice:[{name:'Sum of Array',url:'https://www.geeksforgeeks.org/problems/sum-of-array2326/1'},{name:'Largest in Array',url:'https://www.geeksforgeeks.org/problems/largest-element-in-array4009/1'},{name:'Mean of an Array',url:'https://www.geeksforgeeks.org/problems/mean0021/1'},{name:'Reverse an Array',url:'https://www.geeksforgeeks.org/problems/reverse-an-array/1'},{name:'Second Largest',url:'https://www.geeksforgeeks.org/problems/second-largest3735/1'},{name:'Remove Duplicates Sorted Array',url:'https://www.geeksforgeeks.org/problems/remove-duplicate-elements-from-sorted-array/1'},{name:'Check if array is sorted',url:'https://www.geeksforgeeks.org/problems/check-if-an-array-is-sorted0701/1'},{name:'Max Consecutive Bit',url:'https://www.geeksforgeeks.org/problems/max-consecutive-one/1'}],homework:[{name:'First and Second Smallest',url:'https://www.geeksforgeeks.org/problems/find-the-smallest-and-second-smallest-element-in-an-array3226/1'}],articles:[{name:'Vector in C++ STL',url:'https://www.geeksforgeeks.org/cpp/vector-in-cpp-stl/'}],topics:['Sum of Array','Largest in Array','Mean of an Array','Reverse an Array','Second Largest','Remove Duplicates Sorted Array','Check if array is sorted','Max Consecutive Bit','First and Second Smallest','Vector in C++ STL']},
+    {id:'arr1',num:'01',name:'Array 01',dur:'2:06:56',yt:'https://www.youtube.com/watch?v=g9W7uh_Jfxs',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260223184228144414/tcs-nqt-2026-programming-1-.pdf',practice:[{name:'Sum of Array',url:'https://www.geeksforgeeks.org/problems/sum-of-array2326/1'},{name:'Largest in Array',url:'https://www.geeksforgeeks.org/problems/largest-element-in-array4009/1'},{name:'Mean of an Array',url:'https://www.geeksforgeeks.org/problems/mean0021/1'},{name:'Reverse an Array',url:'https://www.geeksforgeeks.org/problems/reverse-an-array/1'},{name:'Second Largest',url:'https://www.geeksforgeeks.org/problems/second-largest3735/1'},{name:'Remove Duplicates Sorted Array',url:'https://www.geeksforgeeks.org/problems/remove-duplicate-elements-from-sorted-array/1'},{name:'Check if array is sorted',url:'https://www.geeksforgeeks.org/problems/check-if-an-array-is-sorted0701/1'},{name:'Max Consecutive Bit',url:'https://www.geeksforgeeks.org/problems/max-consecutive-one/1'}],homework:[{name:'First and Second Smallest',url:'https://www.geeksforgeeks.org/problems/find-the-smallest-and-second-smallest-element-in-an-array3226/1'}],articles:[],topics:['Sum of Array','Largest in Array','Mean of an Array','Reverse an Array','Second Largest','Remove Duplicates Sorted Array','Check if array is sorted','Max Consecutive Bit','First and Second Smallest','Vector in C++ STL']},
     {id:'arr2',num:'02',name:'Array 02',dur:'2:05:01',yt:'https://www.youtube.com/watch?v=HayvoShS1LQ',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260224221223518495/tcs-nqt-programming-part-2-.pdf',practice:[{name:'Array Subset',url:'https://www.geeksforgeeks.org/problems/array-subset-of-another-array2317/1'},{name:'Rotate Array',url:'https://www.geeksforgeeks.org/problems/rotate-array-by-n-elements-1587115621/1'},{name:'Equal Sum',url:'https://www.geeksforgeeks.org/problems/equal-sum0810/1'},{name:'Stock Buy & Sell',url:'https://www.geeksforgeeks.org/problems/buy-stock-2/1'},{name:'Addition of two square matrices',url:'https://www.geeksforgeeks.org/problems/addition-of-two-square-matrices4916/1'}],homework:[{name:'Union of 2 Sorted Arrays',url:'https://www.geeksforgeeks.org/problems/union-of-two-sorted-arrays-1587115621/1'},{name:'Median of an Array',url:'https://www.geeksforgeeks.org/problems/find-the-median0527/1'},{name:'Count Sorted Rows',url:'https://www.geeksforgeeks.org/problems/count-sorted-rows2702/1'},{name:'Row with max 1s',url:'https://www.geeksforgeeks.org/problems/row-with-max-1s0023/1'}],articles:[{name:'Prefix Sum Array',url:'https://www.geeksforgeeks.org/dsa/prefix-sum-array-implementation-applications-competitive-programming/'},{name:'Stock Buy and Sell',url:'https://www.geeksforgeeks.org/competitive-programming/all-variations-of-stock-problems/'},{name:'Rotate an Array',url:'https://www.geeksforgeeks.org/dsa/complete-guide-on-array-rotations/'}],topics:['Array Subset','Rotate Array','Equal Sum','Stock Buy & Sell – Max one Transaction','Addition of two square matrices','Union of 2 Sorted Arrays','Median of an Array','Count Sorted Rows','Row with max 1s','Prefix Sum Array','Stock Buy & Sell','Rotate an Array']},
     {id:'arr3',num:'03',name:'Array 03',dur:'2:00:38',yt:'https://www.youtube.com/watch?v=eLPApI-lxcY',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260225185305222275/tcsnqt-programming-3-export.pdf',practice:[{name:'Frequencies in a Limited Array',url:'https://www.geeksforgeeks.org/problems/frequency-of-array-elements-1587115620/1'},{name:'Non-Repeating Element',url:'https://www.geeksforgeeks.org/problems/non-repeating-element3958/1'},{name:'Remove Duplicates from unsorted array',url:'https://www.geeksforgeeks.org/problems/remove-duplicates-from-unsorted-array4141/1'},{name:'Replace elements by its rank',url:'https://www.geeksforgeeks.org/problems/replace-elements-by-its-rank-in-the-array/1'},{name:"Kadane's Algorithm",url:'https://www.geeksforgeeks.org/problems/kadanes-algorithm-1587115620/1'}],homework:[{name:'Sort according to an Array',url:'https://www.geeksforgeeks.org/problems/relative-sorting4323/1'},{name:'Maximum Product Subarray',url:'https://www.geeksforgeeks.org/problems/maximum-product-subarray3604/1'}],articles:[{name:'Map in C++ STL',url:'https://www.geeksforgeeks.org/cpp/map-associative-containers-the-c-standard-template-library-stl/'}],topics:['Frequencies in a Limited Array','Non-Repeating Element','Remove Duplicates from unsorted array','Replace elements by its rank',"Kadane's Algorithm",'Sort according to an Array','Maximum Product Subarray','Map in C++ STL']},
     {id:'arr4',num:'04',name:'Array 04',dur:'1:51:08',yt:'https://www.youtube.com/watch?v=NgZa2IHcQS8',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260228102044590456/tcs-nqt-4-export.pdf',practice:[{name:'Max Sum Subarray of size K',url:'https://www.geeksforgeeks.org/problems/max-sum-subarray-of-size-k5313/1'},{name:'Count distinct elements in every window',url:'https://www.geeksforgeeks.org/problems/count-distinct-elements-in-every-window/1'},{name:'First negative in every window of size K',url:'https://www.geeksforgeeks.org/problems/first-negative-integer-in-every-window-of-size-k3345/1'},{name:'Trapping Rain Water',url:'https://www.geeksforgeeks.org/problems/trapping-rain-water-1587115621/1'}],homework:[{name:'Maximum average subarray',url:'https://www.geeksforgeeks.org/problems/maximum-average-subarray5859/1'},{name:'Container With Most Water',url:'https://www.geeksforgeeks.org/problems/container-with-most-water0535/1'}],articles:[{name:'Sliding Window Technique',url:'https://www.geeksforgeeks.org/dsa/window-sliding-technique/'}],topics:['Max Sum Subarray of size K','Count distinct elements in every window','First negative in every window of size K','Trapping Rain Water','Maximum average subarray','Container With Most Water','Sliding Window Technique']},
@@ -380,13 +427,16 @@ const C=[
 
 const META=[{key:'watched',label:'Watched'},{key:'pdf',label:'PDF'},{key:'notes',label:'Notes'},{key:'practice',label:'Practice Qs'},{key:'homework',label:'Homework'},{key:'articles',label:'Articles'}];
 
-let state={},currentUser=null,openCards={},saveTimer=null,autoSyncTimer=null;
+let state={},currentUser=null,openCards={},saveTimer=null;
 const PFX='tcs26_';
 function ss(k,v){try{localStorage.setItem(PFX+k,JSON.stringify(v));return true;}catch{return false;}}
 function sg(k){try{const v=localStorage.getItem(PFX+k);return v?JSON.parse(v):null;}catch{return null;}}
 function setSS(s,m){const d=document.getElementById('sync-dot'),l=document.getElementById('sync-label');d.className='sync-dot'+(s==='saving'?' saving':s==='error'?' error':'');l.textContent=m;}
 function getGistCreds(){
-  return {token:localStorage.getItem('nqt_gist_token')||'',gistId:localStorage.getItem('nqt_gist_id')||''};
+  return {
+    token: localStorage.getItem('nqt_gist_token')||'',
+    gistId: localStorage.getItem('nqt_gist_id')||''
+  };
 }
 
 async function syncToGist(data){
@@ -436,14 +486,14 @@ function saveGistSettings(){
   st.textContent='Connecting...';st.className='settings-status';
   syncFromGist().then(data=>{
     if(data!==null){
-      state=data;renderAll();
+      state=data;
+      renderAll();
       st.textContent='Connected! Data loaded.';st.className='settings-status ok';
       setSS('synced','gist synced');
     } else {
       st.textContent='Connected! No data yet.';st.className='settings-status ok';
       setSS('synced','gist ready');
     }
-    startAutoSync();
   });
 }
 
@@ -456,23 +506,6 @@ function scheduleSave(){
     const ok=await syncToGist(state);
     setSS(ok?'synced':'synced local',ok?'gist synced':'local only');
   },1000);
-}
-
-// ── AUTO SYNC every 5 seconds ──
-function startAutoSync(){
-  if(autoSyncTimer)clearInterval(autoSyncTimer);
-  autoSyncTimer=setInterval(async()=>{
-    if(!currentUser)return;
-    const {gistId}=getGistCreds();
-    if(!gistId)return;
-    const gistData=await syncFromGist();
-    if(gistData&&JSON.stringify(gistData)!==JSON.stringify(state)){
-      state=gistData;
-      ss('u::'+currentUser,state);
-      renderAll();
-      setSS('synced','gist synced');
-    }
-  },2000);
 }
 
 function setUser(){
@@ -494,19 +527,15 @@ function setUser(){
     } else {
       setSS('synced',getGistCreds().token?'gist ready':'local only');
     }
-    startAutoSync();
   });
 }
-
 function changeUser(){
   currentUser=null;state={};openCards={};
-  if(autoSyncTimer){clearInterval(autoSyncTimer);autoSyncTimer=null;}
   document.getElementById('login-section').style.display='flex';
   document.getElementById('user-bar').style.display='none';
   document.getElementById('main-content').style.display='none';
   document.getElementById('uid-input').value='';
 }
-
 const TAB_NEON={v:'active-v',n:'active-n',c:'active-c'};
 function switchTab(t,btn){
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active-v','active-n','active-c'));
@@ -549,7 +578,7 @@ function renderTab(cid,secs){
     sh.innerHTML=`<span class="section-tag ${sec.tag}">${sec.label}</span><div class="section-line"></div>`;
     el.appendChild(sh);
     sec.lectures.forEach(lec=>{
-      const allItems=[...(lec.practice||[]).map(x=>lec.id+'|p|'+x.name),...(lec.homework||[]).map(x=>lec.id+'|h|'+x.name),...(lec.articles||[]).map(x=>lec.id+'|a|'+x.name)];
+      const allItems=[...(lec.practice||[]).map(x=>lec.id+'|p|'+x.name),...(lec.homework||[]).map(x=>lec.id+'|h|'+x.name),...(lec.articles||[]).map(x=>lec.id+'|a|'+x.name),...(lec.notes||[]).map((_,i)=>lec.id+'|mynotes|'+i)];
       const dt=allItems.filter(k=>state[k]).length;
       const pct=allItems.length?Math.round((dt/allItems.length)*100):0;
       const isOpen=!!openCards[lec.id];
@@ -588,11 +617,27 @@ function makeRows(items,lid,type){
 
 function renderBody(lec){
   const practiceHtml=lec.practice&&lec.practice.length
-    ?'<div class="bst prac-title">Class Practice Questions</div>'+makeRows(lec.practice,lec.id,'p'):'';
+    ?'<div class="bst prac-title">Class Practice Questions</div>'+makeRows(lec.practice,lec.id,'p')
+    :'';
   const homeworkHtml=lec.homework&&lec.homework.length
-    ?'<div class="bst hw-title">Homework Questions</div>'+makeRows(lec.homework,lec.id,'h'):'';
+    ?'<div class="bst hw-title">Homework Questions</div>'+makeRows(lec.homework,lec.id,'h')
+    :'';
   const articlesHtml=lec.articles&&lec.articles.length
-    ?'<div class="bst art-title">Articles</div>'+makeRows(lec.articles,lec.id,'a'):'';
+    ?'<div class="bst art-title">Articles</div>'+makeRows(lec.articles,lec.id,'a')
+    :'';
+  const notesHtml=lec.notes&&lec.notes.length
+    ?'<div class="bst notes-title">My Notes (PDFs)</div>'+lec.notes.map(function(item,i){
+        const nkey=lec.id+'|mynotes|'+i;
+        const nchecked=!!state[nkey];
+        return '<div class="t-row full">'
+          +'<input type="checkbox" id="'+nkey+'" '+(nchecked?'checked':'')+' onchange="toggleT(\''+lec.id+'\',\''+nkey+'\')">'
+          +'<label for="'+nkey+'" class="'+(nchecked?'done':'')+'">'
+          +'<a href="'+item.url+'" target="_blank" rel="noopener" class="topic-link" onclick="event.stopPropagation()">'+item.name+'</a>'
+          +' <span style="font-size:10px;color:var(--text3);margin-left:4px;">(notes done)</span>'
+          +'</label>'
+          +'</div>';
+      }).join('')
+    :'';
   const mhtml=META.map(function(m){
     const k=mk(lec.id,m.key),checked=!!state[k];
     return '<div class="check-pill'+(checked?' checked':'')+'" onclick="toggleM(\''+lec.id+'\',\''+m.key+'\')"><span class="ci">'+(checked?'✓':'')+'</span>'+m.label+'</div>';
@@ -601,8 +646,10 @@ function renderBody(lec){
   if(lec.yt)lhtml+='<a class="res-btn btn-yt" href="'+lec.yt+'" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#FF0000"/><path d="M10 8.5L16 12L10 15.5Z" fill="white"/></svg>Watch</a>';
   if(lec.pdf)lhtml+='<a class="res-btn btn-pdf" href="'+lec.pdf+'" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#E24B4A"/><path d="M8 6h5l3 3v9H8Z" fill="white" opacity=".9"/></svg>PDF</a>';
   lhtml+='</div>';
-  const targetVal=state['target::'+lec.id]||'';
-  const lastVal=state['last::'+lec.id]||'';
+  const targetKey='target::'+lec.id;
+  const lastKey='last::'+lec.id;
+  const targetVal=state[targetKey]||'';
+  const lastVal=state[lastKey]||'';
   let targetBadge='';
   if(targetVal){
     const tDate=new Date(targetVal),now=new Date();
@@ -618,7 +665,7 @@ function renderBody(lec){
     lastHtml='<span class="last-studied'+(recent?' recent':'')+'">studied '+ago+'</span>';
   }
   const targetRow='<div class="target-row"><span class="target-label">Target date</span><input class="target-input" type="date" value="'+targetVal+'" onchange="setTarget(\''+lec.id+'\',this.value)" />'+targetBadge+lastHtml+'</div>';
-  return '<div class="lec-body"><div class="body-cols">'+lhtml+practiceHtml+homeworkHtml+articlesHtml+'<div class="checklist-row">'+mhtml+'</div>'+targetRow+'</div></div>';
+  return '<div class="lec-body"><div class="body-cols">'+lhtml+practiceHtml+homeworkHtml+articlesHtml+notesHtml+'<div class="checklist-row">'+mhtml+'</div>'+targetRow+'</div></div>';
 }
 
 function toggleCard(id){openCards[id]=!openCards[id];renderAll();}
@@ -636,6 +683,7 @@ function checkConfetti(lid){
 function toggleT(lid,t){state[t]=!state[t];stampLast(lid);scheduleSave();renderAll();checkConfetti(lid);}
 function toggleM(lid,mk2){const k=mk(lid,mk2);state[k]=!state[k];stampLast(lid);scheduleSave();renderAll();checkConfetti(lid);}
 function setTarget(lid,val){state['target::'+lid]=val;scheduleSave();renderAll();}
+function toggleDrop(e,id){e.stopPropagation();document.querySelectorAll('.drop-menu.open').forEach(m=>{if(m.id!==id)m.classList.remove('open');});document.getElementById(id).classList.toggle('open');}
 document.addEventListener('click',()=>document.querySelectorAll('.drop-menu.open').forEach(m=>m.classList.remove('open')));
 
 function allLecs(){const a=[];[...V,...N,...C].forEach(s=>s.lectures.forEach(l=>a.push(l)));return a;}
@@ -657,7 +705,13 @@ function launchConfetti(){
   const pieces=[];
   const colors=['#00f5ff','#ffffff','#c8f135','#a78bfa','#f472b6','#fb923c'];
   for(let i=0;i<160;i++){
-    pieces.push({x:Math.random()*canvas.width,y:-10-Math.random()*200,w:6+Math.random()*8,h:3+Math.random()*5,color:colors[Math.floor(Math.random()*colors.length)],rot:Math.random()*360,rotV:(Math.random()-0.5)*8,vx:(Math.random()-0.5)*4,vy:2+Math.random()*4,alpha:1});
+    pieces.push({
+      x:Math.random()*canvas.width,y:-10-Math.random()*200,
+      w:6+Math.random()*8,h:3+Math.random()*5,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      rot:Math.random()*360,rotV:(Math.random()-0.5)*8,
+      vx:(Math.random()-0.5)*4,vy:2+Math.random()*4,alpha:1
+    });
   }
   let frame=0;
   function draw(){
@@ -680,7 +734,7 @@ function calc(secs){
   let tot=0,done=0,lec=0,tlec=0,notes=0,hrs=0;
   secs.forEach(s=>s.lectures.forEach(l=>{
     tlec++;
-    const all=[...(l.practice||[]).map(x=>l.id+'|p|'+x.name),...(l.homework||[]).map(x=>l.id+'|h|'+x.name),...(l.articles||[]).map(x=>l.id+'|a|'+x.name)];
+    const all=[...(l.practice||[]).map(x=>l.id+'|p|'+x.name),...(l.homework||[]).map(x=>l.id+'|h|'+x.name),...(l.articles||[]).map(x=>l.id+'|a|'+x.name),...(l.notes||[]).map((_,i)=>l.id+'|mynotes|'+i)];
     tot+=all.length;
     const dt=all.filter(k=>state[k]).length;
     done+=dt;
@@ -711,14 +765,26 @@ function updateStats(){
   const target=new Date('2026-03-26T07:00:00+05:30').getTime();
   function pad(n){return String(n).padStart(2,'0');}
   function tick(){
-    const now=Date.now(),diff=target-now;
-    if(diff<=0){['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id=>document.getElementById(id).textContent='00');return;}
-    document.getElementById('cd-days').textContent=pad(Math.floor(diff/86400000));
-    document.getElementById('cd-hours').textContent=pad(Math.floor((diff%86400000)/3600000));
-    document.getElementById('cd-mins').textContent=pad(Math.floor((diff%3600000)/60000));
-    document.getElementById('cd-secs').textContent=pad(Math.floor((diff%60000)/1000));
+    const now=Date.now();
+    const diff=target-now;
+    if(diff<=0){
+      document.getElementById('cd-days').textContent='00';
+      document.getElementById('cd-hours').textContent='00';
+      document.getElementById('cd-mins').textContent='00';
+      document.getElementById('cd-secs').textContent='00';
+      return;
+    }
+    const d=Math.floor(diff/86400000);
+    const h=Math.floor((diff%86400000)/3600000);
+    const m=Math.floor((diff%3600000)/60000);
+    const s=Math.floor((diff%60000)/1000);
+    document.getElementById('cd-days').textContent=pad(d);
+    document.getElementById('cd-hours').textContent=pad(h);
+    document.getElementById('cd-mins').textContent=pad(m);
+    document.getElementById('cd-secs').textContent=pad(s);
   }
-  tick();setInterval(tick,1000);
+  tick();
+  setInterval(tick,1000);
 })();
 </script>
 <canvas id="confetti-canvas"></canvas>

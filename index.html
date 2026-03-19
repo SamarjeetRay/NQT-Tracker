@@ -149,6 +149,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 @keyframes sd{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
 .body-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 1.5rem;}
 .bst{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--text3);margin:1rem 0 0.5rem;text-transform:uppercase;grid-column:1/-1;}
+.prac-title{color:var(--neon-c) !important;}
+.hw-title{color:#fb923c !important;}
+.art-title{color:#a78bfa !important;}
 .t-row{display:flex;align-items:flex-start;gap:8px;padding:4px 0;}
 .t-row.full{grid-column:1/-1;}
 .t-row input[type=checkbox]{margin-top:3px;flex-shrink:0;accent-color:var(--neon-c);cursor:pointer;}
@@ -455,17 +458,19 @@ function renderTab(cid,secs){
     sh.innerHTML=`<span class="section-tag ${sec.tag}">${sec.label}</span><div class="section-line"></div>`;
     el.appendChild(sh);
     sec.lectures.forEach(lec=>{
-      const dt=lec.topics.filter(t=>state[tk(lec.id,t)]).length;
-      const pct=Math.round((dt/lec.topics.length)*100);
+      const allItems=[...(lec.practice||[]).map(x=>lec.id+'|p|'+x.name),...(lec.homework||[]).map(x=>lec.id+'|h|'+x.name),...(lec.articles||[]).map(x=>lec.id+'|a|'+x.name)];
+      const dt=allItems.filter(k=>state[k]).length;
+      const pct=allItems.length?Math.round((dt/allItems.length)*100):0;
       const isOpen=!!openCards[lec.id];
       const card=document.createElement('div');
       const tgt=state['target::'+lec.id];
       const isOver=tgt&&new Date(tgt)<new Date()&&pct<100;
-      card.className='lec-card'+(pct===100?' done-card':isOver?' overdue':'');
+      const isDone=allItems.length>0&&dt===allItems.length;
+      card.className='lec-card'+(isDone?' done-card':isOver?' overdue':'');
       card.innerHTML=`<div class="lec-head" onclick="toggleCard('${lec.id}')">
         <span class="lec-num">${lec.num}</span>
         <div class="lec-name-wrap"><span class="lec-name">${lec.name}</span>${lec.dur?`<span class="lec-dur">${lec.dur}</span>`:''}</div>
-        <span class="lec-tc">${dt}/${lec.topics.length} topics</span>
+        <span class="lec-tc">${dt}/${allItems.length} topics</span>
         <span class="lec-pct${pct===100?' complete':''}">${pct}%</span>
         <span class="chev ${isOpen?'open':''}">▼</span>
       </div>${isOpen?renderBody(lec):''}`;
@@ -474,28 +479,39 @@ function renderTab(cid,secs){
   });
 }
 
-function renderBody(lec){
-  const umap={};
-  [...(lec.practice||[]),...(lec.homework||[]),...(lec.articles||[])].forEach(x=>{umap[x.name.toLowerCase().trim()]=x.url;});
-  const thtml=lec.topics.map((t,i)=>{
-    const key=tk(lec.id,t),checked=!!state[key];
-    const safe=t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/'/g,'&#39;');
-    const sjs=t.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-    const full=(lec.topics.length%2!==0&&i===lec.topics.length-1)?' full':'';
-    const url=umap[t.toLowerCase().trim()];
-    const inner=url?`<a href="${url}" target="_blank" rel="noopener" class="topic-link" onclick="event.stopPropagation()">${safe}</a>`:safe;
-    return `<div class="t-row${full}"><input type="checkbox" id="${key}" ${checked?'checked':''} onchange="toggleT('${lec.id}','${sjs}')"><label for="${key}" class="${checked?'done':''}">${inner}</label></div>`;
+function makeRows(items,lid,type){
+  if(!items||!items.length)return '';
+  return items.map((item,i)=>{
+    const key=lid+'|'+type+'|'+item.name;
+    const checked=!!state[key];
+    const safe=item.name.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/'/g,'&#39;');
+    const sjsRaw=lid+'|'+type+'|'+item.name;
+    const sjs=sjsRaw.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+    const full=(items.length%2!==0&&i===items.length-1)?' full':'';
+    const inner=item.url
+      ?('<a href="'+item.url+'" target="_blank" rel="noopener" class="topic-link" onclick="event.stopPropagation()">'+safe+'</a>')
+      :safe;
+    return '<div class="t-row'+full+'"><input type="checkbox" id="'+key+'" '+(checked?'checked':'')+' onchange="toggleT(\''+lid+'\',\''+sjs+'\')"><label for="'+key+'" class="'+(checked?'done':'')+'">' +inner+'</label></div>';
   }).join('');
-  const mhtml=META.map(m=>{
+}
+
+function renderBody(lec){
+  const practiceHtml=lec.practice&&lec.practice.length
+    ?'<div class="bst prac-title">Class Practice Questions</div>'+makeRows(lec.practice,lec.id,'p')
+    :'';
+  const homeworkHtml=lec.homework&&lec.homework.length
+    ?'<div class="bst hw-title">Homework Questions</div>'+makeRows(lec.homework,lec.id,'h')
+    :'';
+  const articlesHtml=lec.articles&&lec.articles.length
+    ?'<div class="bst art-title">Articles</div>'+makeRows(lec.articles,lec.id,'a')
+    :'';
+  const mhtml=META.map(function(m){
     const k=mk(lec.id,m.key),checked=!!state[k];
-    return `<div class="check-pill${checked?' checked':''}" onclick="toggleM('${lec.id}','${m.key}')"><span class="ci">${checked?'✓':''}</span>${m.label}</div>`;
+    return '<div class="check-pill'+(checked?' checked':'')+'" onclick="toggleM(\''+lec.id+'\',\''+m.key+'\')"><span class="ci">'+(checked?'✓':'')+'</span>'+m.label+'</div>';
   }).join('');
   let lhtml='<div class="lec-links">';
-  if(lec.yt)lhtml+=`<a class="res-btn btn-yt" href="${lec.yt}" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#FF0000"/><path d="M10 8.5L16 12L10 15.5Z" fill="white"/></svg>Watch</a>`;
-  if(lec.pdf)lhtml+=`<a class="res-btn btn-pdf" href="${lec.pdf}" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#E24B4A"/><path d="M8 6h5l3 3v9H8Z" fill="white" opacity=".9"/></svg>PDF</a>`;
-  if(lec.practice&&lec.practice.length)lhtml+=`<div class="res-dd"><button class="res-btn btn-prac" onclick="toggleDrop(event,'dp-${lec.id}')"><svg width="13" height="13" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#1D9E75"/><path d="M7 12l4 4 6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Practice Qs ▾</button><div class="drop-menu" id="dp-${lec.id}">${lec.practice.map(p=>`<a href="${p.url}" target="_blank">${p.name}</a>`).join('')}</div></div>`;
-  if(lec.homework&&lec.homework.length)lhtml+=`<div class="res-dd"><button class="res-btn btn-hw" onclick="toggleDrop(event,'dh-${lec.id}')"><svg width="13" height="13" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#BA7517"/><path d="M7 8h10M7 12h10M7 16h6" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/></svg>Homework ▾</button><div class="drop-menu" id="dh-${lec.id}">${lec.homework.map(h=>`<a href="${h.url}" target="_blank">${h.name}</a>`).join('')}</div></div>`;
-  if(lec.articles&&lec.articles.length)lhtml+=`<div class="res-dd"><button class="res-btn btn-art" onclick="toggleDrop(event,'da-${lec.id}')"><svg width="13" height="13" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#534AB7"/><path d="M7 8h10M7 12h10M7 16h6" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/></svg>Articles ▾</button><div class="drop-menu" id="da-${lec.id}">${lec.articles.map(a=>`<a href="${a.url}" target="_blank">${a.name}</a>`).join('')}</div></div>`;
+  if(lec.yt)lhtml+='<a class="res-btn btn-yt" href="'+lec.yt+'" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#FF0000"/><path d="M10 8.5L16 12L10 15.5Z" fill="white"/></svg>Watch</a>';
+  if(lec.pdf)lhtml+='<a class="res-btn btn-pdf" href="'+lec.pdf+'" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#E24B4A"/><path d="M8 6h5l3 3v9H8Z" fill="white" opacity=".9"/></svg>PDF</a>';
   lhtml+='</div>';
   const targetKey='target::'+lec.id;
   const lastKey='last::'+lec.id;
@@ -503,26 +519,20 @@ function renderBody(lec){
   const lastVal=state[lastKey]||'';
   let targetBadge='';
   if(targetVal){
-    const tDate=new Date(targetVal);
-    const now=new Date();
+    const tDate=new Date(targetVal),now=new Date();
     const diff=Math.ceil((tDate-now)/(1000*60*60*24));
-    if(diff<0) targetBadge=`<span class="target-badge over">Overdue by ${Math.abs(diff)}d</span>`;
-    else if(diff<=3) targetBadge=`<span class="target-badge warn">${diff}d left</span>`;
-    else targetBadge=`<span class="target-badge ok">${diff}d left</span>`;
+    if(diff<0)targetBadge='<span class="target-badge over">Overdue by '+Math.abs(diff)+'d</span>';
+    else if(diff<=3)targetBadge='<span class="target-badge warn">'+diff+'d left</span>';
+    else targetBadge='<span class="target-badge ok">'+diff+'d left</span>';
   }
   let lastHtml='';
   if(lastVal){
     const ago=timeAgo(lastVal);
     const recent=(Date.now()-new Date(lastVal).getTime())<86400000*2;
-    lastHtml=`<span class="last-studied${recent?' recent':''}">studied ${ago}</span>`;
+    lastHtml='<span class="last-studied'+(recent?' recent':'')+'">studied '+ago+'</span>';
   }
-  const targetRow=`<div class="target-row">
-    <span class="target-label">Target date</span>
-    <input class="target-input" type="date" value="${targetVal}" onchange="setTarget('${lec.id}',this.value)" />
-    ${targetBadge}
-    ${lastHtml}
-  </div>`;
-  return `<div class="lec-body"><div class="body-cols"><div class="bst">Topics covered</div>${thtml}${lhtml}<div class="checklist-row">${mhtml}</div>${targetRow}</div></div>`;
+  const targetRow='<div class="target-row"><span class="target-label">Target date</span><input class="target-input" type="date" value="'+targetVal+'" onchange="setTarget(\''+lec.id+'\',this.value)" />'+targetBadge+lastHtml+'</div>';
+  return '<div class="lec-body"><div class="body-cols">'+lhtml+practiceHtml+homeworkHtml+articlesHtml+'<div class="checklist-row">'+mhtml+'</div>'+targetRow+'</div></div>';
 }
 
 function toggleCard(id){openCards[id]=!openCards[id];renderAll();}
@@ -530,9 +540,12 @@ function stampLast(lid){state['last::'+lid]=new Date().toISOString();scheduleSav
 function checkConfetti(lid){
   const lec=allLecs().find(l=>l.id===lid);
   if(!lec)return;
-  const allTopicsDone=lec.topics.every(t=>state[tk(lid,t)]);
-  const allMetaDone=META.every(m=>state[mk(lid,m.key)]);
-  if(allTopicsDone&&allMetaDone)launchConfetti();
+  const allP=(lec.practice||[]).every(x=>state[lid+'|p|'+x.name]);
+  const allH=(lec.homework||[]).every(x=>state[lid+'|h|'+x.name]);
+  const allA=(lec.articles||[]).every(x=>state[lid+'|a|'+x.name]);
+  const allMeta=META.every(m=>state[mk(lid,m.key)]);
+  const hasItems=(lec.practice||[]).length+(lec.homework||[]).length+(lec.articles||[]).length>0;
+  if(hasItems&&allP&&allH&&allA&&allMeta)launchConfetti();
 }
 function toggleT(lid,t){const k=tk(lid,t);state[k]=!state[k];stampLast(lid);scheduleSave();renderAll();checkConfetti(lid);}
 function toggleM(lid,mk2){const k=mk(lid,mk2);state[k]=!state[k];stampLast(lid);scheduleSave();renderAll();checkConfetti(lid);}
@@ -587,9 +600,12 @@ function launchConfetti(){
 function calc(secs){
   let tot=0,done=0,lec=0,tlec=0,notes=0,hrs=0;
   secs.forEach(s=>s.lectures.forEach(l=>{
-    tlec++;tot+=l.topics.length;
-    const dt=l.topics.filter(t=>state[tk(l.id,t)]).length;
-    done+=dt;if(dt===l.topics.length)lec++;
+    tlec++;
+    const all=[...(l.practice||[]).map(x=>l.id+'|p|'+x.name),...(l.homework||[]).map(x=>l.id+'|h|'+x.name),...(l.articles||[]).map(x=>l.id+'|a|'+x.name)];
+    tot+=all.length;
+    const dt=all.filter(k=>state[k]).length;
+    done+=dt;
+    if(all.length>0&&dt===all.length&&META.every(m=>state[mk(l.id,m.key)]))lec++;
     if(state[mk(l.id,'notes')])notes++;
     if(state[mk(l.id,'watched')])hrs+=2;
   }));

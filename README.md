@@ -2,7 +2,7 @@
 
 > A sleek, fully offline-capable progress tracker for the **TCS NQT 2026** course by GeeksforGeeks — covering Verbal Ability, Numerical Reasoning, and Coding.
 
-🔗 **[Live Demo → samar.github.io/tcs-nqt-tracker](https://samar.github.io/tcs-nqt-tracker)**
+🔗 **[Live Demo → samar.github.io/tcs-nqt-tracker](https://samarjeetray.github.io/NQT-Tracker/)**
 
 ---
 

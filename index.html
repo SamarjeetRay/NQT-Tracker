@@ -217,6 +217,22 @@ footer{position:relative;z-index:1;text-align:center;padding:2rem 1.25rem 1.5rem
 
 /* CONFETTI CANVAS */
 #confetti-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;}
+
+/* SETTINGS PANEL */
+.settings-panel{background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius-xl);padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:none;}
+.settings-panel.open{display:block;}
+.settings-title{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:1rem;}
+.settings-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
+.settings-label{font-size:12px;color:var(--text2);min-width:80px;font-family:'DM Mono',monospace;}
+.settings-input{font-family:'DM Mono',monospace;font-size:12px;padding:7px 12px;background:var(--bg4);border:1px solid var(--line2);border-radius:var(--radius);color:var(--text);outline:none;flex:1;min-width:200px;transition:border-color 0.2s;}
+.settings-input:focus{border-color:var(--neon-c);}
+.settings-input[type=password]{letter-spacing:0.15em;}
+.settings-hint{font-size:11px;color:var(--text3);margin-top:4px;grid-column:1/-1;}
+.settings-btn{font-size:12px;padding:7px 16px;border-radius:var(--radius);border:1px solid var(--neon-c);background:var(--neon-c-dim);color:var(--neon-c);cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;}
+.settings-btn:hover{background:var(--neon-c);color:#0d0d0f;}
+.settings-status{font-size:12px;color:var(--text3);font-family:'DM Mono',monospace;}
+.settings-status.ok{color:var(--neon-c);}
+.settings-status.err{color:var(--red);}
 @media(max-width:560px){
   .overall-stats,.sec-stats{grid-template-columns:repeat(2,1fr);}
   .body-cols{grid-template-columns:1fr;}
@@ -280,6 +296,25 @@ footer{position:relative;z-index:1;text-align:center;padding:2rem 1.25rem 1.5rem
   <div style="display:flex;align-items:center;gap:12px;">
     <div class="sync-pill"><div class="sync-dot" id="sync-dot"></div><span id="sync-label">synced</span></div>
     <button class="btn btn-ghost" style="font-size:12px;padding:6px 12px;" onclick="changeUser()">Switch user</button>
+    <button class="btn btn-ghost" style="font-size:12px;padding:6px 12px;" onclick="toggleSettings()">⚙ Sync</button>
+  </div>
+</div>
+
+<div class="settings-panel" id="settings-panel">
+  <div class="settings-title">GitHub Gist Sync</div>
+  <div class="settings-row">
+    <span class="settings-label">Gist ID</span>
+    <input class="settings-input" id="gist-id-input" type="text" placeholder="your gist id..." value="" />
+  </div>
+  <div class="settings-row">
+    <span class="settings-label">Token</span>
+    <input class="settings-input" id="gist-token-input" type="password" placeholder="ghp_... (stays in your browser only)" />
+  </div>
+  <div style="font-size:11px;color:var(--text3);margin-bottom:12px;">Your token is stored only in your browser's localStorage — never sent anywhere except GitHub's API.</div>
+  <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+    <button class="settings-btn" onclick="saveGistSettings()">Save &amp; Connect</button>
+    <button class="settings-btn" style="border-color:var(--line2);background:transparent;color:var(--text2);" onclick="toggleSettings()">Close</button>
+    <span class="settings-status" id="gist-status"></span>
   </div>
 </div>
 
@@ -396,18 +431,102 @@ const PFX='tcs26_';
 function ss(k,v){try{localStorage.setItem(PFX+k,JSON.stringify(v));return true;}catch{return false;}}
 function sg(k){try{const v=localStorage.getItem(PFX+k);return v?JSON.parse(v):null;}catch{return null;}}
 function setSS(s,m){const d=document.getElementById('sync-dot'),l=document.getElementById('sync-label');d.className='sync-dot'+(s==='saving'?' saving':s==='error'?' error':'');l.textContent=m;}
-function scheduleSave(){setSS('saving','saving…');if(saveTimer)clearTimeout(saveTimer);saveTimer=setTimeout(()=>{if(!currentUser)return;const ok=ss('u::'+currentUser,state);setSS(ok?'synced':'error',ok?'synced':'error');},700);}
+function getGistCreds(){
+  return {
+    token: localStorage.getItem('nqt_gist_token')||'',
+    gistId: localStorage.getItem('nqt_gist_id')||''
+  };
+}
+
+async function syncToGist(data){
+  const {token,gistId}=getGistCreds();
+  if(!token||!gistId)return false;
+  try{
+    const res=await fetch('https://api.github.com/gists/'+gistId,{
+      method:'PATCH',
+      headers:{'Authorization':'token '+token,'Content-Type':'application/json'},
+      body:JSON.stringify({files:{'nqt-progress.json':{content:JSON.stringify(data)}}})
+    });
+    return res.ok;
+  }catch(e){return false;}
+}
+
+async function syncFromGist(){
+  const {token,gistId}=getGistCreds();
+  if(!gistId)return null;
+  try{
+    const headers={'Content-Type':'application/json'};
+    if(token)headers['Authorization']='token '+token;
+    const res=await fetch('https://api.github.com/gists/'+gistId,{headers});
+    if(!res.ok)return null;
+    const data=await res.json();
+    const content=data.files&&data.files['nqt-progress.json']&&data.files['nqt-progress.json'].content;
+    return content?JSON.parse(content):null;
+  }catch(e){return null;}
+}
+
+function toggleSettings(){
+  const p=document.getElementById('settings-panel');
+  p.classList.toggle('open');
+  if(p.classList.contains('open')){
+    const {token,gistId}=getGistCreds();
+    document.getElementById('gist-id-input').value=gistId;
+    if(token)document.getElementById('gist-token-input').value=token;
+  }
+}
+
+function saveGistSettings(){
+  const token=document.getElementById('gist-token-input').value.trim();
+  const gistId=document.getElementById('gist-id-input').value.trim();
+  const st=document.getElementById('gist-status');
+  if(!token||!gistId){st.textContent='Please enter both fields.';st.className='settings-status err';return;}
+  localStorage.setItem('nqt_gist_token',token);
+  localStorage.setItem('nqt_gist_id',gistId);
+  st.textContent='Connecting...';st.className='settings-status';
+  syncFromGist().then(data=>{
+    if(data!==null){
+      state=data;
+      renderAll();
+      st.textContent='Connected! Data loaded.';st.className='settings-status ok';
+      setSS('synced','gist synced');
+    } else {
+      st.textContent='Connected! No data yet.';st.className='settings-status ok';
+      setSS('synced','gist ready');
+    }
+  });
+}
+
+function scheduleSave(){
+  setSS('saving','saving…');
+  if(saveTimer)clearTimeout(saveTimer);
+  saveTimer=setTimeout(async()=>{
+    if(!currentUser)return;
+    ss('u::'+currentUser,state);
+    const ok=await syncToGist(state);
+    setSS(ok?'synced':'synced local',ok?'gist synced':'local only');
+  },1000);
+}
 
 function setUser(){
   const v=document.getElementById('uid-input').value.trim().replace(/\s+/g,'_').toLowerCase();
   if(!v)return;
-  currentUser=v;const saved=sg('u::'+v);state=saved||{};
+  currentUser=v;
+  const saved=sg('u::'+v);state=saved||{};
   document.getElementById('login-section').style.display='none';
   document.getElementById('user-bar').style.display='flex';
   document.getElementById('user-label-name').textContent=v;
   document.getElementById('user-avatar').textContent=v[0].toUpperCase();
   document.getElementById('main-content').style.display='block';
-  setSS('synced','synced');renderAll();
+  setSS('saving','loading...');
+  renderAll();
+  syncFromGist().then(gistData=>{
+    if(gistData&&Object.keys(gistData).length>0){
+      state=gistData;ss('u::'+v,state);renderAll();
+      setSS('synced','gist synced');
+    } else {
+      setSS('synced',getGistCreds().token?'gist ready':'local only');
+    }
+  });
 }
 function changeUser(){
   currentUser=null;state={};openCards={};

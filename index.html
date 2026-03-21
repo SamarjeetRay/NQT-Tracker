@@ -4,53 +4,51 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>TCS NQT 2026 — Full Tracker</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 /* ── THEME VARS ── */
 :root{
-  /* DARK (default) */
-  --bg:#0d0d0f;--bg2:#141416;--bg3:#1a1a1e;--bg4:#212127;--surface:#252530;
-  --line:#ffffff12;--line2:#ffffff20;--line3:#ffffff35;
-  --text:#f0efe8;--text2:#9d9ba8;--text3:#5a5868;
+  --bg:#0b0f0e;--bg2:#111614;--bg3:#161c1a;--bg4:#1c2421;--surface:#202c28;
+  --line:#ffffff0d;--line2:#ffffff18;--line3:#ffffff28;
+  --text:#e8f0ee;--text2:#8fa89f;--text3:#4a6058;
 
-  /* single neon = cyan */
-  --neon-v:#ff3030;--neon-v-dim:#ff303018;--neon-v-glow:0 0 12px #ff303060,0 0 28px #ff303030;
-  --neon-n:#ff3030;--neon-n-dim:#ff303018;--neon-n-glow:0 0 12px #ff303060,0 0 28px #ff303030;
-  --neon-c:#ff3030;--neon-c-dim:#ff303018;--neon-c-glow:0 0 12px #ff303060,0 0 28px #ff303030;
+  --neon-v:#10b981;--neon-v-dim:#10b98118;--neon-v-glow:0 0 14px #10b98150,0 0 30px #10b98128;
+  --neon-n:#10b981;--neon-n-dim:#10b98118;--neon-n-glow:0 0 14px #10b98150,0 0 30px #10b98128;
+  --neon-c:#10b981;--neon-c-dim:#10b98118;--neon-c-glow:0 0 14px #10b98150,0 0 30px #10b98128;
 
-  --accent:#ff3030;--accent2:#dd2020;--accent-dim:#ff303018;
+  --accent:#10b981;--accent2:#059669;--accent-dim:#10b98118;
   --blue:#60a5fa;--blue-dim:#60a5fa18;
   --purple:#a78bfa;--purple-dim:#a78bfa18;
   --orange:#fb923c;--orange-dim:#fb923c18;
   --teal:#2dd4bf;--teal-dim:#2dd4bf18;
   --pink:#f472b6;--pink-dim:#f472b618;
-  --red:#f87171;--green:#4ade80;--green-dim:#4ade8018;
-  --radius:10px;--radius-lg:16px;--radius-xl:22px;
+  --red:#f87171;--green:#10b981;--green-dim:#10b98118;
+  --radius:8px;--radius-lg:14px;--radius-xl:20px;
   color-scheme:dark;
 }
 [data-theme="light"]{
-  --bg:#fdf6e3;--bg2:#f7edd0;--bg3:#fffdf5;--bg4:#f7edd0;--surface:#f0e4bc;
-  --line:#00000007;--line2:#00000012;--line3:#0000001e;
-  --text:#1c1a14;--text2:#5c5540;--text3:#a09878;
+  --bg:#f7faf9;--bg2:#edf4f1;--bg3:#ffffff;--bg4:#edf4f1;--surface:#ddeee8;
+  --line:#00000008;--line2:#00000014;--line3:#00000022;
+  --text:#0d1f1a;--text2:#3d6b5c;--text3:#7aaa96;
 
-  --neon-v:#cc2020;--neon-v-dim:#cc202012;--neon-v-glow:0 0 8px #cc202035;
-  --neon-n:#cc2020;--neon-n-dim:#cc202012;--neon-n-glow:0 0 8px #cc202035;
-  --neon-c:#cc2020;--neon-c-dim:#cc202012;--neon-c-glow:0 0 8px #cc202035;
-  --accent:#cc2020;--accent2:#aa1818;--accent-dim:#cc202012;
-  --green-dim:#4ade8015;
+  --neon-v:#059669;--neon-v-dim:#05966912;--neon-v-glow:0 0 8px #05966930;
+  --neon-n:#059669;--neon-n-dim:#05966912;--neon-n-glow:0 0 8px #05966930;
+  --neon-c:#059669;--neon-c-dim:#05966912;--neon-c-glow:0 0 8px #05966930;
+  --accent:#059669;--accent2:#047857;--accent-dim:#05966912;
+  --green:#059669;--green-dim:#05966912;
   color-scheme:light;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background 0.3s,color 0.3s;}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background 0.3s,color 0.3s;}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle,var(--line2) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0;}
 .wrap{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:2rem 1.25rem 4rem;}
 
 /* HERO */
 .hero{padding:3rem 0 2rem;border-bottom:1px solid var(--line2);margin-bottom:2rem;}
 .hero-top{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;}
-.hero-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.15em;color:var(--neon-c);text-transform:uppercase;margin-bottom:0.75rem;display:flex;align-items:center;gap:8px;}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.15em;color:var(--neon-c);text-transform:uppercase;margin-bottom:0.75rem;display:flex;align-items:center;gap:8px;}
 .hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--neon-c);}
-.hero-title{font-family:'Syne',sans-serif;font-size:clamp(28px,5vw,48px);font-weight:800;line-height:1.05;letter-spacing:-0.02em;margin-bottom:0.5rem;}
+.hero-title{font-family:'Outfit',sans-serif;font-size:clamp(28px,5vw,48px);font-weight:800;line-height:1.05;letter-spacing:-0.02em;margin-bottom:0.5rem;}
 .hero-title span{color:var(--neon-c);}
 .hero-sub{font-size:14px;color:var(--text2);font-weight:300;}
 
@@ -66,16 +64,18 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .login-card{background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius-xl);padding:1.5rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
 .login-card p{font-size:13px;color:var(--text2);flex:1;min-width:180px;}
 .login-inputs{display:flex;gap:8px;flex-wrap:wrap;}
-.login-inputs input{font-family:'DM Mono',monospace;font-size:13px;padding:9px 14px;background:var(--bg4);border:1px solid var(--line2);border-radius:var(--radius);color:var(--text);outline:none;width:200px;transition:border-color 0.2s;}
+.login-inputs input{font-family:'JetBrains Mono',monospace;font-size:13px;padding:9px 14px;background:var(--bg4);border:1px solid var(--line2);border-radius:var(--radius);color:var(--text);outline:none;width:200px;transition:border-color 0.2s;}
 .login-inputs input:focus{border-color:var(--neon-c);}
-.btn{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:9px 18px;border-radius:var(--radius);border:none;cursor:pointer;transition:all 0.15s;}
+.btn{font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:500;padding:9px 18px;border-radius:var(--radius);border:none;cursor:pointer;transition:all 0.15s;}
 .btn-accent{background:var(--neon-c);color:#0d0d0f;}[data-theme="light"] .btn-accent{color:#fff;}
+[data-theme="light"] .lec-card.done-card{border-color:#05966960;background:linear-gradient(135deg,var(--bg3) 0%,#05966906 100%);}
+[data-theme="light"] .done-card .lec-name{color:#047857;}
 .btn-accent:hover{opacity:0.88;}
 .btn-ghost{background:var(--bg4);border:1px solid var(--line2);color:var(--text2);}
 .btn-ghost:hover{color:var(--text);background:var(--surface);}
 .user-active{display:flex;align-items:center;justify-content:space-between;background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius-xl);padding:1rem 1.5rem;margin-bottom:1.5rem;flex-wrap:wrap;gap:10px;}
 .user-pill{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text2);}
-.user-avatar{width:32px;height:32px;border-radius:50%;background:var(--neon-c-dim);border:1px solid var(--neon-c);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:12px;font-weight:500;color:var(--neon-c);}
+.user-avatar{width:32px;height:32px;border-radius:50%;background:var(--neon-c-dim);border:1px solid var(--neon-c);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--neon-c);}
 .sync-pill{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text3);}
 .sync-dot{width:7px;height:7px;border-radius:50%;background:var(--green);}
 .sync-dot.saving{background:var(--orange);}
@@ -86,18 +86,18 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .os{background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius-lg);padding:1rem 1.1rem;position:relative;overflow:hidden;}
 .os::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--neon-c);opacity:0;transition:opacity 0.3s;}
 .os.hv::after{opacity:1;}
-.os-label{font-size:11px;color:var(--text3);margin-bottom:6px;font-family:'DM Mono',monospace;letter-spacing:0.05em;}
-.os-val{font-size:22px;font-weight:700;font-family:'Syne',sans-serif;color:var(--text);}
-.os-val span{font-size:12px;font-weight:400;color:var(--text3);font-family:'DM Sans',sans-serif;}
+.os-label{font-size:11px;color:var(--text3);margin-bottom:6px;font-family:'JetBrains Mono',monospace;letter-spacing:0.05em;}
+.os-val{font-size:22px;font-weight:700;font-family:'Outfit',sans-serif;color:var(--text);}
+.os-val span{font-size:12px;font-weight:400;color:var(--text3);font-family:'Plus Jakarta Sans',sans-serif;}
 
 /* TABS */
 .tabs{display:flex;gap:4px;background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius-lg);padding:5px;margin-bottom:1.5rem;}
-.tab-btn{flex:1;font-size:13px;font-weight:500;padding:9px 12px;border-radius:10px;border:1px solid transparent;background:transparent;color:var(--text3);cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;align-items:center;gap:3px;font-family:'DM Sans',sans-serif;}
+.tab-btn{flex:1;font-size:13px;font-weight:500;padding:9px 12px;border-radius:10px;border:1px solid transparent;background:transparent;color:var(--text3);cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;align-items:center;gap:3px;font-family:'Plus Jakarta Sans',sans-serif;}
 .tab-btn:hover{color:var(--text2);background:var(--bg4);}
 .tab-btn.active-v{background:var(--neon-v-dim);border-color:var(--neon-v);color:var(--neon-v);box-shadow:var(--neon-v-glow);}
 .tab-btn.active-n{background:var(--neon-n-dim);border-color:var(--neon-n);color:var(--neon-n);box-shadow:var(--neon-n-glow);}
 .tab-btn.active-c{background:var(--neon-c-dim);border-color:var(--neon-c);color:var(--neon-c);box-shadow:var(--neon-c-glow);}
-.tab-sub{font-size:10px;font-family:'DM Mono',monospace;letter-spacing:0.05em;color:var(--text3);}
+.tab-sub{font-size:10px;font-family:'JetBrains Mono',monospace;letter-spacing:0.05em;color:var(--text3);}
 .tab-btn.active-v .tab-sub{color:var(--neon-v);}
 .tab-btn.active-n .tab-sub{color:var(--neon-n);}
 .tab-btn.active-c .tab-sub{color:var(--neon-c);}
@@ -107,20 +107,20 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 /* SECTION STATS */
 .sec-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:1.25rem;}
 .ss{background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius);padding:0.75rem 1rem;}
-.ss-label{font-size:10px;color:var(--text3);margin-bottom:4px;font-family:'DM Mono',monospace;letter-spacing:0.05em;}
-.ss-val{font-size:18px;font-weight:700;font-family:'Syne',sans-serif;color:var(--text);}
+.ss-label{font-size:10px;color:var(--text3);margin-bottom:4px;font-family:'JetBrains Mono',monospace;letter-spacing:0.05em;}
+.ss-val{font-size:18px;font-weight:700;font-family:'Outfit',sans-serif;color:var(--text);}
 .ss-val span{font-size:11px;font-weight:400;color:var(--text3);}
 
 /* NEON PROGRESS BARS */
 .prog-wrap{background:var(--bg3);border-radius:4px;height:4px;margin-bottom:1.5rem;overflow:hidden;}
 .prog-bar{height:4px;border-radius:4px;transition:width 0.5s cubic-bezier(.4,0,.2,1);}
-.pb-v{background:var(--neon-v);box-shadow:0 0 8px var(--neon-v);}
-.pb-n{background:var(--neon-n);box-shadow:0 0 8px var(--neon-n);}
-.pb-c{background:var(--neon-c);box-shadow:0 0 8px var(--neon-c);}
+.pb-v{background:var(--accent);box-shadow:0 0 8px var(--accent);}
+.pb-n{background:var(--accent);box-shadow:0 0 8px var(--accent);}
+.pb-c{background:var(--accent);box-shadow:0 0 8px var(--accent);}
 
 /* SECTION HEADER */
 .section-header{display:flex;align-items:center;gap:12px;margin:1.75rem 0 0.75rem;}
-.section-tag{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.1em;padding:4px 12px;border-radius:20px;}
+.section-tag{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.1em;padding:4px 12px;border-radius:20px;}
 .tag-verbal{background:var(--neon-v-dim);color:var(--neon-v);border:1px solid var(--neon-v);}
 .tag-numerical{background:var(--neon-n-dim);color:var(--neon-n);border:1px solid var(--neon-n);}
 .tag-array{background:var(--neon-c-dim);color:var(--neon-c);border:1px solid var(--neon-c);}
@@ -131,16 +131,17 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 /* LECTURE CARD */
 .lec-card{background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius-lg);margin-bottom:10px;overflow:hidden;transition:border-color 0.2s,box-shadow 0.2s;}
-.lec-card.done-card{border-color:#4ade8040;box-shadow:0 0 0 1px #4ade8020;}
+.lec-card.done-card{border-color:#10b98150;box-shadow:0 0 12px #10b98120;background:linear-gradient(135deg,var(--bg3) 0%,#10b98108 100%);}
 .lec-head{display:grid;grid-template-columns:auto 1fr auto auto auto;align-items:center;gap:12px;padding:1rem 1.25rem;cursor:pointer;user-select:none;}
 .lec-head:hover{background:var(--bg4);}
-.lec-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);width:20px;text-align:right;}
+.lec-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3);width:20px;text-align:right;}
 .lec-name-wrap{display:flex;flex-direction:column;gap:2px;}
 .lec-name{font-size:14px;font-weight:500;color:var(--text);}
-.lec-dur{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;}
-.lec-tc{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;white-space:nowrap;}
-.lec-pct{font-family:'DM Mono',monospace;font-size:11px;padding:3px 8px;border-radius:20px;white-space:nowrap;background:var(--bg4);color:var(--text3);min-width:44px;text-align:center;}
-.lec-pct.complete{background:var(--green-dim);color:var(--green);}
+.done-card .lec-name{color:#10b981;}
+.lec-dur{font-size:11px;color:var(--text3);font-family:'JetBrains Mono',monospace;}
+.lec-tc{font-size:11px;color:var(--text3);font-family:'JetBrains Mono',monospace;white-space:nowrap;}
+.lec-pct{font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 8px;border-radius:20px;white-space:nowrap;background:var(--bg4);color:var(--text3);min-width:44px;text-align:center;}
+.lec-pct.complete{background:#10b98118;color:#10b981;box-shadow:0 0 6px #10b98135;font-weight:600;}
 .chev{font-size:10px;color:var(--text3);transition:transform 0.2s;margin-left:4px;}
 .chev.open{transform:rotate(180deg);}
 
@@ -148,9 +149,12 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .lec-body{padding:0 1.25rem 1.25rem;border-top:1px solid var(--line);animation:sd 0.18s ease;}
 @keyframes sd{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
 .body-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 1.5rem;}
-.bst{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--text3);margin:1rem 0 0.5rem;text-transform:uppercase;grid-column:1/-1;}
+.bst{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--text3);margin:1rem 0 0.5rem;text-transform:uppercase;grid-column:1/-1;}
 .prac-title{color:var(--neon-c) !important;}
 .notes-title{color:#38bdf8 !important;}
+.link-list{display:flex;flex-direction:column;gap:4px;margin-bottom:0.5rem;grid-column:1/-1;}
+.link-item{font-size:13px;color:var(--text2);text-decoration:none;padding:5px 0 5px 10px;border-left:2px solid var(--line2);transition:all 0.15s;display:block;}
+.link-item:hover{color:var(--accent);border-left-color:var(--accent);padding-left:14px;}
 .hw-title{color:#fb923c !important;}
 .art-title{color:#a78bfa !important;}
 .t-row{display:flex;align-items:flex-start;gap:8px;padding:4px 0;}
@@ -172,7 +176,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 /* LINKS */
 .lec-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line);grid-column:1/-1;}
-.res-btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;padding:6px 12px;border-radius:20px;border:1px solid var(--line2);background:var(--bg4);color:var(--text2);text-decoration:none;cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;white-space:nowrap;}
+.res-btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;padding:6px 12px;border-radius:20px;border:1px solid var(--line2);background:var(--bg4);color:var(--text2);text-decoration:none;cursor:pointer;transition:all 0.15s;font-family:'Plus Jakarta Sans',sans-serif;white-space:nowrap;}
 .res-btn:hover{color:var(--text);background:var(--surface);}
 .btn-yt:hover{border-color:#ff444440;color:#ff6666;background:#ff000018;}
 .btn-pdf:hover{border-color:#e24b4a40;color:#f87171;background:#e24b4a18;}
@@ -191,9 +195,9 @@ footer{position:relative;z-index:1;text-align:center;padding:2rem 1.25rem 1.5rem
 
 /* COUNTDOWN */
 .cd-box{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:54px;background:var(--bg4);border:1px solid var(--line2);border-radius:var(--radius);padding:10px 14px;}
-.cd-num{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--text);line-height:1;letter-spacing:-0.02em;}
-.cd-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);}
-.cd-sep{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--text3);align-self:center;padding-bottom:14px;}
+.cd-num{font-family:'Outfit',sans-serif;font-size:26px;font-weight:800;color:var(--text);line-height:1;letter-spacing:-0.02em;}
+.cd-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);}
+.cd-sep{font-family:'Outfit',sans-serif;font-size:22px;font-weight:700;color:var(--text3);align-self:center;padding-bottom:14px;}
 #cd-d .cd-num{color:var(--neon-v);text-shadow:var(--neon-v-glow);}
 #cd-h .cd-num{color:var(--neon-n);text-shadow:var(--neon-n-glow);}
 #cd-m .cd-num{color:var(--neon-c);text-shadow:var(--neon-c-glow);}
@@ -201,10 +205,10 @@ footer{position:relative;z-index:1;text-align:center;padding:2rem 1.25rem 1.5rem
 
 /* TARGET DATE */
 .target-row{display:flex;align-items:center;gap:10px;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid var(--line);grid-column:1/-1;flex-wrap:wrap;}
-.target-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);white-space:nowrap;}
-.target-input{font-family:'DM Mono',monospace;font-size:12px;padding:5px 10px;background:var(--bg4);border:1px solid var(--line2);border-radius:var(--radius);color:var(--text);outline:none;cursor:pointer;transition:border-color 0.2s;}
+.target-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);white-space:nowrap;}
+.target-input{font-family:'JetBrains Mono',monospace;font-size:12px;padding:5px 10px;background:var(--bg4);border:1px solid var(--line2);border-radius:var(--radius);color:var(--text);outline:none;cursor:pointer;transition:border-color 0.2s;}
 .target-input:focus{border-color:var(--neon-c);}
-.target-badge{font-family:'DM Mono',monospace;font-size:11px;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+.target-badge{font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 10px;border-radius:20px;white-space:nowrap;}
 .target-badge.ok{background:var(--neon-c-dim);color:var(--neon-c);border:1px solid var(--neon-c);}
 .target-badge.warn{background:#fb923c18;color:#fb923c;border:1px solid #fb923c40;}
 .target-badge.over{background:#f8717118;color:#f87171;border:1px solid #f8717140;animation:pulse-red 1.5s ease-in-out infinite;}
@@ -213,7 +217,7 @@ footer{position:relative;z-index:1;text-align:center;padding:2rem 1.25rem 1.5rem
 .lec-card.overdue .lec-name{color:#f87171;}
 
 /* LAST STUDIED */
-.last-studied{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:0.04em;margin-left:auto;}
+.last-studied{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:0.04em;margin-left:auto;}
 .last-studied.recent{color:var(--neon-c);}
 
 /* CONFETTI CANVAS */
@@ -222,16 +226,16 @@ footer{position:relative;z-index:1;text-align:center;padding:2rem 1.25rem 1.5rem
 /* SETTINGS PANEL */
 .settings-panel{background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius-xl);padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:none;}
 .settings-panel.open{display:block;}
-.settings-title{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:1rem;}
+.settings-title{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:1rem;}
 .settings-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
-.settings-label{font-size:12px;color:var(--text2);min-width:80px;font-family:'DM Mono',monospace;}
-.settings-input{font-family:'DM Mono',monospace;font-size:12px;padding:7px 12px;background:var(--bg4);border:1px solid var(--line2);border-radius:var(--radius);color:var(--text);outline:none;flex:1;min-width:200px;transition:border-color 0.2s;}
+.settings-label{font-size:12px;color:var(--text2);min-width:80px;font-family:'JetBrains Mono',monospace;}
+.settings-input{font-family:'JetBrains Mono',monospace;font-size:12px;padding:7px 12px;background:var(--bg4);border:1px solid var(--line2);border-radius:var(--radius);color:var(--text);outline:none;flex:1;min-width:200px;transition:border-color 0.2s;}
 .settings-input:focus{border-color:var(--neon-c);}
 .settings-input[type=password]{letter-spacing:0.15em;}
 .settings-hint{font-size:11px;color:var(--text3);margin-top:4px;grid-column:1/-1;}
-.settings-btn{font-size:12px;padding:7px 16px;border-radius:var(--radius);border:1px solid var(--neon-c);background:var(--neon-c-dim);color:var(--neon-c);cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;}
+.settings-btn{font-size:12px;padding:7px 16px;border-radius:var(--radius);border:1px solid var(--neon-c);background:var(--neon-c-dim);color:var(--neon-c);cursor:pointer;transition:all 0.15s;font-family:'Plus Jakarta Sans',sans-serif;}
 .settings-btn:hover{background:var(--neon-c);color:#0d0d0f;}
-.settings-status{font-size:12px;color:var(--text3);font-family:'DM Mono',monospace;}
+.settings-status{font-size:12px;color:var(--text3);font-family:'JetBrains Mono',monospace;}
 .settings-status.ok{color:var(--neon-c);}
 .settings-status.err{color:var(--red);}
 @media(max-width:560px){
@@ -263,7 +267,7 @@ footer{position:relative;z-index:1;text-align:center;padding:2rem 1.25rem 1.5rem
 <div id="countdown-bar" style="margin-bottom:1.5rem;">
   <div style="background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius-xl);padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
     <div>
-      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text3);margin-bottom:6px;">TCS NQT exam countdown</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text3);margin-bottom:6px;">TCS NQT exam countdown</div>
       <div style="font-size:12px;color:var(--text2);">26 March 2026 · 7:00 AM</div>
     </div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;" id="cd-boxes">
@@ -345,9 +349,9 @@ footer{position:relative;z-index:1;text-align:center;padding:2rem 1.25rem 1.5rem
 
   <div class="tab-panel" id="panel-n">
     <div class="sec-stats">
-      <div class="ss"><div class="ss-label">LECTURES</div><div class="ss-val" id="n-lec">0<span>/14</span></div></div>
+      <div class="ss"><div class="ss-label">LECTURES</div><div class="ss-val" id="n-lec">0<span>/15</span></div></div>
       <div class="ss"><div class="ss-label">TOPICS</div><div class="ss-val" id="n-top">0<span> done</span></div></div>
-      <div class="ss"><div class="ss-label">NOTES</div><div class="ss-val" id="n-not">0<span>/14</span></div></div>
+      <div class="ss"><div class="ss-label">NOTES</div><div class="ss-val" id="n-not">0<span>/15</span></div></div>
       <div class="ss"><div class="ss-label">PROGRESS</div><div class="ss-val" id="n-pct">0<span>%</span></div></div>
     </div>
     <div class="prog-wrap"><div class="prog-bar pb-n" id="n-prog" style="width:0%"></div></div>
@@ -368,42 +372,43 @@ footer{position:relative;z-index:1;text-align:center;padding:2rem 1.25rem 1.5rem
 </div>
 
 <script>
-const V=[{id:'verbal',label:'Verbal Ability',tag:'tag-verbal',lectures:[
-  {id:'v01',num:'01',name:'Rules For Usage Of Nouns',dur:'',yt:'https://www.youtube.com/watch?v=SJMNAltbKpM',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260223160837422156/TCS_NQT_2026_LEC_1_NOUNS-.pdf',practice:[{name:'Nouns Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/rules-for-the-usage-of-nouns/'}],homework:[{name:'Nouns MCQs',url:'https://www.geeksforgeeks.org/quizzes/noun-quiz/'}],articles:[{name:'Nouns',url:'https://www.geeksforgeeks.org/english/nouns/'}],topics:['Nouns Practice Questions','Nouns MCQs','Nouns Article']},
-  {id:'v02',num:'02',name:'Rules For Usage Of Pronouns',dur:'',yt:'https://www.youtube.com/watch?v=TVfKqbenTgM',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260224152047271419/TCS_NQT_LEC_2_VERBAL_PRONOUN.pdf',practice:[{name:'Pronouns Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-verbal-ability-rules-for-the-usage-of-pronoun-2/'}],homework:[{name:'Pronouns MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-verbal-ability-rules-for-the-usage-of-pronoun/'}],articles:[{name:'Pronouns',url:'https://www.geeksforgeeks.org/english/what-are-pronouns-meaning-and-examples/'}],topics:['Pronouns Practice Questions','Pronouns MCQs','Pronouns Article']},
-  {id:'v03',num:'03',name:'Rules For Usage Of Verbs',dur:'',yt:'https://www.youtube.com/watch?v=DgHV4dvV_jk',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260225150405111596/TCS_NQT_VERBAL_VERBS_LEC_3_FINAL.pdf',practice:[{name:'Verbs Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-verbs-class/'}],homework:[{name:'Verbs MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-verbs-hw-01/'}],articles:[{name:'Verb',url:'https://www.geeksforgeeks.org/english/verbs/'}],topics:['Verbs Practice Questions','Verbs MCQs','Verb Article']},
-  {id:'v04',num:'04',name:'Rules For Usage Of Adjective',dur:'',yt:'https://www.youtube.com/watch?v=xpp2_oCMa6M',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260226233954940024/TCS_NQT_Adjectives_Lec4_final.pdf',practice:[{name:'Adjective Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-adjectives-class/'}],homework:[{name:'Adjective MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-english-hw/'}],articles:[{name:'Adjective',url:'https://www.geeksforgeeks.org/english/adjectives/'}],topics:['Adjective Practice Questions','Adjective MCQs','Adjective Article']},
-  {id:'v05',num:'05',name:'Rules For Usage Of Adverbs',dur:'',yt:'https://www.youtube.com/watch?v=tegkf8rOuoo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260227164831917838/TCS_NQT_VERBAL_ADVERBS_FINAL.pdf',practice:[{name:'Adverb Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-adverb-class/'}],homework:[{name:'Adverb MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-adverb-hw/'}],articles:[{name:'Adverb',url:'https://www.geeksforgeeks.org/english/adverbs/'}],topics:['Adverb Practice Questions','Adverb MCQs','Adverb Article']},
-  {id:'v06',num:'06',name:'Rules For Usage Of Preposition',dur:'',yt:'https://www.youtube.com/watch?v=xjqeHT0Vvoc',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260228160754584940/TCS_NQT_VERBAL_PREPOSITION_LEC_6_FINAL.pdf',practice:[{name:'Preposition Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-conjunction-class/'}],homework:[{name:'Preposition MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-preposition-hw/'}],articles:[{name:'Preposition',url:'https://www.geeksforgeeks.org/english/preposition/'}],topics:['Preposition Practice Questions','Preposition MCQs','Preposition Article']},
-  {id:'v07',num:'07',name:'Rules For Usage Of Conjunction',dur:'',yt:'https://www.youtube.com/watch?v=Ft36ni8GsMo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260302154822524829/TCS_NQT_VERBAL_CONJUNCTION_LEC_7_FINAL.pdf',practice:[{name:'Conjunction Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-conjunction-class-1/'}],homework:[{name:'Conjunction MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-conjunction-hw/'}],articles:[{name:'Conjunction',url:'https://www.geeksforgeeks.org/english/conjunction/'}],topics:['Conjunction Practice Questions','Conjunction MCQs','Conjunction Article']},
-  {id:'v08',num:'08',name:'Interjection / Determiners',dur:'',yt:'https://www.youtube.com/watch?v=Lmz6Lye-ymI',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260305182946600955/TCS_NQT_VERBAL_INTERJECTION_DETERMINER_LEC_8_FINAL.pdf',practice:[{name:'Interjection Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-interjection-class/'},{name:'Determiners Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-determiners-class/'}],homework:[{name:'Interjection MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-intejection-hw/'}],articles:[{name:'Interjection',url:'https://www.geeksforgeeks.org/english/interjections/'},{name:'Determiners',url:'https://www.geeksforgeeks.org/aptitude/determiners/'}],topics:['Interjection Practice Questions','Determiners Practice Questions','Interjection MCQs','Interjection Article','Determiners Article']},
-  {id:'v09',num:'09',name:'Direct and Indirect Speech',dur:'',yt:'https://www.youtube.com/watch?v=PYU94_uYRFo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260307121339518988/TCS_NQT_VERBAL_LEC_10_FINAL.pdf',practice:[{name:'Direct Indirect Speech Practice',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-direct-and-indirect-speech-class/'}],homework:[{name:'Direct Indirect Speech MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-direct-and-indirect-speech-hw/'}],articles:[{name:'Direct and Indirect Speech',url:'https://www.geeksforgeeks.org/english/direct-indirect-speech-rules/'}],topics:['Direct Indirect Speech Practice','Direct Indirect Speech MCQs','Direct and Indirect Speech Article']},
-  {id:'v10',num:'10',name:'Active Passive Voice',dur:'',yt:'https://www.youtube.com/watch?v=sPFpfiHNGDM',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260307185621179428/TCS_NQT_Verbal_Lec_10_Final.pdf',practice:[{name:'Active Passive Voice Practice',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-active-passive-voice-class/'}],homework:[{name:'Active Passive MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-active-passive-voice-hw/'}],articles:[{name:'Active Passive Voice',url:'https://www.geeksforgeeks.org/english/difference-between-active-and-passive-voice/'}],topics:['Active Passive Voice Practice','Active Passive MCQs','Active Passive Voice Article']},
-  {id:'v11',num:'11',name:'Reading Comprehension',dur:'',yt:'https://www.youtube.com/watch?v=qTGhSAlibxo',pdf:null,practice:[{name:'Reading Comprehension Practice',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-reading-comprehension-class/'}],homework:[{name:'Reading Comprehension MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-reading-comprehension-hw/'}],articles:[{name:'Reading Comprehension',url:'https://www.geeksforgeeks.org/english/reading-comprehension-questions/'}],topics:['Reading Comprehension Practice','Reading Comprehension MCQs','Reading Comprehension Article']},
-  {id:'v12',num:'12',name:'Jumbled and Parajumbled',dur:'',yt:null,pdf:null,practice:[],homework:[],articles:[],topics:['Jumbled sentences','Parajumbled sentences']},
-  {id:'v13',num:'13',name:'Vocabulary',dur:'',yt:'https://www.youtube.com/watch?v=WuUACJ1mM7g',pdf:null,practice:[],homework:[],articles:[],topics:['Vocabulary practice','Vocabulary MCQs']},
-]}];
+const V=[  {id:'verbal',label:'Verbal Ability',tag:'tag-verbal',lectures:[
+    {id:'v01',num:'01',name:'Rules For Usage Of Nouns',dur:'',yt:'https://www.youtube.com/watch?v=SJMNAltbKpM',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260223160837422156/TCS_NQT_2026_LEC_1_NOUNS-.pdf',practice:[{name:'Nouns Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/rules-for-the-usage-of-nouns/'}],homework:[{name:'Nouns MCQs',url:'https://www.geeksforgeeks.org/quizzes/noun-quiz/'}],articles:[{name:'Nouns',url:'https://www.geeksforgeeks.org/english/nouns/'}],topics:['Nouns Practice Questions','Nouns MCQs','Nouns Article']},
+    {id:'v02',num:'02',name:'Rules For Usage Of Pronouns',dur:'',yt:'https://www.youtube.com/watch?v=TVfKqbenTgM',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260224152047271419/TCS_NQT_LEC_2_VERBAL_PRONOUN.pdf',practice:[{name:'Pronouns Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-verbal-ability-rules-for-the-usage-of-pronoun-2/'}],homework:[{name:'Pronouns MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-verbal-ability-rules-for-the-usage-of-pronoun/'}],articles:[{name:'Pronouns',url:'https://www.geeksforgeeks.org/english/what-are-pronouns-meaning-and-examples/'}],topics:['Pronouns Practice Questions','Pronouns MCQs','Pronouns Article']},
+    {id:'v03',num:'03',name:'Rules For Usage Of Verbs',dur:'',yt:'https://www.youtube.com/watch?v=DgHV4dvV_jk',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260225150405111596/TCS_NQT_VERBAL_VERBS_LEC_3_FINAL.pdf',practice:[{name:'Verbs Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-verbs-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-verbs-hw-01/'}],articles:[{name:'Verb',url:'https://www.geeksforgeeks.org/english/verbs/'}],topics:['Verbs Practice Questions','Verbs MCQs','Verb Article']},
+    {id:'v04',num:'04',name:'Rules For Usage Of Adjective',dur:'',yt:'https://www.youtube.com/watch?v=xpp2_oCMa6M',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260226233954940024/TCS_NQT_Adjectives_Lec4_final.pdf',practice:[{name:'Adjective Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-adjectives-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-english-hw/'}],articles:[{name:'Adjective',url:'https://www.geeksforgeeks.org/english/adjectives/'}],topics:['Adjective Practice Questions','Adjective MCQs','Adjective Article']},
+    {id:'v05',num:'05',name:'Rules For Usage Of Adverbs',dur:'',yt:'https://www.youtube.com/watch?v=tegkf8rOuoo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260227164831917838/TCS_NQT_VERBAL_ADVERBS_FINAL.pdf',practice:[{name:'Adverb Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-adverb-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-adverb-hw/'}],articles:[{name:'Adverb',url:'https://www.geeksforgeeks.org/english/adverbs/'}],topics:['Adverb Practice Questions','Adverb MCQs','Adverb Article']},
+    {id:'v06',num:'06',name:'Rules For Usage Of Preposition',dur:'',yt:'https://www.youtube.com/watch?v=xjqeHT0Vvoc',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260228160754584940/TCS_NQT_VERBAL_PREPOSITION_LEC_6_FINAL.pdf',practice:[{name:'Preposition Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-conjunction-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-preposition-hw/'}],articles:[{name:'Preposition',url:'https://www.geeksforgeeks.org/english/preposition/'}],topics:['Preposition Practice Questions','Preposition MCQs','Preposition Article']},
+    {id:'v07',num:'07',name:'Rules For Usage Of Conjunction',dur:'',yt:'https://www.youtube.com/watch?v=Ft36ni8GsMo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260302154822524829/TCS_NQT_VERBAL_CONJUNCTION_LEC_7_FINAL.pdf',practice:[{name:'Conjunction Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-conjunction-class-1/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-conjunction-hw/'}],articles:[{name:'Conjunction',url:'https://www.geeksforgeeks.org/english/conjunction/'}],topics:['Conjunction Practice Questions','Conjunction MCQs','Conjunction Article']},
+    {id:'v08',num:'08',name:'Interjection / Determiners',dur:'',yt:'https://www.youtube.com/watch?v=Lmz6Lye-ymI',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260305182946600955/TCS_NQT_VERBAL_INTERJECTION_DETERMINER_LEC_8_FINAL.pdf',practice:[{name:'Interjection Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-interjection-class/'},{name:'Determiners Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-determiners-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-intejection-hw/'}],articles:[{name:'Interjection',url:'https://www.geeksforgeeks.org/english/interjections/'},{name:'Determiners',url:'https://www.geeksforgeeks.org/aptitude/determiners/'}],topics:['Interjection Practice Questions','Determiners Practice Questions','Interjection MCQs','Interjection Article','Determiners Article']},
+    {id:'v09',num:'09',name:'Direct and Indirect Speech',dur:'',yt:'https://www.youtube.com/watch?v=PYU94_uYRFo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260307121339518988/TCS_NQT_VERBAL_LEC_10_FINAL.pdf',practice:[{name:'Direct and Indirect Speech Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-direct-and-indirect-speech-class/'}],homework:[{name:'Practice MCQs Interjection',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-direct-and-indirect-speech-hw/'},{name:'Practice MCQs Determiners',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-rules-for-usage-of-determiners-hw/'}],articles:[{name:'Direct and Indirect Speech',url:'https://www.geeksforgeeks.org/english/direct-indirect-speech-rules/'}],topics:['Direct and Indirect Speech Practice','Practice MCQs Interjection','Practice MCQs Determiners','Direct and Indirect Speech Article']},
+    {id:'v10',num:'10',name:'Active Passive Voice',dur:'',yt:'https://www.youtube.com/watch?v=sPFpfiHNGDM',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260307185621179428/TCS_NQT_Verbal_Lec_10_Final.pdf',practice:[{name:'Active Passive Voice',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-active-passive-voice-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-active-passive-voice-hw/'}],articles:[{name:'Active Passive Voice',url:'https://www.geeksforgeeks.org/english/difference-between-active-and-passive-voice/'}],topics:['Active Passive Voice Practice','Active Passive MCQs','Active Passive Voice Article']},
+    {id:'v11',num:'11',name:'Reading Comprehension',dur:'',yt:'https://www.youtube.com/watch?v=qTGhSAlibxo',pdf:null,practice:[{name:'Reading Comprehension',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-reading-comprehension-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-verbal-ability-reading-comprehension-hw/'}],articles:[{name:'Reading Comprehension',url:'https://www.geeksforgeeks.org/english/reading-comprehension-questions/'}],topics:['Reading Comprehension Practice','Reading Comprehension MCQs','Reading Comprehension Article']},
+    {id:'v12',num:'12',name:'Jumbled and Parajumbled',dur:'',yt:null,pdf:null,practice:[],homework:[],articles:[{name:'Jumbled Sentences',url:'https://www.geeksforgeeks.org/english/jumbled-sentences/'},{name:'Para Jumbles',url:'https://www.geeksforgeeks.org/aptitude/para-jumbles/'}],topics:['Jumbled Sentences','Para Jumbles']},
+    {id:'v13',num:'13',name:'Vocabulary',dur:'',yt:'https://www.youtube.com/watch?v=WuUACJ1mM7g',pdf:null,practice:[],homework:[],articles:[{name:'Vocabulary',url:'https://www.geeksforgeeks.org/english/vocabulary/'}],topics:['Vocabulary Article']},
+  ]}];
 
-const N=[{id:'numerical',label:'Numerical Ability & Reasoning',tag:'tag-numerical',lectures:[
-  {id:'n01',num:'01',name:'Time & Work, Pipes & Cisterns, LCM HCF',dur:'',yt:'https://www.youtube.com/watch?v=3EI9YAySwHQ',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260223221726359180/20260223220636087.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcqnqt2026classtimeworkpipecisternlcmhcf/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-time-and-work-hcf-lcm/'}],articles:[],notes:[{name:'Time & Work Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/Time_and_Works.pdf'},{name:'Pipes & Cisterns Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Pipes_Cisterns.pdf'},{name:'HCF & LCM Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Number_System_HCF_LCM.pdf'}],topics:['Time & Work','Pipes & Cisterns','LCM','HCF']},
-  {id:'n02',num:'02',name:'Time Speed & Distance, Boat & Stream',dur:'',yt:'https://www.youtube.com/watch?v=mLHtKPEXss8',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260224222843411873/20260224215948439.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcsnqt2026classtimedistanceboatstream/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-time-and-distance-boat-stream/'}],articles:[],notes:[{name:'Time Speed Distance Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Time_Speed_Distance_Boats_Trains.pdf'}],topics:['Time Speed Distance','Boats and Streams']},
-  {id:'n03',num:'03',name:'Percentage',dur:'',yt:'https://www.youtube.com/watch?v=5ToqG0SJTLo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260225221502182403/20260225215812523.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-aptitude-percentage-class-practice/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-aptitude-percentage/'}],articles:[],notes:[{name:'Percentage Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Percentage.pdf'}],topics:['Percentage concepts','Percentage problems']},
-  {id:'n04',num:'04',name:'Ratio & Proportion, Mixture',dur:'',yt:'https://www.youtube.com/watch?v=afawt9_IyEo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260226234526795026/20260226215942629.pdf',practice:[{name:'Ratio & Proportion Practice',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-ratio-proportion-hw/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-ratio-proportion-hw/'}],articles:[],notes:[{name:'Ratio & Proportion Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Ratio_Proportion.pdf'},{name:'Mixtures & Alligation Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Mixtures_Alligation_Notes.pdf'}],topics:['Ratio & Proportion','Mixture and Alligation']},
-  {id:'n05',num:'05',name:'Profit, Loss & Discount',dur:'',yt:'https://www.youtube.com/watch?v=YW4qxQWQdR0',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260228100805469311/20260227220230596.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-profit-loss-discount-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-aptitude-profit-loss-discount-hw/'}],articles:[],notes:[{name:'Profit & Loss Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Profit_Loss.pdf'}],topics:['Profit & Loss','Discount']},
-  {id:'n06',num:'06',name:'SI & CI, Average',dur:'',yt:'https://www.youtube.com/watch?v=PmxujfHK48Q',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260302101858222765/20260228215813020.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/cs-nqt-2026-si-ci-average-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-si-ci-average-hw/'}],articles:[],notes:[{name:'SI & CI Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_2026_SI_CI.pdf'},{name:'Averages Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Averages.pdf'}],topics:['Simple Interest','Compound Interest','Average']},
-  {id:'n07',num:'07',name:'Number System',dur:'',yt:'https://www.youtube.com/watch?v=8z9bDGyNQEY',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260303112244909806/20260302215459476.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-apitude-number-system/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-number-system-hw/'}],articles:[],notes:[{name:'Number System Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Number_System_HCF_LCM.pdf'}],topics:['Number System concepts','Number System problems']},
-  {id:'n08',num:'08',name:'Mensuration 2D & 3D',dur:'',yt:'https://www.youtube.com/watch?v=xX0UmPDUmGM',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260305110657278982/20260303215858653.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-apitude-mensuration-2d-3d-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-aptitude-mensuration-2d-3d-hw/'}],articles:[],notes:[{name:'Mensuration Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Mensuration.pdf'}],topics:['Mensuration 2D','Mensuration 3D']},
-  {id:'n09',num:'09',name:'Clock and Calendar',dur:'',yt:'https://www.youtube.com/watch?v=03EEJjfkfhA',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260305111331185898/20260304215152682-.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-apitude-clock-and-calendar-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-apitude-clock-and-calendar-hw/'}],articles:[],topics:['Clock problems','Calendar problems']},
-  {id:'n10',num:'10',name:'Series, Coding Decoding & Analogy',dur:'',yt:'https://www.youtube.com/watch?v=3Sligb3z6JA',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260307122439287405/20260305212843372.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-series-coding-decoding-and-analogy-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-series-coding-decoding-and-analogy-hw/'}],articles:[],topics:['Number Series','Coding Decoding','Analogy']},
-  {id:'n11',num:'11',name:'Blood Relation, Direction & Math Operations',dur:'',yt:'https://www.youtube.com/watch?v=6tjVVMaODZo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260307122150288852/20260306215705320.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-blood-relation-direction-mathematical-operations-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-blood-relation-direction-mathematical-operations-hw/'}],articles:[],topics:['Blood Relations','Direction problems','Mathematical Operations']},
-  {id:'n12',num:'12',name:'Seating Arrangement and Puzzle Test',dur:'',yt:'https://www.youtube.com/watch?v=T2pCfaadKdw',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260309105011576264/20260307215652125.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-aptitude-seating-arrangement-and-puzzle-test-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-aptitude-seating-arrangement-and-puzzle-test-hw/'}],articles:[],topics:['Seating Arrangement','Puzzle Test']},
-  {id:'n13',num:'13',name:'Non Verbal Reasoning',dur:'',yt:'https://www.youtube.com/watch?v=NTGeq-FT9Uc',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260311110612229469/20260309215707116.pdf',practice:[],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-aptitude-permutation-and-combination-probability-di-hw/'}],articles:[],topics:['Non Verbal Reasoning practice','Non Verbal Reasoning MCQs']},
-  {id:'n14',num:'14',name:'Algebra and Progression',dur:'',yt:'https://www.youtube.com/watch?v=ddOiz_04Ue4',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260311110510000591/20260310215529200.pdf',practice:[],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-algebra-progression-hw/'}],articles:[],notes:[{name:'Permutation & Combination Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/TCS_NQT_Permutation_Combination.pdf'},{name:'Probability Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/TCS_NQT_Probability.pdf'},{name:'Statistics Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/TCS_NQT_Statistics.pdf'},{name:'Data Interpretation Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Data_Interpretation.pdf'}],topics:['Algebra problems','Progression problems']},
-]}];
+const N=[  {id:'numerical',label:'Numerical Ability & Reasoning',tag:'tag-numerical',lectures:[
+    {id:'n01',num:'01',name:'Time & Work, Pipes & Cisterns, LCM HCF',dur:'',yt:'https://www.youtube.com/watch?v=3EI9YAySwHQ',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260223221726359180/20260223220636087.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcqnqt2026classtimeworkpipecisternlcmhcf/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-time-and-work-hcf-lcm/'}],articles:[],notes:[{name:'Time & Work Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/Time_and_Works.pdf'},{name:'Pipes & Cisterns Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Pipes_Cisterns.pdf'},{name:'HCF & LCM Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Number_System_HCF_LCM.pdf'}],topics:['Time & Work','Pipes & Cisterns','LCM','HCF']},
+    {id:'n02',num:'02',name:'Time Speed & Distance, Boat & Stream',dur:'',yt:'https://www.youtube.com/watch?v=mLHtKPEXss8',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260224222843411873/20260224215948439.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcsnqt2026classtimedistanceboatstream/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-time-and-distance-boat-stream/'}],articles:[],notes:[{name:'Time Speed Distance Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Time_Speed_Distance_Boats_Trains.pdf'}],topics:['Time Speed Distance','Boats and Streams']},
+    {id:'n03',num:'03',name:'Percentage',dur:'',yt:'https://www.youtube.com/watch?v=5ToqG0SJTLo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260225221502182403/20260225215812523.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-aptitude-percentage-class-practice/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-aptitude-percentage/'}],articles:[],notes:[{name:'Percentage Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Percentage.pdf'}],topics:['Percentage concepts','Percentage problems']},
+    {id:'n04',num:'04',name:'Ratio & Proportion, Mixture',dur:'',yt:'https://www.youtube.com/watch?v=afawt9_IyEo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260226234526795026/20260226215942629.pdf',practice:[{name:'Ratio & Proportion Practice',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-ratio-proportion-hw/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-ratio-proportion-hw/'}],articles:[],notes:[{name:'Ratio & Proportion Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Ratio_Proportion.pdf'},{name:'Mixtures & Alligation Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Mixtures_Alligation_Notes.pdf'}],topics:['Ratio & Proportion','Mixture and Alligation']},
+    {id:'n05',num:'05',name:'Profit, Loss & Discount',dur:'',yt:'https://www.youtube.com/watch?v=YW4qxQWQdR0',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260228100805469311/20260227220230596.pdf',practice:[{name:'Class Practice Questions',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-profit-loss-discount-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-aptitude-profit-loss-discount-hw/'}],articles:[],notes:[{name:'Profit & Loss Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Profit_Loss.pdf'}],topics:['Profit & Loss','Discount']},
+    {id:'n06',num:'06',name:'SI & CI, Average',dur:'',yt:'https://www.youtube.com/watch?v=PmxujfHK48Q',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260302101858222765/20260228215813020.pdf',practice:[{name:'SI & CI, Average Practice',url:'https://www.geeksforgeeks.org/quizzes/cs-nqt-2026-si-ci-average-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-si-ci-average-hw/'}],articles:[],notes:[{name:'SI & CI Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_2026_SI_CI.pdf'},{name:'Averages Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Averages.pdf'}],topics:['Simple Interest','Compound Interest','Average']},
+    {id:'n07',num:'07',name:'Number System',dur:'',yt:'https://www.youtube.com/watch?v=8z9bDGyNQEY',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260303112244909806/20260302215459476.pdf',practice:[{name:'Number System Practice',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-apitude-number-system/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-number-system-hw/'}],articles:[],notes:[{name:'Number System Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Number_System_HCF_LCM.pdf'}],topics:['Number System concepts','Number System problems']},
+    {id:'n08',num:'08',name:'Mensuration 2D & 3D',dur:'',yt:'https://www.youtube.com/watch?v=xX0UmPDUmGM',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260305110657278982/20260303215858653.pdf',practice:[{name:'Mensuration Practice',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-apitude-mensuration-2d-3d-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-aptitude-mensuration-2d-3d-hw/'}],articles:[],notes:[{name:'Mensuration Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Mensuration.pdf'}],topics:['Mensuration 2D','Mensuration 3D']},
+    {id:'n09',num:'09',name:'Clock and Calendar',dur:'',yt:'https://www.youtube.com/watch?v=03EEJjfkfhA',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260305111331185898/20260304215152682-.pdf',practice:[{name:'Clock and Calendar Practice',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-apitude-clock-and-calendar-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-apitude-clock-and-calendar-hw/'}],articles:[],topics:['Clock problems','Calendar problems']},
+    {id:'n10',num:'10',name:'Series, Coding Decoding & Analogy',dur:'',yt:'https://www.youtube.com/watch?v=3Sligb3z6JA',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260307122439287405/20260305212843372.pdf',practice:[{name:'Series, Coding Decoding Practice',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-series-coding-decoding-and-analogy-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-series-coding-decoding-and-analogy-hw/'}],articles:[],topics:['Number Series','Coding Decoding','Analogy']},
+    {id:'n11',num:'11',name:'Blood Relation, Direction & Math Operations',dur:'',yt:'https://www.youtube.com/watch?v=6tjVVMaODZo',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260307122150288852/20260306215705320.pdf',practice:[{name:'Blood Relation Practice',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-blood-relation-direction-mathematical-operations-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-aptitude-blood-relation-direction-mathematical-operations-hw/'}],articles:[],topics:['Blood Relations','Direction problems','Mathematical Operations']},
+    {id:'n12',num:'12',name:'Seating Arrangement and Puzzle Test',dur:'',yt:'https://www.youtube.com/watch?v=T2pCfaadKdw',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260309105011576264/20260307215652125.pdf',practice:[{name:'Seating Arrangement Practice',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-aptitude-seating-arrangement-and-puzzle-test-class/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-aptitude-seating-arrangement-and-puzzle-test-hw/'}],articles:[],topics:['Seating Arrangement','Puzzle Test']},
+    {id:'n13',num:'13',name:'Non Verbal Reasoning',dur:'',yt:'https://www.youtube.com/watch?v=NTGeq-FT9Uc',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260311110612229469/20260309215707116.pdf',practice:[],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-aptitude-permutation-and-combination-probability-di-hw/'}],articles:[],topics:['Non Verbal Reasoning practice','Non Verbal Reasoning MCQs']},
+    {id:'n14',num:'14',name:'Algebra and Progression',dur:'',yt:'https://www.youtube.com/watch?v=ddOiz_04Ue4',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260311110510000591/20260310215529200.pdf',practice:[],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-algebra-progression-hw/'}],articles:[],notes:[{name:'Permutation & Combination Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/TCS_NQT_Permutation_Combination.pdf'},{name:'Probability Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/TCS_NQT_Probability.pdf'},{name:'Statistics Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/TCS_NQT_Statistics.pdf'},{name:'Data Interpretation Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Data_Interpretation.pdf'}],topics:['Algebra problems','Progression problems']},
+    {id:'n15',num:'15',name:'Permutation & Combination, Probability & DI',dur:'',yt:'https://www.youtube.com/playlist?list=PLqM7alHXFySFSlR00usGeOFRpcFUVYkMp',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260313175252292812/20260311215750153.pdf',practice:[{name:'Permutation & Combination Practice',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-aptitude-permutation-and-combination-probability-di-hw/'}],homework:[{name:'Practice MCQs',url:'https://www.geeksforgeeks.org/quizzes/tcs-nqt-2026-pyq-aptitude-permutation-and-combination-probability-di-hw/'}],articles:[],notes:[{name:'Permutation & Combination Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/TCS_NQT_Permutation_Combination.pdf'},{name:'Probability Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/TCS_NQT_Probability.pdf'},{name:'Statistics Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/TCS_NQT_Statistics.pdf'},{name:'Data Interpretation Notes',url:'https://samarjeetray.github.io/NQT-Tracker/assets/numerical/NQT_Data_Interpretation.pdf'}],topics:['Permutation & Combination','Probability','Data Interpretation']},
+  ]}];
 
 const C=[
   {id:'array',label:'Arrays',tag:'tag-array',lectures:[
-    {id:'arr1',num:'01',name:'Array 01',dur:'2:06:56',yt:'https://www.youtube.com/watch?v=g9W7uh_Jfxs',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260223184228144414/tcs-nqt-2026-programming-1-.pdf',practice:[{name:'Sum of Array',url:'https://www.geeksforgeeks.org/problems/sum-of-array2326/1'},{name:'Largest in Array',url:'https://www.geeksforgeeks.org/problems/largest-element-in-array4009/1'},{name:'Mean of an Array',url:'https://www.geeksforgeeks.org/problems/mean0021/1'},{name:'Reverse an Array',url:'https://www.geeksforgeeks.org/problems/reverse-an-array/1'},{name:'Second Largest',url:'https://www.geeksforgeeks.org/problems/second-largest3735/1'},{name:'Remove Duplicates Sorted Array',url:'https://www.geeksforgeeks.org/problems/remove-duplicate-elements-from-sorted-array/1'},{name:'Check if array is sorted',url:'https://www.geeksforgeeks.org/problems/check-if-an-array-is-sorted0701/1'},{name:'Max Consecutive Bit',url:'https://www.geeksforgeeks.org/problems/max-consecutive-one/1'}],homework:[{name:'First and Second Smallest',url:'https://www.geeksforgeeks.org/problems/find-the-smallest-and-second-smallest-element-in-an-array3226/1'}],articles:[],topics:['Sum of Array','Largest in Array','Mean of an Array','Reverse an Array','Second Largest','Remove Duplicates Sorted Array','Check if array is sorted','Max Consecutive Bit','First and Second Smallest','Vector in C++ STL']},
+    {id:'arr1',num:'01',name:'Array 01',dur:'2:06:56',yt:'https://www.youtube.com/watch?v=g9W7uh_Jfxs',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260223184228144414/tcs-nqt-2026-programming-1-.pdf',practice:[{name:'Sum of Array',url:'https://www.geeksforgeeks.org/problems/sum-of-array2326/1'},{name:'Largest in Array',url:'https://www.geeksforgeeks.org/problems/largest-element-in-array4009/1'},{name:'Mean of an Array',url:'https://www.geeksforgeeks.org/problems/mean0021/1'},{name:'Reverse an Array',url:'https://www.geeksforgeeks.org/problems/reverse-an-array/1'},{name:'Second Largest',url:'https://www.geeksforgeeks.org/problems/second-largest3735/1'},{name:'Remove Duplicates Sorted Array',url:'https://www.geeksforgeeks.org/problems/remove-duplicate-elements-from-sorted-array/1'},{name:'Check if array is sorted',url:'https://www.geeksforgeeks.org/problems/check-if-an-array-is-sorted0701/1'},{name:'Max Consecutive Bit',url:'https://www.geeksforgeeks.org/problems/max-consecutive-one/1'}],homework:[{name:'First and Second Smallest',url:'https://www.geeksforgeeks.org/problems/find-the-smallest-and-second-smallest-element-in-an-array3226/1'}],articles:[{name:'Vector in C++ STL',url:'https://www.geeksforgeeks.org/cpp/vector-in-cpp-stl/'}],topics:['Sum of Array','Largest in Array','Mean of an Array','Reverse an Array','Second Largest','Remove Duplicates Sorted Array','Check if array is sorted','Max Consecutive Bit','First and Second Smallest','Vector in C++ STL']},
     {id:'arr2',num:'02',name:'Array 02',dur:'2:05:01',yt:'https://www.youtube.com/watch?v=HayvoShS1LQ',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260224221223518495/tcs-nqt-programming-part-2-.pdf',practice:[{name:'Array Subset',url:'https://www.geeksforgeeks.org/problems/array-subset-of-another-array2317/1'},{name:'Rotate Array',url:'https://www.geeksforgeeks.org/problems/rotate-array-by-n-elements-1587115621/1'},{name:'Equal Sum',url:'https://www.geeksforgeeks.org/problems/equal-sum0810/1'},{name:'Stock Buy & Sell',url:'https://www.geeksforgeeks.org/problems/buy-stock-2/1'},{name:'Addition of two square matrices',url:'https://www.geeksforgeeks.org/problems/addition-of-two-square-matrices4916/1'}],homework:[{name:'Union of 2 Sorted Arrays',url:'https://www.geeksforgeeks.org/problems/union-of-two-sorted-arrays-1587115621/1'},{name:'Median of an Array',url:'https://www.geeksforgeeks.org/problems/find-the-median0527/1'},{name:'Count Sorted Rows',url:'https://www.geeksforgeeks.org/problems/count-sorted-rows2702/1'},{name:'Row with max 1s',url:'https://www.geeksforgeeks.org/problems/row-with-max-1s0023/1'}],articles:[{name:'Prefix Sum Array',url:'https://www.geeksforgeeks.org/dsa/prefix-sum-array-implementation-applications-competitive-programming/'},{name:'Stock Buy and Sell',url:'https://www.geeksforgeeks.org/competitive-programming/all-variations-of-stock-problems/'},{name:'Rotate an Array',url:'https://www.geeksforgeeks.org/dsa/complete-guide-on-array-rotations/'}],topics:['Array Subset','Rotate Array','Equal Sum','Stock Buy & Sell – Max one Transaction','Addition of two square matrices','Union of 2 Sorted Arrays','Median of an Array','Count Sorted Rows','Row with max 1s','Prefix Sum Array','Stock Buy & Sell','Rotate an Array']},
     {id:'arr3',num:'03',name:'Array 03',dur:'2:00:38',yt:'https://www.youtube.com/watch?v=eLPApI-lxcY',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260225185305222275/tcsnqt-programming-3-export.pdf',practice:[{name:'Frequencies in a Limited Array',url:'https://www.geeksforgeeks.org/problems/frequency-of-array-elements-1587115620/1'},{name:'Non-Repeating Element',url:'https://www.geeksforgeeks.org/problems/non-repeating-element3958/1'},{name:'Remove Duplicates from unsorted array',url:'https://www.geeksforgeeks.org/problems/remove-duplicates-from-unsorted-array4141/1'},{name:'Replace elements by its rank',url:'https://www.geeksforgeeks.org/problems/replace-elements-by-its-rank-in-the-array/1'},{name:"Kadane's Algorithm",url:'https://www.geeksforgeeks.org/problems/kadanes-algorithm-1587115620/1'}],homework:[{name:'Sort according to an Array',url:'https://www.geeksforgeeks.org/problems/relative-sorting4323/1'},{name:'Maximum Product Subarray',url:'https://www.geeksforgeeks.org/problems/maximum-product-subarray3604/1'}],articles:[{name:'Map in C++ STL',url:'https://www.geeksforgeeks.org/cpp/map-associative-containers-the-c-standard-template-library-stl/'}],topics:['Frequencies in a Limited Array','Non-Repeating Element','Remove Duplicates from unsorted array','Replace elements by its rank',"Kadane's Algorithm",'Sort according to an Array','Maximum Product Subarray','Map in C++ STL']},
     {id:'arr4',num:'04',name:'Array 04',dur:'1:51:08',yt:'https://www.youtube.com/watch?v=NgZa2IHcQS8',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260228102044590456/tcs-nqt-4-export.pdf',practice:[{name:'Max Sum Subarray of size K',url:'https://www.geeksforgeeks.org/problems/max-sum-subarray-of-size-k5313/1'},{name:'Count distinct elements in every window',url:'https://www.geeksforgeeks.org/problems/count-distinct-elements-in-every-window/1'},{name:'First negative in every window of size K',url:'https://www.geeksforgeeks.org/problems/first-negative-integer-in-every-window-of-size-k3345/1'},{name:'Trapping Rain Water',url:'https://www.geeksforgeeks.org/problems/trapping-rain-water-1587115621/1'}],homework:[{name:'Maximum average subarray',url:'https://www.geeksforgeeks.org/problems/maximum-average-subarray5859/1'},{name:'Container With Most Water',url:'https://www.geeksforgeeks.org/problems/container-with-most-water0535/1'}],articles:[{name:'Sliding Window Technique',url:'https://www.geeksforgeeks.org/dsa/window-sliding-technique/'}],topics:['Max Sum Subarray of size K','Count distinct elements in every window','First negative in every window of size K','Trapping Rain Water','Maximum average subarray','Container With Most Water','Sliding Window Technique']},
@@ -412,16 +417,16 @@ const C=[
     {id:'str1',num:'05',name:'String 01',dur:'1:40:15',yt:'https://www.youtube.com/watch?v=x3_RZbzjvks',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260228102138772430/tcs-nqt-programming-5.pdf',practice:[{name:'Palindrome String',url:'https://www.geeksforgeeks.org/problems/palindrome-string0817/1'},{name:'Anagram',url:'https://www.geeksforgeeks.org/problems/anagram-1587115620/1'},{name:'Remove vowels from string',url:'https://www.geeksforgeeks.org/problems/remove-vowels-from-string1446/1'},{name:'Remove character',url:'https://www.geeksforgeeks.org/problems/remove-character3815/1'},{name:'Remove all characters other than alphabets',url:'https://www.geeksforgeeks.org/problems/remove-all-characters-other-than-alphabets4923/1'},{name:'Encrypt the string - 1',url:'https://www.geeksforgeeks.org/problems/encrypt-the-string-10337/1'},{name:'Smallest and Largest word',url:'https://www.geeksforgeeks.org/problems/smallest-and-largest/1'}],homework:[{name:'Count Alphabets',url:'https://www.geeksforgeeks.org/problems/count-alphabets3649/1'},{name:'Non Repeating Character',url:'https://www.geeksforgeeks.org/problems/non-repeating-character-1587115620/1'},{name:'Sort a String',url:'https://www.geeksforgeeks.org/problems/sort-a-string2943/1'},{name:'Toggle Case',url:'https://www.geeksforgeeks.org/problems/toggle-case/1'}],articles:[{name:'String in Data Structure',url:'https://www.geeksforgeeks.org/dsa/string-data-structure/'}],topics:['Palindrome String','Anagram','Remove vowels from string','Remove character','Remove all characters other than alphabets','Encrypt the string - 1','Smallest and Largest word','Count Alphabets','Non Repeating Character','Sort a String','Toggle Case']},
     {id:'str2',num:'06',name:'String 02',dur:'1:44:56',yt:'https://www.youtube.com/watch?v=mVzFQaBy6II',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260302103335161323/tcs-nqt-6-export.pdf',practice:[{name:'Isomorphic Strings',url:'https://www.geeksforgeeks.org/problems/isomorphic-strings-1587115620/1'},{name:'String Duplicates Removal',url:'https://www.geeksforgeeks.org/problems/remove-all-duplicates-from-a-given-string4321/1'},{name:'Most Frequent Character',url:'https://www.geeksforgeeks.org/problems/maximum-occuring-character-1587115620/1'},{name:'Roman to Integer',url:'https://www.geeksforgeeks.org/problems/roman-number-to-integer3201/1'},{name:'Convert to Roman No',url:'https://www.geeksforgeeks.org/problems/convert-to-roman-no/1'},{name:'Common Subsequence',url:'https://www.geeksforgeeks.org/problems/common-subsequence4049/1'},{name:'Check if a String is Subsequence of Other',url:'https://www.geeksforgeeks.org/problems/given-two-strings-find-if-first-string-is-a-subsequence-of-second/1'},{name:'First Occurrence',url:'https://www.geeksforgeeks.org/problems/implement-strstr/1'}],homework:[{name:'Implement Atoi',url:'https://www.geeksforgeeks.org/problems/implement-atoi/1'},{name:'Encrypt the string - 2',url:'https://www.geeksforgeeks.org/problems/encrypt-the-string-21117/1'}],articles:[{name:'Converting Decimal to Roman Numerals',url:'https://www.geeksforgeeks.org/dsa/converting-decimal-number-lying-between-1-to-3999-to-roman-numerals/'}],topics:['Isomorphic Strings','String Duplicates Removal','Most Frequent Character','Roman to Integer','Convert to Roman No','Common Subsequence','Check if a String is Subsequence of Other','First Occurrence','Implement Atoi','Encrypt the string - 2']},
     {id:'str3',num:'07',name:'String 03',dur:'1:06:48',yt:'https://www.youtube.com/watch?v=aJY9Z6cFJNQ',pdf:null,practice:[{name:'Number of factors',url:'https://www.geeksforgeeks.org/problems/number-of-factors1435/1'},{name:'Prime Number',url:'https://www.geeksforgeeks.org/problems/prime-number2314/1'}],homework:[{name:'Factorial of a Number',url:'https://www.geeksforgeeks.org/dsa/program-for-factorial-of-a-number/'},{name:'Binomial Coefficient',url:'https://www.geeksforgeeks.org/dsa/binomial-coefficient-dp-9/'}],articles:[{name:'Sum of elements of an AP',url:'https://www.geeksforgeeks.org/dsa/sum-of-elements-of-an-ap-in-the-given-range/'},{name:'Find all factors of a Positive Number',url:'https://www.geeksforgeeks.org/dsa/find-all-factors-of-a-natural-number/'},{name:'Check for Prime Number',url:'https://www.geeksforgeeks.org/dsa/check-for-prime-number/'}],topics:['Number of factors','Prime Number','Factorial of a Number','Binomial Coefficient','Sum of elements of an AP','Find all factors of a Positive Number','Check for Prime Number']},
-    {id:'str4',num:'08',name:'String 04',dur:'1:31:30',yt:'https://www.youtube.com/watch?v=WP-MR6xUqVM',pdf:null,practice:[{name:'Program to print all palindromes in a given range',url:'https://www.geeksforgeeks.org/dsa/program-print-palindromes-given-range/'},{name:'Find Prime numbers in a range',url:'https://www.geeksforgeeks.org/problems/find-prime-numbers-in-a-range4718/1'}],homework:[{name:"Replace all '0' with '5'",url:'https://www.geeksforgeeks.org/problems/replace-all-0s-with-5/1'},{name:'Program to check Strong Number',url:'https://www.geeksforgeeks.org/problems/strong-numbers3315/1'}],articles:[],topics:['Program to print all palindromes in a given range','Find Prime numbers in a range',"Replace all '0' with '5' in an input Integer",'Program to check Strong Number']},
+    {id:'str4',num:'08',name:'String 04',dur:'1:31:30',yt:'https://www.youtube.com/watch?v=WP-MR6xUqVM',pdf:null,practice:[{name:'Program to print all palindromes in a given range',url:'https://www.geeksforgeeks.org/dsa/program-print-palindromes-given-range/'},{name:'Find Prime numbers in a range',url:'https://www.geeksforgeeks.org/problems/find-prime-numbers-in-a-range4718/1'}],homework:[{name:"Replace all '0' with '5'",url:'https://www.geeksforgeeks.org/problems/replace-all-0s-with-5/1'},{name:'Program to check Strong Number',url:'https://www.geeksforgeeks.org/problems/strong-numbers3315/1'}],articles:[{name:'Replace all \'0\' with \'5\'',url:'https://www.geeksforgeeks.org/dsa/program-to-replace-all-0s-with-5-in-an-input-integer/'},{name:'Check Strong Number',url:'https://www.geeksforgeeks.org/dsa/strong-number/'}],topics:['Program to print all palindromes in a given range','Find Prime numbers in a range',"Replace all '0' with '5' in an input Integer",'Program to check Strong Number']},
   ]},
   {id:'numtheory',label:'Number Theory',tag:'tag-numtheory',lectures:[
     {id:'nt1',num:'09',name:'Number Theory 01',dur:'1:22:56',yt:'https://www.youtube.com/watch?v=zhrIXkwn_NA',pdf:'https://media.geeksforgeeks.org/wp-content/uploads/20260305182542408649/aman05.pdf',practice:[{name:'LCM of two numbers',url:'https://www.geeksforgeeks.org/problems/lcm--151453/1'},{name:'GCD of two numbers',url:'https://www.geeksforgeeks.org/problems/gcd-of-two-numbers3459/1'},{name:'Largest prime factor',url:'https://www.geeksforgeeks.org/problems/largest-prime-factor2601/1'},{name:'Sum of AP series',url:'https://www.geeksforgeeks.org/problems/sum-of-ap-series4512/1'}],homework:[{name:'Factorial',url:'https://www.geeksforgeeks.org/problems/factorial5739/1'}],articles:[],topics:['LCM of two numbers','GCD of two numbers','Largest prime factor','Sum of AP series','Factorial']},
     {id:'nt2',num:'10',name:'Number Theory 02',dur:'1:17:21',yt:'https://www.youtube.com/watch?v=BtKaHBKMfcc',pdf:null,practice:[],homework:[],articles:[],topics:['Number Theory 02 concepts']},
   ]},
   {id:'pyq',label:'PYQ Practice',tag:'tag-pyq',lectures:[
-    {id:'pyq1',num:'11',name:'Practice PYQ — Set 1',dur:'~2 hrs',yt:'https://www.youtube.com/watch?v=paG2hNpT1YU',pdf:null,practice:[{name:'CSES - Weird Algorithm',url:'https://www.geeksforgeeks.org/competitive-programming/weird-algorithm/'},{name:'CSES - Missing Number',url:'https://www.geeksforgeeks.org/competitive-programming/missing-number-cses/'},{name:'CSES - Repetitions',url:'https://www.geeksforgeeks.org/competitive-programming/cses-solutions-repetitions/'},{name:'CSES - Permutations',url:'https://www.geeksforgeeks.org/competitive-programming/cses-solutions-permutations/'},{name:'CSES - Two Sets',url:'https://www.geeksforgeeks.org/competitive-programming/cses-solutions-two-sets/'}],homework:[{name:'Number of occurrence',url:'https://www.geeksforgeeks.org/problems/number-of-occurrence2259/1'},{name:'Check if array is sorted',url:'https://www.geeksforgeeks.org/problems/check-if-an-array-is-sorted0701/1'},{name:'Find triplets with zero sum',url:'https://www.geeksforgeeks.org/problems/find-triplets-with-zero-sum/1'}],articles:[],topics:['CSES - Weird Algorithm','CSES - Missing Number','CSES - Repetitions','CSES - Permutations','CSES - Two Sets','Number of occurrence','Check if array is sorted','Find triplets with zero sum']},
-    {id:'pyq2',num:'12',name:'Practice PYQ — Set 2',dur:'~2 hrs',yt:'https://www.youtube.com/watch?v=xjsnCsNDnfg',pdf:null,practice:[{name:'First n Fibonacci',url:'https://www.geeksforgeeks.org/problems/print-first-n-fibonacci-numbers1002/1'},{name:'First and Second Smallests',url:'https://www.geeksforgeeks.org/problems/find-the-smallest-and-second-smallest-element-in-an-array3226/1'},{name:'Missing And Repeating',url:'https://www.geeksforgeeks.org/problems/find-missing-and-repeating2512/1'},{name:'Greatest of three numbers',url:'https://www.geeksforgeeks.org/problems/greatest-of-three-numbers2520/1'},{name:'Most Frequent Character',url:'https://www.geeksforgeeks.org/problems/maximum-occuring-character-1587115620/1'},{name:'Sum of numbers in string',url:'https://www.geeksforgeeks.org/problems/sum-of-numbers-in-string-1587115621/1'},{name:'Perfect Numbers',url:'https://www.geeksforgeeks.org/problems/perfect-numbers3207/1'},{name:'Toggle Case',url:'https://www.geeksforgeeks.org/problems/toggle-case/1'}],homework:[{name:'Sort according to an Array',url:'https://www.geeksforgeeks.org/problems/relative-sorting4323/1'},{name:'Non Repeating Character',url:'https://www.geeksforgeeks.org/problems/non-repeating-character-1587115620/1'},{name:'Most Frequent Character',url:'https://www.geeksforgeeks.org/problems/maximum-occuring-character-1587115620/1'}],articles:[],topics:['First n Fibonacci','First and Second Smallests','Missing And Repeating','Greatest of three numbers','Most Frequent Character','Sum of numbers in string','Perfect Numbers','Toggle Case','Sort according to an Array','Non Repeating Character']},
-    {id:'pyq3',num:'13',name:'Practice PYQ — Set 3',dur:'~2 hrs',yt:'https://www.youtube.com/watch?v=KTWKcsfNI_s',pdf:null,practice:[{name:"Kadane's Algorithm",url:'https://www.geeksforgeeks.org/problems/kadanes-algorithm-1587115620/1'},{name:'Max Circular Subarray Sum',url:'https://www.geeksforgeeks.org/problems/max-circular-subarray-sum-1587115620/1'}],homework:[{name:'Max diff of zeros and ones in binary string',url:'https://www.geeksforgeeks.org/problems/maximum-difference-of-zeros-and-ones-in-binary-string4111/1'},{name:'Maximum Product Subarray',url:'https://www.geeksforgeeks.org/problems/max-circular-subarray-sum-1587115620/1'}],articles:[],topics:["Kadane's Algorithm","Max Circular Subarray Sum","Maximum difference of zeros and ones in binary string","Maximum Product Subarray"]},
+    {id:'pyq1',num:'11',name:'Practice PYQ — Set 1',dur:'~2 hrs',yt:'https://www.youtube.com/watch?v=paG2hNpT1YU',pdf:null,practice:[{name:'CSES - Weird Algorithm',url:'https://www.geeksforgeeks.org/competitive-programming/weird-algorithm/'},{name:'CSES - Missing Number',url:'https://www.geeksforgeeks.org/competitive-programming/missing-number-cses/'},{name:'CSES - Repetitions',url:'https://www.geeksforgeeks.org/competitive-programming/cses-solutions-repetitions/'},{name:'CSES - Permutations',url:'https://www.geeksforgeeks.org/competitive-programming/cses-solutions-permutations/'},{name:'CSES - Two Sets',url:'https://www.geeksforgeeks.org/competitive-programming/cses-solutions-two-sets/'}],homework:[{name:'Number of occurrence',url:'https://www.geeksforgeeks.org/problems/number-of-occurrence2259/1'},{name:'Check if array is sorted',url:'https://www.geeksforgeeks.org/problems/check-if-an-array-is-sorted0701/1'},{name:'Find triplets with zero sum',url:'https://www.geeksforgeeks.org/problems/find-triplets-with-zero-sum/1'}],articles:[{name:'Number of occurrence',url:'https://www.geeksforgeeks.org/problems/number-of-occurrence2259/1'},{name:'Check if array is sorted',url:'https://www.geeksforgeeks.org/problems/check-if-an-array-is-sorted0701/1'},{name:'Find triplets with zero sum',url:'https://www.geeksforgeeks.org/problems/find-triplets-with-zero-sum/1'}],topics:['CSES - Weird Algorithm','CSES - Missing Number','CSES - Repetitions','CSES - Permutations','CSES - Two Sets','Number of occurrence','Check if array is sorted','Find triplets with zero sum']},
+    {id:'pyq2',num:'12',name:'Practice PYQ — Set 2',dur:'~2 hrs',yt:'https://www.youtube.com/watch?v=xjsnCsNDnfg',pdf:null,practice:[{name:'First n Fibonacci',url:'https://www.geeksforgeeks.org/problems/print-first-n-fibonacci-numbers1002/1'},{name:'First and Second Smallests',url:'https://www.geeksforgeeks.org/problems/find-the-smallest-and-second-smallest-element-in-an-array3226/1'},{name:'Missing And Repeating',url:'https://www.geeksforgeeks.org/problems/find-missing-and-repeating2512/1'},{name:'Greatest of three numbers',url:'https://www.geeksforgeeks.org/problems/greatest-of-three-numbers2520/1'},{name:'Most Frequent Character',url:'https://www.geeksforgeeks.org/problems/maximum-occuring-character-1587115620/1'},{name:'Sum of numbers in string',url:'https://www.geeksforgeeks.org/problems/sum-of-numbers-in-string-1587115621/1'},{name:'Perfect Numbers',url:'https://www.geeksforgeeks.org/problems/perfect-numbers3207/1'},{name:'Toggle Case',url:'https://www.geeksforgeeks.org/problems/toggle-case/1'}],homework:[{name:'Sort according to an Array',url:'https://www.geeksforgeeks.org/problems/relative-sorting4323/1'},{name:'Non Repeating Character',url:'https://www.geeksforgeeks.org/problems/non-repeating-character-1587115620/1'},{name:'Most Frequent Character',url:'https://www.geeksforgeeks.org/problems/maximum-occuring-character-1587115620/1'}],articles:[{name:'Sort according to an Array',url:'https://www.geeksforgeeks.org/problems/relative-sorting4323/1'},{name:'Non Repeating Character',url:'https://www.geeksforgeeks.org/problems/non-repeating-character-1587115620/1'},{name:'Most Frequent Character',url:'https://www.geeksforgeeks.org/problems/maximum-occuring-character-1587115620/1'}],topics:['First n Fibonacci','First and Second Smallests','Missing And Repeating','Greatest of three numbers','Most Frequent Character','Sum of numbers in string','Perfect Numbers','Toggle Case','Sort according to an Array','Non Repeating Character']},
+    {id:'pyq3',num:'13',name:'Practice PYQ — Set 3',dur:'~2 hrs',yt:'https://www.youtube.com/watch?v=KTWKcsfNI_s',pdf:null,practice:[{name:"Kadane's Algorithm",url:'https://www.geeksforgeeks.org/problems/kadanes-algorithm-1587115620/1'},{name:'Max Circular Subarray Sum',url:'https://www.geeksforgeeks.org/problems/max-circular-subarray-sum-1587115620/1'}],homework:[{name:'Max diff of zeros and ones in binary string',url:'https://www.geeksforgeeks.org/problems/maximum-difference-of-zeros-and-ones-in-binary-string4111/1'},{name:'Maximum Product Subarray',url:'https://www.geeksforgeeks.org/problems/max-circular-subarray-sum-1587115620/1'}],articles:[{name:'Maximum difference of zeros and ones in binary string',url:'https://www.geeksforgeeks.org/problems/maximum-difference-of-zeros-and-ones-in-binary-string4111/1'},{name:'Maximum Product Subarray',url:'https://www.geeksforgeeks.org/problems/maximum-product-subarray3604/1'}],topics:["Kadane's Algorithm","Max Circular Subarray Sum","Maximum difference of zeros and ones in binary string","Maximum Product Subarray"]},
   ]},
 ];
 
@@ -578,14 +583,14 @@ function renderTab(cid,secs){
     sh.innerHTML=`<span class="section-tag ${sec.tag}">${sec.label}</span><div class="section-line"></div>`;
     el.appendChild(sh);
     sec.lectures.forEach(lec=>{
-      const allItems=[...(lec.practice||[]).map(x=>lec.id+'|p|'+x.name),...(lec.homework||[]).map(x=>lec.id+'|h|'+x.name),...(lec.articles||[]).map(x=>lec.id+'|a|'+x.name),...(lec.notes||[]).map((_,i)=>lec.id+'|mynotes|'+i)];
+      const SMETA_KEYS=['watched','notes','practice'];const allItems=SMETA_KEYS.map(k=>lec.id+'|m|'+k);
       const dt=allItems.filter(k=>state[k]).length;
       const pct=allItems.length?Math.round((dt/allItems.length)*100):0;
       const isOpen=!!openCards[lec.id];
       const card=document.createElement('div');
       const tgt=state['target::'+lec.id];
       const isOver=tgt&&new Date(tgt)<new Date()&&pct<100;
-      const isDone=allItems.length>0&&dt===allItems.length;
+      const isDone=dt===allItems.length;
       card.className='lec-card'+(isDone?' done-card':isOver?' overdue':'');
       card.innerHTML=`<div class="lec-head" onclick="toggleCard('${lec.id}')">
         <span class="lec-num">${lec.num}</span>
@@ -616,36 +621,56 @@ function makeRows(items,lid,type){
 }
 
 function renderBody(lec){
+  // Links row: Watch + PDF
+  let lhtml='';
+  if(lec.yt||lec.pdf){
+    lhtml='<div class="lec-links">';
+    if(lec.yt)lhtml+='<a class="res-btn btn-yt" href="'+lec.yt+'" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#FF0000"/><path d="M10 8.5L16 12L10 15.5Z" fill="white"/></svg>Watch</a>';
+    if(lec.pdf)lhtml+='<a class="res-btn btn-pdf" href="'+lec.pdf+'" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#E24B4A"/><path d="M8 6h5l3 3v9H8Z" fill="white" opacity=".9"/></svg>PDF</a>';
+    lhtml+='</div>';
+  }
+
+  // Practice section — links only, no checkboxes
   const practiceHtml=lec.practice&&lec.practice.length
-    ?'<div class="bst prac-title">Class Practice Questions</div>'+makeRows(lec.practice,lec.id,'p')
+    ?'<div class="bst prac-title">Class Practice Questions</div>'
+      +'<div class="link-list">'+lec.practice.map(function(p){
+          return '<a href="'+p.url+'" target="_blank" rel="noopener" class="link-item">'+p.name+'</a>';
+        }).join('')+'</div>'
     :'';
+
+  // Homework section — links only, no checkboxes
   const homeworkHtml=lec.homework&&lec.homework.length
-    ?'<div class="bst hw-title">Homework Questions</div>'+makeRows(lec.homework,lec.id,'h')
+    ?'<div class="bst hw-title">Homework Questions</div>'
+      +'<div class="link-list">'+lec.homework.map(function(h){
+          return '<a href="'+h.url+'" target="_blank" rel="noopener" class="link-item">'+h.name+'</a>';
+        }).join('')+'</div>'
     :'';
+
+  // Articles section — links only
   const articlesHtml=lec.articles&&lec.articles.length
-    ?'<div class="bst art-title">Articles</div>'+makeRows(lec.articles,lec.id,'a')
+    ?'<div class="bst art-title">Articles</div>'
+      +'<div class="link-list">'+lec.articles.map(function(a){
+          return '<a href="'+a.url+'" target="_blank" rel="noopener" class="link-item">'+a.name+'</a>';
+        }).join('')+'</div>'
     :'';
+
+  // Notes PDFs — links only, no checkboxes
   const notesHtml=lec.notes&&lec.notes.length
-    ?'<div class="bst notes-title">My Notes (PDFs)</div>'+lec.notes.map(function(item,i){
-        const nkey=lec.id+'|mynotes|'+i;
-        const nchecked=!!state[nkey];
-        return '<div class="t-row full">'
-          +'<input type="checkbox" id="'+nkey+'" '+(nchecked?'checked':'')+' onchange="toggleT(\''+lec.id+'\',\''+nkey+'\')">'
-          +'<label for="'+nkey+'" class="'+(nchecked?'done':'')+'">'
-          +'<a href="'+item.url+'" target="_blank" rel="noopener" class="topic-link" onclick="event.stopPropagation()">'+item.name+'</a>'
-          +' <span style="font-size:10px;color:var(--text3);margin-left:4px;">(notes done)</span>'
-          +'</label>'
-          +'</div>';
-      }).join('')
+    ?'<div class="bst notes-title">My Notes</div>'
+      +'<div class="link-list">'+lec.notes.map(function(item){
+          return '<a href="'+item.url+'" target="_blank" rel="noopener" class="link-item">'+item.name+'</a>';
+        }).join('')+'</div>'
     :'';
-  const mhtml=META.map(function(m){
+
+  // 3 simple checklist pills
+  const SMETA=[{key:'watched',label:'Watched'},{key:'notes',label:'Notes made'},{key:'practice',label:'Practice done'}];
+  const mhtml=SMETA.map(function(m){
     const k=mk(lec.id,m.key),checked=!!state[k];
-    return '<div class="check-pill'+(checked?' checked':'')+'" onclick="toggleM(\''+lec.id+'\',\''+m.key+'\')"><span class="ci">'+(checked?'✓':'')+'</span>'+m.label+'</div>';
+    return '<div class="check-pill'+(checked?' checked':'')+'" onclick="toggleM(\''+lec.id+'\',\''+m.key+'\')">'
+      +'<span class="ci">'+(checked?'✓':'')+'</span>'+m.label+'</div>';
   }).join('');
-  let lhtml='<div class="lec-links">';
-  if(lec.yt)lhtml+='<a class="res-btn btn-yt" href="'+lec.yt+'" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#FF0000"/><path d="M10 8.5L16 12L10 15.5Z" fill="white"/></svg>Watch</a>';
-  if(lec.pdf)lhtml+='<a class="res-btn btn-pdf" href="'+lec.pdf+'" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#E24B4A"/><path d="M8 6h5l3 3v9H8Z" fill="white" opacity=".9"/></svg>PDF</a>';
-  lhtml+='</div>';
+
+  // Target date + last studied
   const targetKey='target::'+lec.id;
   const lastKey='last::'+lec.id;
   const targetVal=state[targetKey]||'';
@@ -664,8 +689,16 @@ function renderBody(lec){
     const recent=(Date.now()-new Date(lastVal).getTime())<86400000*2;
     lastHtml='<span class="last-studied'+(recent?' recent':'')+'">studied '+ago+'</span>';
   }
-  const targetRow='<div class="target-row"><span class="target-label">Target date</span><input class="target-input" type="date" value="'+targetVal+'" onchange="setTarget(\''+lec.id+'\',this.value)" />'+targetBadge+lastHtml+'</div>';
-  return '<div class="lec-body"><div class="body-cols">'+lhtml+practiceHtml+homeworkHtml+articlesHtml+notesHtml+'<div class="checklist-row">'+mhtml+'</div>'+targetRow+'</div></div>';
+  const targetRow='<div class="target-row"><span class="target-label">Target</span>'
+    +'<input class="target-input" type="date" value="'+targetVal+'" onchange="setTarget(\''+lec.id+'\',this.value)" />'
+    +targetBadge+lastHtml+'</div>';
+
+  return '<div class="lec-body"><div class="body-cols">'
+    +lhtml
+    +practiceHtml+homeworkHtml+articlesHtml+notesHtml
+    +'<div class="checklist-row">'+mhtml+'</div>'
+    +targetRow
+    +'</div></div>';
 }
 
 function toggleCard(id){openCards[id]=!openCards[id];renderAll();}
@@ -676,7 +709,7 @@ function checkConfetti(lid){
   const allP=(lec.practice||[]).every(x=>state[lid+'|p|'+x.name]);
   const allH=(lec.homework||[]).every(x=>state[lid+'|h|'+x.name]);
   const allA=(lec.articles||[]).every(x=>state[lid+'|a|'+x.name]);
-  const allMeta=META.every(m=>state[mk(lid,m.key)]);
+  const SMETA_C=['watched','notes','practice'];const allMeta=SMETA_C.every(k=>state[mk(lid,k)]);
   const hasItems=(lec.practice||[]).length+(lec.homework||[]).length+(lec.articles||[]).length>0;
   if(hasItems&&allP&&allH&&allA&&allMeta)launchConfetti();
 }
@@ -732,13 +765,13 @@ function launchConfetti(){
 
 function calc(secs){
   let tot=0,done=0,lec=0,tlec=0,notes=0,hrs=0;
+  const SMETA=['watched','notes','practice'];
   secs.forEach(s=>s.lectures.forEach(l=>{
     tlec++;
-    const all=[...(l.practice||[]).map(x=>l.id+'|p|'+x.name),...(l.homework||[]).map(x=>l.id+'|h|'+x.name),...(l.articles||[]).map(x=>l.id+'|a|'+x.name),...(l.notes||[]).map((_,i)=>l.id+'|mynotes|'+i)];
-    tot+=all.length;
-    const dt=all.filter(k=>state[k]).length;
+    tot+=SMETA.length;
+    const dt=SMETA.filter(k=>state[mk(l.id,k)]).length;
     done+=dt;
-    if(all.length>0&&dt===all.length&&META.every(m=>state[mk(l.id,m.key)]))lec++;
+    if(dt===SMETA.length)lec++;
     if(state[mk(l.id,'notes')])notes++;
     if(state[mk(l.id,'watched')])hrs+=2;
   }));
@@ -789,7 +822,7 @@ function updateStats(){
 </script>
 <canvas id="confetti-canvas"></canvas>
 <footer style="position:relative;z-index:1;text-align:center;padding:2rem 1.25rem 1.5rem;border-top:1px solid var(--line2);margin-top:2rem;">
-  <p style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text3);letter-spacing:0.05em;">made with <span style="color:#f87171;font-size:14px;">&#9829;</span> by <span style="color:var(--accent);font-weight:500;">samar</span></p>
+  <p style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text3);letter-spacing:0.05em;">made with <span style="color:#f87171;font-size:14px;">&#9829;</span> by <span style="color:var(--accent);font-weight:500;">samar</span></p>
 </footer>
 </body>
 </html>
